@@ -38,6 +38,21 @@
     },
     methods: {
       onSubmit(formName) {
+        if (this.form.name == '') {
+          this.$notify({
+            title:'info', message: '名字不能为空',type: 'info'
+          });
+          return;
+        }
+
+        if (this.form.password == '') {
+          this.$notify({
+            title:'info', message: '密码不能为空',type: 'info'
+          });
+          return;
+        }
+        
+        if (this.form.name != '' && this.form.password != ''){}
         this.$http.post('/login', this.form)
         .then(res => {
           return res.data;

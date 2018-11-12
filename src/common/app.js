@@ -1,6 +1,8 @@
+const fontawesomeurl = '';
 import 'element-ui/lib/theme-chalk/index.css';
 import './base.css'
-import 'font-awesome/css/font-awesome.min.css'
+
+import '../../static/font-awesome/css/font-awesome.css'
 import '../../static/css/animate.css'
 import '../../static/css/normalize.css'
 

@@ -46,6 +46,33 @@
     },
     methods: {
       onSubmit() {
+        if (this.form.name == '') {
+          this.$notify({
+            title:'info', message: '名字不能为空',type: 'info'
+          });
+          return;
+        }
+
+        if (this.form.email == '') {
+          this.$notify({
+            title:'info', message: '邮箱不能为空',type: 'info'
+          });
+          return;
+        }
+
+        if (this.form.password == '') {
+          this.$notify({
+            title:'info', message: '密码不能为空',type: 'info'
+          });
+          return;
+        }
+
+        if (this.form.password !== this.form.password_confirm) {
+          this.$notify({
+            title:'info', message: '两次密码不一致',type: 'info'
+          });
+          return;
+        }
         this.$http.post('/register', this.form)
         .then(res => {
           return res.data;

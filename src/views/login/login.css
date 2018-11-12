@@ -1,6 +1,6 @@
 /***login form **/
 #container{
-    background: url('../../../static/img/bg.jpg');
+    background: url('/static/img/bg.jpg');
     height: 100%;
     position: absolute;
     width: 100%;
