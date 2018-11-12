@@ -3,7 +3,7 @@ const util = require('../../util.js')
 module.exports = (req, res) => {
   //参数 req.body
   console.log(req.body)
-  let statement = 'SELECT a.*, b.password FROM users a JOIN user_auth b on a.user_id = b.user_id where a.name = "'+req.body.name+'"'; 
+  let statement = 'SELECT a.*, b.password FROM users a JOIN user_auth b on a.id = b.user_id where a.name = "'+req.body.name+'"'; 
   util.requestHandle({req, res, statement}).then(data => {
     let obj = {}
     if (!data.length) {

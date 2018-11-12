@@ -1,8 +1,10 @@
 import '../../common/app'
+import './login.css'
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import login from 'src/components/login'
-import sign from 'src/components/sign'
+import register from 'src/components/register'
 
 Vue.use(Vuex)
 
@@ -15,9 +17,9 @@ new Vue({
 })
 
 new Vue({
-  el: "#sign",
+  el: "#register",
   data: {},
   components: {
-    sign
+    register
   }
 })

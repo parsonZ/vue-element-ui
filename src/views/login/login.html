@@ -1,232 +1,24 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html>
 <head>
-  <title>index</title>
+  <title>Login</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="./static/assets/fav.ico">
-  <link rel="stylesheet" type="text/css" href="./static/SlidingHeaderLayout/css/demo.css" />
-  <link rel="stylesheet" type="text/css" href="./static/SlidingHeaderLayout/css/layout-multi.css" />
-  <script src="./static/SlidingHeaderLayout/js/modernizr.custom.js"></script>
 </head>
 <body>
-  <div>
-    <svg class="hidden">
-        <g id="icon-grid">
-            <rect x="32.5" y="5.5" width="22" height="22"/>
-            <rect x="4.5" y="5.5" width="22" height="22"/>
-            <rect x="32.5" y="33.5" width="22" height="22"/>
-            <rect x="4.5" y="33.5" width="22" height="22"/>
-        </g>
-        <g id="icon-cross">
-            <line x1="4.5" y1="55.5" x2="54.953" y2="5.046"/>
-            <line x1="54.953" y1="55.5" x2="4.5" y2="5.047"/>
-        </g>
-    </svg>
-    <nav class="thumb-nav">
-        <a data-container="container-1" class="thumb-nav__item" href="#"><img src="./static/SlidingHeaderLayout/img/thumbs/thumb1.png" alt="thumb01" /><span>登录</span></a>
-        <a data-container="container-2" class="thumb-nav__item" href="#"><img src="./static/SlidingHeaderLayout/img/thumbs/thumb2.png" alt="thumb02" /><span>注册</span></a>
-    </nav>
-    <div id="container-1" class="container theme-1">
-        <header class="intro">
-            <img class="intro__image" src="./static/SlidingHeaderLayout/img/header01.jpg" alt="Lava"/>
-            <div id="login">
+    <section id="container">             
+        <a class="hiddenanchor" id="toregister"></a>
+        <a class="hiddenanchor" id="tologin"></a>
+        <div id="wrapper">
+            <div id="login" class="animate form">
                 <login></login>
             </div>
-            <div class="intro__content">
-                <div class="intro__subtitle">
-                    <button class="trigger">
-                        <svg width="100%" height="100%" viewBox="0 0 60 60" preserveAspectRatio="none">
-                            <use class="icon icon--grid" xlink:href="#icon-grid" />
-                            <use class="icon icon--cross" xlink:href="#icon-cross" />
-                        </svg>
-                        <span>Toggle content</span>
-                    </button>
-                </div>
-            </div><!-- /intro__content -->
-        </header><!-- /intro -->
-        <section class="items-wrap">
-            <div class="item">看什么</div>
-            <div class="item">看什么</div>
-            <div class="item">看什么</div>
-            <div class="item">看什么</div>
-        </section>
-    </div><!-- /container -->
-    <div id="container-2" class="container theme-2">
-        <header class="intro">
-            <img class="intro__image" src="./static/SlidingHeaderLayout/img/header02.jpg" alt="Road"/>
-            <div id="sign">
-                <sign></sign>
+
+            <div id="register" class="animate form">
+                <register></register>
             </div>
-            <div class="intro__content">
-                <div class="intro__subtitle">
-                    <button class="trigger">
-                        <svg width="100%" height="100%" viewBox="0 0 60 60" preserveAspectRatio="none">
-                            <use class="icon icon--grid" xlink:href="#icon-grid" />
-                            <use class="icon icon--cross" xlink:href="#icon-cross" />
-                        </svg>
-                        <span>Toggle content</span>
-                    </button>
-                </div>
-            </div><!-- /intro__content -->
-        </header><!-- /intro -->
-        <section class="items-wrap">
-            <div class="item">看什么</div>
-            <div class="item">看什么</div>
-            <div class="item">看什么</div>
-            <div class="item">看什么</div>
-        </section>
-    </div><!-- /container -->
-    
-  </div>
-  <script src="./static/SlidingHeaderLayout/js/classie.js"></script>
-  <script>
-    (function() {
-        var support = { animations : Modernizr.cssanimations },
-            animEndEventNames = { 'WebkitAnimation' : 'webkitAnimationEnd', 'OAnimation' : 'oAnimationEnd', 'msAnimation' : 'MSAnimationEnd', 'animation' : 'animationend' },
-            animEndEventName = animEndEventNames[ Modernizr.prefixed( 'animation' ) ],
-            onEndAnimation = function( el, callback ) {
-                var onEndCallbackFn = function( ev ) {
-                    if( support.animations ) {
-                        if( ev.target != this ) return;
-                        this.removeEventListener( animEndEventName, onEndCallbackFn );
-                    }
-                    if( callback && typeof callback === 'function' ) { callback.call(); }
-                };
-                if( support.animations ) {
-                    el.addEventListener( animEndEventName, onEndCallbackFn );
-                }
-                else {
-                    onEndCallbackFn();
-                }
-            };
-
-        var containers = [].slice.call( document.querySelectorAll( '.container' ) ),
-            containersCount = containers.length,
-            nav = document.querySelector( 'nav.thumb-nav' ),
-            pageTriggers = [].slice.call( nav.children ),
-            isAnimating = false, current = 0;
-
-        function init() {
-            resetScroll();
-            // disable scrolling
-            window.addEventListener( 'scroll', noscroll );
-            // set current page trigger
-            classie.add( pageTriggers[ current ], 'thumb-nav__item--current' );
-            // set current container
-            classie.add( containers[ current ], 'container--current' );
-            // initialize events
-            initEvents();
-        }
-
-        function initEvents() {
-            // slideshow navigation
-            pageTriggers.forEach( function( pageTrigger ) {
-                pageTrigger.addEventListener( 'click', function( ev ) {
-                    ev.preventDefault();
-                    navigate( this );
-                } );
-            } );
-
-            // open each container's content area when clicking on the respective trigger button
-            containers.forEach( function( container ) {
-                container.querySelector( 'button.trigger' ).addEventListener( 'click', function() {
-                    toggleContent( container, this );
-                } );
-            } );
-
-            // keyboard navigation events
-            document.addEventListener( 'keydown', function( ev ) {
-                var keyCode = ev.keyCode || ev.which,
-                    isContainerOpen = containers[ current ].getAttribute( 'data-open' ) == 'open';
-
-                switch (keyCode) {
-                    // left key
-                    case 37:
-                        if( current > 0 && !isContainerOpen ) {
-                            navigate( pageTriggers[ current - 1 ] );
-                        }
-                        break;
-                    // right key
-                    case 39:
-                        if( current < containersCount - 1 && !isContainerOpen ) {
-                            navigate( pageTriggers[ current + 1 ] );
-                        }
-                        break;
-                }
-            } );
-        }
-
-        function navigate( pageTrigger ) {
-            var oldcurrent = current,
-                newcurrent = pageTriggers.indexOf( pageTrigger );
-
-            if( isAnimating || oldcurrent === newcurrent ) return;
-            isAnimating = true;
-
-            // reset scroll
-            allowScroll();
-            resetScroll();
-            preventScroll();
-
-            var currentPageTrigger = pageTriggers[ current ],
-                nextContainer = document.getElementById( pageTrigger.getAttribute( 'data-container' ) ),
-                currentContainer = containers[ current ],
-                dir = newcurrent > oldcurrent ? 'left' : 'right';
-
-            classie.remove( currentPageTrigger, 'thumb-nav__item--current' );
-            classie.add( pageTrigger, 'thumb-nav__item--current' );
-
-            // update current
-            current = newcurrent;
-
-            // add animation classes
-            classie.add( nextContainer, dir === 'left' ? 'container--animInRight' : 'container--animInLeft' );
-            classie.add( currentContainer, dir === 'left' ? 'container--animOutLeft' : 'container--animOutRight' );
-
-            onEndAnimation( currentContainer, function() {
-                // clear animation classes
-                classie.remove( currentContainer, dir === 'left' ? 'container--animOutLeft' : 'container--animOutRight' );
-                classie.remove( nextContainer, dir === 'left' ? 'container--animInRight' : 'container--animInLeft' );
-
-                // clear current class / set current class
-                classie.remove( currentContainer, 'container--current' );
-                classie.add( nextContainer, 'container--current' );
-
-                isAnimating = false;
-            } );
-        }
-
-        // show content section
-        function toggleContent( container, trigger ) {
-            if( classie.has( container, 'container--open' ) ) {
-                classie.remove( container, 'container--open' );
-                classie.remove( trigger, 'trigger--active' );
-                classie.remove( nav, 'thumb-nav--hide' );
-                container.setAttribute( 'data-open', '' );
-                preventScroll();
-            }
-            else {
-                classie.add( container, 'container--open' );
-                classie.add( trigger, 'trigger--active' );
-                classie.add( nav, 'thumb-nav--hide' );
-                container.setAttribute( 'data-open', 'open' );
-                allowScroll();
-            }
-        }
-
-        // scroll functions
-        function resetScroll() { document.body.scrollTop = document.documentElement.scrollTop = 0; }
-        function preventScroll() { window.addEventListener( 'scroll', noscroll ); }
-        function allowScroll() { window.removeEventListener( 'scroll', noscroll ); }
-        function noscroll() { 
-            window.scrollTo( 0, 0 ); 
-        }
-
-        init();
-
-        // For Demo purposes only (prevent jump on click)
-        [].slice.call( document.querySelectorAll('.items-wrap a') ).forEach( function(el) { el.onclick = function() { return false; } } );
-    })();
-  </script>
+        </div>
+    </section>
 </body>
 </html>

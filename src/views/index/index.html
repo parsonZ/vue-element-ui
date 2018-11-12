@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Index</title>
+        <link rel="shortcut icon" href="./static/assets/fav.ico">
+        <link rel="stylesheet" type="text/css" href="./static/css/normalize.css" />
+        <link rel="stylesheet" type="text/css" href="./static/css/plugin.css" />
+    </head>
+    <body>
+        <main>
+            <div class="segmenter" style="background-image: url(./static/img/3.jpg)"></div>
+            <h2 class="trigger-headline trigger-headline--hidden">
+                <span>h</span>
+                <span>e</span>
+                <span>l</span>
+                <span>l</span>
+                <span>0</span>                
+            </h2>
+        </main>
+        <nav id="menu" class="menu">
+            <button class="menu__handle"><span>Menu</span></button>
+            <div class="menu__inner">
+                <ul>
+                    <li><a href="#" class="active"><i class="fa fa-fw fa-home"></i>首页</a></li>
+                    <li><a href="./login.html"><i class="fa fa-fw fa-tachometer" aria-hidden="true"></i>登录</a></li>
+                </ul>
+            </div>
+            <div class="morph-shape" data-morph-open="M300-10c0,0,295,164,295,410c0,232-295,410-295,410" data-morph-close="M300-10C300-10,5,154,5,400c0,232,295,410,295,410">
+                <svg width="100%" height="100%" viewBox="0 0 600 800" preserveAspectRatio="none">
+                    <path fill="none" d="M300-10c0,0,0,164,0,410c0,232,0,410,0,410"/>
+                </svg>
+            </div>
+        </nav>
+        <script src="./static/js/anime.min.js"></script>
+        <script src="./static/js/imagesloaded.pkgd.min.js"></script>
+        <script src="./static/js/main.js"></script>
+
+        <script src="./static/js/snap.svg-min.js"></script>
+        <script src="./static/js/classie.js"></script>
+        <script>
+        (function() {
+            var headline = document.querySelector('.trigger-headline'),
+                trigger = document.querySelector('.btn--trigger'),
+                segmenter = new Segmenter(document.querySelector('.segmenter'), {
+                    pieces: 1, //分块数量
+                    shadowsAnimation: {
+                        opacity: 1,
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeInOutCubic',
+                        delay: 0,
+                        opacity: 1,
+                        translateZ: 1,
+                    },
+                    positions: [ // 分块集合
+                        {top: 0, left: 0, width: '100%', height: '100%'}
+                    ],
+                    parallax: true,
+                    parallaxMovement: {min: 5, max: 20},
+                    onReady: function() {
+                        segmenter.animate();
+                    }
+                });
+
+
+                function SVGMenu( el, options ) {
+                    this.el = el;
+                    this.init();
+                }
+
+                SVGMenu.prototype.init = function() {
+                    this.trigger = this.el.querySelector( 'button.menu__handle' );
+                    this.shapeEl = this.el.querySelector( 'div.morph-shape' );
+
+                    var s = Snap( this.shapeEl.querySelector( 'svg' ) );
+                    this.pathEl = s.select( 'path' );
+                    this.paths = {
+                        reset : this.pathEl.attr( 'd' ),
+                        open : this.shapeEl.getAttribute( 'data-morph-open' ),
+                        close : this.shapeEl.getAttribute( 'data-morph-close' )
+                    };
+
+                    this.isOpen = false;
+
+                    this.initEvents();
+                };
+
+                SVGMenu.prototype.initEvents = function() {
+                    this.trigger.addEventListener( 'click', this.toggle.bind(this) );
+                };
+
+                SVGMenu.prototype.toggle = function() {
+                    var self = this;
+
+                    if( this.isOpen ) {
+                        classie.remove( self.el, 'menu--anim' );
+                        setTimeout( function() { classie.remove( self.el, 'menu--open' );   }, 250 );
+                    }
+                    else {
+                        classie.add( self.el, 'menu--anim' );
+                        setTimeout( function() { classie.add( self.el, 'menu--open' );  }, 250 );
+                    }
+                    this.pathEl.stop().animate( { 'path' : this.isOpen ? this.paths.close : this.paths.open }, 350, mina.easeout, function() {
+                        self.pathEl.stop().animate( { 'path' : self.paths.reset }, 800, mina.elastic );
+                    } );
+                    
+                    this.isOpen = !this.isOpen;
+                };
+
+                new SVGMenu( document.getElementById( 'menu' ) );
+            })()
+
+        </script>
+    </body>
+</html>
+
