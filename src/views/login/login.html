@@ -7,18 +7,21 @@
   <link rel="shortcut icon" href="./static/assets/fav.ico">
 </head>
 <body>
+  <div id="start">
     <section id="container">             
         <a class="hiddenanchor" id="toregister"></a>
         <a class="hiddenanchor" id="tologin"></a>
         <div id="wrapper">
-            <div id="login" class="animate form">
-                <login></login>
-            </div>
-
-            <div id="register" class="animate form">
-                <register></register>
-            </div>
+          <login></login>
+          <register></register>
         </div>
     </section>
+    <section id="nav_menu">
+      <sidebar></sidebar>
+    </section>
+  </div>
+    
+  <script src="./static/js/snap.svg-min.js"></script>
+  <script src="./static/js/classie.js"></script>
 </body>
 </html>

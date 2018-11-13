@@ -1,7 +1,10 @@
+const db = require('../mysql.js');
+const validator = require('validator');
+
 module.exports = {
   requestHandle(params){
     const promise = new Promise((resolve, reject) => {
-      params.req.sql.query(params.statement, (error, results, fields) => {
+      db.execute(params.sql, params.sql_param, (error, results, fields) => {
         if (error) {
             reject(error)
         } else {
@@ -12,7 +15,7 @@ module.exports = {
     .catch(err => {
         console.log(err)
     })
-
     return promise;
-  }
+  },
+  valid: validator
 }

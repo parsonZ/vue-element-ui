@@ -2,24 +2,10 @@ import '../../common/app'
 import './login.css'
 
 import Vue from 'vue'
-import Vuex from 'vuex'
-import login from 'src/components/login'
-import register from 'src/components/register'
-
-Vue.use(Vuex)
+import store from 'src/store/index'
 
 new Vue({
-  el: "#login",
+  el: "#start",
+  store,
   data: {},
-  components: {
-    login
-  }
-})
-
-new Vue({
-  el: "#register",
-  data: {},
-  components: {
-    register
-  }
 })

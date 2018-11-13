@@ -1,21 +1,21 @@
 <template>
-    <div class="">
-      <form autocomplete="on"> 
+    <div id="login" class="animate form">
+      <form autocomplete="on" :class="{'login-active': this.$store.getters.getSidebarState.show}"> 
           <h1>Log in</h1> 
           <p> 
               <label for="username" class="uname"> Your email or username </label>
-              <i class="fa fa-user-o" aria-hidden="true"></i>
-              <input id="username" v-model="form.name" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
+              <div class="flex">
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+                <input id="username" v-model="form.name" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
+              </div>
           </p>
           <p> 
               <label for="password" class="youpasswd"> Your password </label>
-              <i class="fa fa-eye-slash" aria-hidden="true"></i>
-              <input id="password" name="password" v-model="form.password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
+              <div class="flex">
+                <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                <input id="password" name="password" v-model="form.password" required="required" type="password" placeholder="eg. X8df!90EO" />
+              </div>
           </p>
-          <!-- <p class="keeplogin"> 
-              <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
-              <label for="loginkeeping">Keep me logged in</label>
-          </p> -->
           <p class="login button"> 
               <input type="button" @click="onSubmit" value="Login" /> 
           </p>
@@ -27,6 +27,7 @@
   </div>
 </template>
 <script>
+  import util from '../common/util.js'
   export default {
     data() {
       return {
@@ -37,7 +38,7 @@
       }
     },
     methods: {
-      onSubmit(formName) {
+      onSubmit() {
         if (this.form.name == '') {
           this.$notify({
             title:'info', message: '名字不能为空',type: 'info'
@@ -52,8 +53,10 @@
           return;
         }
         
-        if (this.form.name != '' && this.form.password != ''){}
-        this.$http.post('/login', this.form)
+        this.$http.post('/login', {
+          name: this.form.name,
+          password: util.md5Encrypt(this.form.password)
+        })
         .then(res => {
           return res.data;
         })

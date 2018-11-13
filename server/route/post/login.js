@@ -1,27 +1,27 @@
 const util = require('../../util.js')
 
 module.exports = (req, res) => {
-  //参数 req.body
-  console.log(req.body)
-  let statement = 'SELECT a.*, b.password FROM users a JOIN user_auth b on a.id = b.user_id where a.name = "'+req.body.name+'"'; 
-  util.requestHandle({req, res, statement}).then(data => {
-    let obj = {}
+  let sql = 'SELECT a.*, b.password FROM users a JOIN user_auth b on a.id = b.user_id where a.name = ?';
+  let sql_param = [req.body.name];
+  let obj = {}
+  util.requestHandle({sql, sql_param}).then(data => {
     if (!data.length) {
-        obj = {
-            status: 0,
-            message: '用户不存在'
-        }
+      obj = {
+        status: 0,
+        message: '用户不存在'
+      }
     } else {
-        if (data[0].password == req.body.password) {
-            obj = {
-                status: 200
-            }
-        } else {
-            obj = {
-                status: 0,
-                message: '密码错误'
-            }
+      if (util.valid.equals(data[0].password, req.body.password)) {
+        obj = {
+          status: 200,
+          message: '登录成功'
         }
+      } else {
+        obj = {
+          status: 0,
+          message: '密码错误'
+        }
+      }
     }
     res.send(obj)
   })

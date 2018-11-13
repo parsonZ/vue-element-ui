@@ -12,8 +12,11 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "crypto": "^1.0.1",
     "element-ui": "^2.4.8",
     "mysql": "^2.16.0",
+    "mysql2": "^1.6.4",
+    "validator": "^10.9.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
