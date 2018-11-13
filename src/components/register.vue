@@ -30,8 +30,10 @@
                 <input id="passwordsignup_confirm" v-model="form.password_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
               </div>
           </p>
-          <p class="signin button"> 
-              <input type="button" @click="onSubmit" value="Sign up"/> 
+          <p class="signin"> 
+              <button class="button button--nina button--text-thick button--text-upper button--size-s" data-text="SignUp" @click="onSubmit">
+                <span>S</span><span>i</span><span>g</span><span>n</span><span>U</span><span>p</span>
+              </button>
           </p>
           <p class="change_link">  
               Already a member ?

@@ -1,5 +1,7 @@
 import 'element-ui/lib/theme-chalk/index.css';
 import './base.css'
+import './button.css'
+import './input.css'
 import '../../static/font-awesome/css/font-awesome.css'
 import '../../static/css/animate.css'
 import '../../static/css/normalize.css'
