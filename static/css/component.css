@@ -41,9 +41,9 @@ html.js,
 
 .dragslider h2 span {
 	display: block;
-    font-size: 1.5rem;
+    font-size: .4em;
     font-weight: 300;
-    padding: 2em 1em;
+    padding: 1em 0;
     text-indent: 1rem;
     letter-spacing: 2px;
     text-align: left;
@@ -314,7 +314,7 @@ button.content-switch:hover {
 }
 
 .pages .content.show {
-	height: 100%;
+	height: calc(100% - 6em);
 	-webkit-transition: none;
 	transition: none;
 }
@@ -323,11 +323,6 @@ button.content-switch:hover {
 	font-size: 2em;
 	max-width: 70%;
 	color: #4e4e4e;
-    padding: 1.5em 0;
-}
-
-.no-js .pages .content h2 {
-	padding-top: 1em;
 }
 
 .pages .content h2 span {
@@ -338,10 +333,10 @@ button.content-switch:hover {
 	max-width: 990px;
 	margin: 0 auto;
 	line-height: 1.5;
-	padding: 0 20px;
+	padding: 1em 2em;
 	word-break: break-all;
 	text-align: left;
-	font-size: 1.3em;
+	font-size: .8em;
 	text-indent: 1rem;
 	letter-spacing: 2px;
 }
@@ -417,16 +412,16 @@ button.content-switch:hover {
 
 @media screen and (max-width: 63.125em) {
 	.dragslider h2 {
-		font-size: 2em;
+		font-size: 1.5em;
 	}
 	.pages .content {
-		font-size: 100%;
+		font-size: 16px;
 	}
 	.pages .content h2 {
-		font-size: 2em;
+		font-size: 1.3em;
 	}
 	.dragslider h2 span{
-		font-size: 1.2rem;
+		font-size: .8rem;
 	}
 }
 

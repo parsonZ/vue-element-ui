@@ -1,5 +1,5 @@
 .content {
-    padding: 3em 0;
+    padding-top: 6em;
 }
 
 .trigger-headline {
@@ -186,7 +186,7 @@ a:hover {
 .menu ul li .fa {
     font-size: 2.5em;
     display: block;
-    margin: 0 auto;
+    margin: 7px auto;
 }
 
 .menu ul li span {

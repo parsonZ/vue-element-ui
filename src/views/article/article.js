@@ -1,9 +1,11 @@
 import '../../common/app'
 
 import Vue from 'vue'
+import store from 'src/store/index'
 
 new Vue({
   el: "#main",
+  store,
   data: {
     lists: [
       {
@@ -32,8 +34,5 @@ new Vue({
         smallTitle: '很多学设计的小伙伴在入门的时候不知道从何入手。本文就为大家总结一下UI设计学习的的4个技巧，相信对初学者一定非常有用。学习ui设计的小技巧之一：软件学习',
       }
     ]
-  },
-  mounted(){
-    
   }
 })
