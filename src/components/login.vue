@@ -1,24 +1,27 @@
 <template>
     <div id="login" class="animate form">
       <form autocomplete="on" :class="{'login-active': this.$store.getters.getSidebarState.show}"> 
-          <h1>Log in</h1> 
-          <p> 
-              <label for="username" class="uname"> Your email or username </label>
+          <h1>Log in</h1>
+          <p class="label-input"> 
+              <label for="username" class="uname"> Username </label>
               <div class="flex">
+                <input id="username" v-model="form.name" autocomplete="off" name="username" required="required" type="text"/>
                 <i class="fa fa-user-o" aria-hidden="true"></i>
-                <input id="username" v-model="form.name" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
               </div>
           </p>
-          <p> 
-              <label for="password" class="youpasswd"> Your password </label>
+          <p class="label-input"> 
+              <label for="password" class="youpasswd"> Password </label>
               <div class="flex">
+                <input id="password" name="password" v-model="form.password" required="required" type="password"/>
                 <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                <input id="password" name="password" v-model="form.password" required="required" type="password" placeholder="eg. X8df!90EO" />
               </div>
           </p>
           <p class="login"> 
-              <button class="button button--nina button--text-thick button--text-upper button--size-s" data-text="Login" @click="onSubmit">
+              <button type="button" class="button button--nina button--text-thick button--text-upper button--size-s" data-text="Login" @click="onSubmit" v-if="!confirm">
                 <span>L</span><span>o</span><span>g</span><span>i</span><span>n</span>
+              </button>
+              <button type="button" class="button icon-button button--size-s" v-else>
+                <span class="icon icon-loading"></span>
               </button>
           </p>
           <p class="change_link">
@@ -35,7 +38,8 @@
         form: {
           name: '',
           password: ''
-        }
+        },
+        confirm: false
       }
     },
     methods: {
@@ -53,7 +57,7 @@
           });
           return;
         }
-        
+        this.confirm = true
         this.$http.post('/login', {
           name: this.form.name,
           password: util.md5Encrypt(this.form.password)
@@ -71,6 +75,7 @@
               title:'error', message: res.message,type: 'error'
             });
           }
+          this.confirm = false
         })
       }
     }
@@ -88,10 +93,8 @@
       overflow: auto;
   }
   #wrapper{
-      right: 0px;
-      min-height: 560px;  
       margin: 0px auto;   
-      width: 500px;
+      width: 28rem;
       position: relative; 
   }
   /**** Styling the form elements **/
@@ -129,9 +132,6 @@
       background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(154, 161, 162, 0.8) 20%,rgba(46, 49, 49,1) 53%,rgba(154, 161, 162,0.8) 79%,rgba(147,184,189,0) 100%); 
   }
 
-  #wrapper p{
-      margin-bottom:15px;
-  }
   #wrapper p.login,
   #wrapper p.signin{
     text-align: right;
@@ -142,6 +142,9 @@
   #wrapper label{
       color: #505050;
       position: relative;
+      font-weight: 600;
+      letter-spacing: 1px;
+      font-size: 1.2em;
   }
 
   /**** advanced input styling ****/
@@ -162,25 +165,19 @@
   /* all the input except submit and checkbox */
   #wrapper input:not([type="checkbox"]){
       width: 92%;
-      margin-top: 4px;
-      padding: 10px 5px 10px 32px;    
+      padding: 10px 5px 10px 50px;
+      background: #fff; 
       border: 1px solid rgb(178, 178, 178);
-      -webkit-appearance: textfield;
-      -webkit-box-sizing: content-box;
-        -moz-box-sizing : content-box;
-             box-sizing : content-box;
-      -webkit-border-radius: 3px;
-         -moz-border-radius: 3px;
-              border-radius: 3px;
-      -webkit-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
-         -moz-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
-              box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
-      -webkit-transition: all 0.2s linear;
-         -moz-transition: all 0.2s linear;
-           -o-transition: all 0.2s linear;
-              transition: all 0.2s linear;
   }
+  #wrapper input:not([type="checkbox"]):focus{
+    border: 1px solid rgb(78, 78, 78);
+  }
+  .fa::before{
+    transition: .3s;
+  }
+  #wrapper input:not([type="checkbox"]):focus+.fa{
 
+  }
   /** the magic icon trick ! **/
   [data-icon]:after {
       content: attr(data-icon);
@@ -230,7 +227,6 @@
       width: 80%;
   }
 
-
   /*styling the links to change from one form to another */
 
   p.change_link{
@@ -239,15 +235,23 @@
       right: 30px;
       height: 20px;
       font-size: 16px ;
+      margin: 0;
       text-align: right;
   }
   form>p{
       position: relative;
   }
   form>.flex .fa{
-      position: absolute;
-      left: 12px;
-      margin-top: 2px;
+    position: absolute;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    justify-content: center;
+    height: 100%;
+    background: #4e4e4e;
+    -webkit-transition: .2s;
+    transition: .2s;
   }
   #wrapper p.change_link a {
       display: inline-block;
@@ -268,22 +272,16 @@
       position: absolute;
       top: 30px;
       width: 88%; 
-      padding: 18px 6% 60px 6%;
+      margin-bottom: 30px;
+      padding: 18px 6% 50px 6%;
       background: rgb(247, 247, 247);
-      border: 1px solid #ddd;
-      -webkit-box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),  0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
-         -moz-box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),  0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
-              box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),  0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
-      -webkit-box-shadow: 5px;
-      -moz-border-radius: 5px;
-           border-radius: 5px;
   }
   form {
       transition: .3s;
   }
   @media screen and (max-width: 768px) {
       #wrapper{
-          width: 100%;
+          width: 80%;
       }
       #login, #register{
           box-shadow: none;
@@ -297,6 +295,9 @@
       }
       #wrapper h1,#wrapper label,#wrapper a{
           color: #fff;
+      }
+      #wrapper h1{
+        font-size: 2rem;
       }
   }
   #register{  
@@ -329,9 +330,6 @@
       animation-name: fadeOutLeft;
   }
 
-
-
-  /** the actual animation, credit where due : http://daneden.me/animate/ ***/
   .animate{
       -webkit-animation-duration: 0.5s;
       -webkit-animation-timing-function: ease;
@@ -353,6 +351,4 @@
       animation-timing-function: ease;
       animation-fill-mode: both;
   }
-
-
 </style>

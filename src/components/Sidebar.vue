@@ -4,7 +4,8 @@
       <div class="menu__inner">
           <ul>
               <li><a href="./index.html" class="active"><i class="fa fa-fw fa-home"></i>首页</a></li>
-              <li><a href="./login.html"><i class="fa fa-fw fa-tachometer" aria-hidden="true"></i>登录</a></li>
+              <li><a href="./article.html"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>文章</a></li>
+              <li><a href="./login.html"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>登录</a></li>
           </ul>
       </div>
       <div class="morph-shape" data-morph-open="M300-10c0,0,295,164,295,410c0,232-295,410-295,410" data-morph-close="M300-10C300-10,5,154,5,400c0,232,295,410,295,410">

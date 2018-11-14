@@ -3,36 +3,39 @@
       <form autocomplete="on" :class="{'login-active': this.$store.getters.getSidebarState.show}"> 
           <h1> Sign up </h1> 
           <p> 
-              <label for="usernamesignup" class="uname">Your username</label>
+              <label for="usernamesignup" class="uname">Username</label>
               <div class="flex">
+                <input id="usernamesignup" autocomplete="off" v-model="form.name" name="usernamesignup" required="required" type="text" />
                 <i class="fa fa-user-o" aria-hidden="true"></i>
-                <input id="usernamesignup" v-model="form.name" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
               </div>
           </p>
           <p> 
-              <label for="emailsignup" class="youmail"> Your email</label>
+              <label for="emailsignup" class="youmail"> Email</label>
               <div class="flex">
+                <input id="emailsignup" autocomplete="off" v-model="form.email" name="emailsignup" required="required" type="email"/>
                 <i class="fa fa-envelope-open-o" aria-hidden="true"></i>
-                <input id="emailsignup" v-model="form.email" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/>
               </div> 
           </p>
           <p> 
-              <label for="passwordsignup" class="youpasswd">Your password </label>
+              <label for="passwordsignup" class="youpasswd">Password </label>
               <div class="flex">
+                <input id="passwordsignup" autocomplete="off" v-model="form.password" name="passwordsignup" required="required" type="password" />
                 <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                <input id="passwordsignup" v-model="form.password" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
               </div>
           </p>
           <p> 
-              <label for="passwordsignup_confirm" class="youpasswd">Please confirm your password </label>
+              <label for="passwordsignup_confirm" class="youpasswd">Confirm Password </label>
               <div class="flex">
+                <input id="passwordsignup_confirm" v-model="form.password_confirm" name="passwordsignup_confirm" required="required" type="password"/>
                 <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                <input id="passwordsignup_confirm" v-model="form.password_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
               </div>
           </p>
           <p class="signin"> 
-              <button class="button button--nina button--text-thick button--text-upper button--size-s" data-text="SignUp" @click="onSubmit">
+              <button type="button" class="button button--nina button--text-thick button--text-upper button--size-s" data-text="SignUp" @click="onSubmit" v-if="!confirm">
                 <span>S</span><span>i</span><span>g</span><span>n</span><span>U</span><span>p</span>
+              </button>
+              <button type="button" class="button icon-button button--size-s" v-else>
+                <span class="icon icon-loading"></span>
               </button>
           </p>
           <p class="change_link">  
@@ -52,7 +55,8 @@
           email: '',
           password: '',
           password_confirm: ''
-        } 
+        },
+        confirm: false
       }
     },
     methods: {
@@ -85,6 +89,7 @@
           return;
         }
 
+        this.confirm = true
         this.$http.post('/register', {
           name: this.form.name,
           email: this.form.email,
@@ -98,6 +103,7 @@
           this.$notify({
             title: 'Tips', message: res.message, type: res.status == 200 ? 'success':'error'
           });
+          this.confirm = false
         })
       }
     }
