@@ -123,8 +123,8 @@ a:hover {
 }
 
 .main {
-    -webkit-transition: opacity 0.6s;
-    transition: opacity 0.6s;
+    -webkit-transition: 0.6s;
+    transition: 0.6s;
 }
 
 .menu.menu--open + .main {
@@ -145,7 +145,7 @@ a:hover {
     list-style: none;
     padding: 50px 0;
     width: 100px;
-    height: calc(100% - 2*50px);
+    height: 100%;
     margin: 0;
     background: #454545;
 }
@@ -218,7 +218,7 @@ a:hover {
 .menu__handle::before,
 .menu__handle::after,
 .menu__handle span {
-    background: #fff;
+    background: #dedbdb;
 }
 
 .menu__handle::before,
