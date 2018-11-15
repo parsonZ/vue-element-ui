@@ -17,7 +17,7 @@
               </div>
           </p>
           <p class="login"> 
-              <button type="button" class="button button--nina button--text-thick button--text-upper button--size-s" data-text="Login" @click="onSubmit" v-if="!confirm">
+              <button type="button" class="button button--nina button--text-thick button--text-upper button--size-s" data-text="Login" @click="onSubmit" v-if="!loading">
                 <span>L</span><span>o</span><span>g</span><span>i</span><span>n</span>
               </button>
               <button type="button" class="button icon-button button--size-s" v-else>
@@ -28,6 +28,7 @@
               <a href="#toregister" class="to_register">Join us</a>
           </p>
       </form>
+      <adialog :dialog-content="dialogObj" ref="dialogContent"></adialog>
   </div>
 </template>
 <script>
@@ -39,7 +40,11 @@
           name: '',
           password: ''
         },
-        confirm: false,
+        loading: false,
+        dialogObj: {
+          title: '这是提交',
+          message: 'naisdiasdijsld'
+        }
       }
     },
     methods: {
@@ -57,25 +62,25 @@
           });
           return;
         }
-        this.confirm = true
+
+        this.loading = true
         this.$http.post('/login', {
           name: this.form.name,
           password: util.md5Encrypt(this.form.password)
         })
         .then(res => {
-          return res.data;
-        })
-        .then(res => {
           if (res.status == 200) {
             this.$notify({
-              title:'success', message: '登录成功',type: 'success'
+              title: 'Tips', message: res.data.message, type: res.data.status == 200 ? 'success':'error'
             });
+            this.loading = res.loading
+            this.$refs.dialogContent.modal()
           } else {
             this.$notify({
-              title:'error', message: res.message,type: 'error'
+              title:'error', message: res.message, type: 'error'
             });
+            this.loading = false
           }
-          this.confirm = false
         })
       }
     }

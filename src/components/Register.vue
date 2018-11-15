@@ -31,7 +31,7 @@
               </div>
           </p>
           <p class="signin"> 
-              <button type="button" class="button button--nina button--text-thick button--text-upper button--size-s" data-text="SignUp" @click="onSubmit" v-if="!confirm">
+              <button type="button" class="button button--nina button--text-thick button--text-upper button--size-s" data-text="SignUp" @click="onSubmit" v-if="!loading">
                 <span>S</span><span>i</span><span>g</span><span>n</span><span>U</span><span>p</span>
               </button>
               <button type="button" class="button icon-button button--size-s" v-else>
@@ -56,7 +56,7 @@
           password: '',
           password_confirm: ''
         },
-        confirm: false,
+        loading: false,
       }
     },
     methods: {
@@ -89,7 +89,7 @@
           return;
         }
 
-        this.confirm = true
+        this.loading = true
         this.$http.post('/register', {
           name: this.form.name,
           email: this.form.email,
@@ -97,13 +97,17 @@
           password_confirm: util.md5Encrypt(this.form.password_confirm)
         })
         .then(res => {
-          return res.data;
-        })
-        .then(res => {
-          this.$notify({
-            title: 'Tips', message: res.message, type: res.status == 200 ? 'success':'error'
-          });
-          this.confirm = false
+          if (res.status == 200) {
+            this.$notify({
+              title: 'Tips', message: res.data.message, type: res.data.status == 200 ? 'success':'error'
+            });
+            this.loading = res.loading
+          } else {
+            this.$notify({
+              title:'error', message: res.message, type: 'error'
+            });
+            this.loading = false
+          }
         })
       }
     }

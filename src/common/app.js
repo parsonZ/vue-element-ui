@@ -1,7 +1,6 @@
-import 'element-ui/lib/theme-chalk/index.css';
 import './base.css'
 import './button.css'
-import '../../static/font-awesome/css/font-awesome.css'
+import 'font-awesome/css/font-awesome.css'
 
 import '../../static/css/normalize.css'
 import '../../static/css/component.css'
@@ -9,21 +8,32 @@ import '../../static/css/animate.css'
 import '../../static/css/plugin.css'
 
 import Vue from 'vue';
-import ElementUI from 'element-ui';
 import axios from 'axios';
-
-Vue.use(ElementUI);
+import { Notification } from 'element-ui';
+Vue.prototype.$notify = Notification;
 
 const axiosIns = axios.create({
   baseURL: process.env.NODE_ENV == 'development' ? 'http://localhost:9009' : 'http://www.parsonz.xyz:9009',
+  timeout: 5000
 });
 
-axiosIns.interceptors.request.use(function (config) {
-  config['loading'] = true
+/*请求拦截器*/
+axiosIns.interceptors.request.use((config) => {
   return config;
-}, function (error) {
+}, error => {
   return Promise.reject(error);
 });
+
+/*响应拦截器*/
+axiosIns.interceptors.response.use(config => {
+  config['loading'] = config.status == 200 ? false : true
+  return config
+}, error => {
+  return {
+    status: 500,
+    message: 'Network Error'
+  }
+})
 
 Vue.prototype.$http = axiosIns;
 

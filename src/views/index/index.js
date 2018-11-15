@@ -9,6 +9,9 @@ new Vue({
   data: {
     zoom: false
   },
+  mounted(){
+    this.init()
+  },
   computed: {
     sidebarStatus(){
       return this.$store.state.sidebar.show
@@ -17,6 +20,33 @@ new Vue({
   watch: {
     sidebarStatus(n, o){
       this.zoom = n
+    }
+  },
+  methods: {
+    init(){
+      var headline = document.querySelector('.trigger-headline'),
+        trigger = document.querySelector('.btn--trigger'),
+        segmenter = new Segmenter(document.querySelector('.segmenter'), {
+          pieces: 1, //分块数量
+          shadowsAnimation: {
+            opacity: 1,
+          },
+          animation: {
+            duration: 2000,
+            easing: 'easeInOutCubic',
+            delay: 0,
+            opacity: 1,
+            translateZ: 1,
+          },
+          positions: [ // 分块集合
+            {top: 0, left: 0, width: '100%', height: '100%'},
+          ],
+          parallax: true,
+          parallaxMovement: {min: 10, max: 30},
+          onReady: function() {
+            segmenter.animate();
+          }
+      });
     }
   }
 })
