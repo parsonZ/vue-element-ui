@@ -1,6 +1,6 @@
 <template>
     <div id="register" class="animate form">
-      <form autocomplete="on" :class="{'login-active': this.$store.getters.getSidebarState.show}"> 
+      <form autocomplete="on" > 
           <h1> Sign up </h1> 
           <p> 
               <label for="usernamesignup" class="uname">Username</label>
@@ -56,7 +56,7 @@
           password: '',
           password_confirm: ''
         },
-        confirm: false
+        confirm: false,
       }
     },
     methods: {

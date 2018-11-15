@@ -33,6 +33,17 @@ new Vue({
         title: 'JavaScript基础知识必知！',
         smallTitle: '很多学设计的小伙伴在入门的时候不知道从何入手。本文就为大家总结一下UI设计学习的的4个技巧，相信对初学者一定非常有用。学习ui设计的小技巧之一：软件学习',
       }
-    ]
+    ],
+    zoom: false
+  },
+  computed: {
+    sidebarStatus(){
+      return this.$store.state.sidebar.show
+    }
+  },
+  watch: {
+    sidebarStatus(n, o){
+      this.zoom = n
+    }
   }
 })

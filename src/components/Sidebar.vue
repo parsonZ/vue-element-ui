@@ -63,9 +63,9 @@
                 classie.add( self.el, 'menu--anim' );
                 setTimeout( function() { classie.add( self.el, 'menu--open' );  }, 250 );
             }
-            this.pathEl.stop().animate( { 'path' : this.isOpen ? this.paths.close : this.paths.open }, 350, mina.easeout, function() {
+           /* this.pathEl.stop().animate( { 'path' : this.isOpen ? this.paths.close : this.paths.open }, 350, mina.easeout, function() {
                 self.pathEl.stop().animate( { 'path' : self.paths.reset }, 800, mina.elastic );
-            } );
+            } );*/
             
             this.isOpen = !this.isOpen;
         };

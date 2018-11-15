@@ -11,7 +11,7 @@
         <div id="main">
             <sidebar></sidebar>
             <!-- <placeholder></placeholder> -->
-            <div class="container">
+            <div class="container wrap-container">
                 <header id="header" class="codrops-header">
                     <button class="slider-switch">Switch view</button>
                 </header>
@@ -23,7 +23,7 @@
                         <button>Got it!</button>    
                     </div>
                 </div>
-                <div id="slideshow" class="dragslider">
+                <div id="slideshow" class="dragslider" :class="{'scaleMain': zoom}">
                     <section class="img-dragger img-dragger-large dragdealer">
                         <div class="handle">
                             <div class="slide" v-for="item in lists" :data-content="'content-'+item.id">

@@ -8,7 +8,7 @@
 </head>
 <body>
   <div id="start">
-    <section id="container">             
+    <section id="container" class="wrap-container" :class="{'scaleMain': zoom}">             
         <a class="hiddenanchor" id="toregister"></a>
         <a class="hiddenanchor" id="tologin"></a>
         <div id="wrapper">
@@ -16,9 +16,7 @@
           <register></register>
         </div>
     </section>
-    <section>
-      <sidebar></sidebar>
-    </section>
+    <sidebar></sidebar>
   </div>
     
   <script src="./static/js/snap.svg-min.js"></script>

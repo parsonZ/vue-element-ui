@@ -1,6 +1,6 @@
 <template>
     <div id="login" class="animate form">
-      <form autocomplete="on" :class="{'login-active': this.$store.getters.getSidebarState.show}"> 
+      <form autocomplete="on"> 
           <h1>Log in</h1>
           <p class="label-input"> 
               <label for="username" class="uname"> Username </label>
@@ -39,7 +39,7 @@
           name: '',
           password: ''
         },
-        confirm: false
+        confirm: false,
       }
     },
     methods: {
@@ -276,8 +276,12 @@
       padding: 18px 6% 50px 6%;
       background: rgb(247, 247, 247);
   }
-  form {
+  .form {
       transition: .3s;
+  }
+  .login-active,
+  .register-active{
+      transform: scale(.7);
   }
   @media screen and (max-width: 768px) {
       #wrapper{
@@ -288,10 +292,6 @@
           background: none;
           border: none;
           transition: .3s;
-      }
-      .login-active,
-      .register-active{
-          transform: translateX(120px) scale(.7);
       }
       #wrapper h1,#wrapper label,#wrapper a{
           color: #fff;

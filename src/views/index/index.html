@@ -8,17 +8,17 @@
         <link rel="shortcut icon" href="./static/assets/fav.ico">
     </head>
     <body>
-        <main>
-            <div class="segmenter" style="background-image: url(./static/img/3.jpg); background-size: cover;"></div>
-            <h2 class="trigger-headline" style="opacity: 0;">
-                <span>h</span>
-                <span>e</span>
-                <span>l</span>
-                <span>l</span>
-                <span>0</span>                
-            </h2>
-        </main>
         <div id="nav_menu">
+            <main class="wrap-container" :class="{'scaleMain': zoom}">
+                <div class="segmenter" style="background-image: url(./static/img/3.jpg); background-size: cover;"></div>
+                <h2 class="trigger-headline" style="opacity: 0;">
+                    <span>h</span>
+                    <span>e</span>
+                    <span>l</span>
+                    <span>l</span>
+                    <span>0</span>                
+                </h2>
+            </main>
             <sidebar></sidebar>
         </div>
         <script src="./static/js/anime.min.js"></script>
