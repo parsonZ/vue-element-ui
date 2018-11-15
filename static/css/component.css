@@ -201,7 +201,7 @@ button.slider-switch:hover {
     line-height: 1.5;
 	top: 100%;
 	text-align: center;
-	color: #ccc;
+	color: #6f6b6b;
 	-webkit-animation: slideUpFade 0.4s 0.1s;
 }
 
@@ -221,7 +221,7 @@ button.slider-switch:hover {
 }
 
 .img-dragger-small .slide.current h2 {
-	color: #4e4e4e;
+	color: #fff;
 	-webkit-animation-delay: 0s;
 	animation-delay: 0s;
 	-webkit-transition: color 0.3s, opacity 0.3s;
