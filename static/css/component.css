@@ -314,7 +314,7 @@ button.content-switch:hover {
 }
 
 .pages .content.show {
-	height: calc(100% - 6em);
+	height: 100%;
 	-webkit-transition: none;
 	transition: none;
 }

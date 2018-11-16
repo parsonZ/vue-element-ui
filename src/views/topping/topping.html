@@ -7,45 +7,48 @@
         <title>Topping</title>
         <link rel="shortcut icon" href="./static/assets/fav.ico">
     </head>
-    <body>
-        <div class="container" id="gridMain">
-            <div id="theGrid" class="main wrap-container" :class="{'scaleMain': zoom}">
-                <section class="grid">
-                    <a class="grid__item" href="#" v-for="item in new Array(20)">
-                        <h2 class="title title--preview">Hope for Amy Walters</h2>
-                        <div class="loader"></div>
-                        <span class="category">Life &amp; Death</span>
-                        <div class="meta meta--preview">
-                            <img class="meta__avatar" src="./static/img/authors/4.png" alt="author04" /> 
-                            <span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
-                            <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
-                        </div>
-                    </a>
-                    <footer class="page-meta">
-                        <span>Load more...</span>
-                    </footer>
-                </section>
-                <section class="content">
-                    <div class="scroll-wrap">
-                        <article class="content__item" v-for="item in new Array(20)">
-                            <span class="category category--full">Life &amp; Death</span>
-                            <h2 class="title title--full">Hope for Amy Walters</h2>
-                            <div class="meta meta--full">
-                                <img class="meta__avatar" src="./static/img/authors/4.png" alt="author04" />
-                                <span class="meta__author">Sandra Paulson</span>
+    <body style="overflow: auto;height: -webkit-fill-available;">
+        <div id="gridMain">
+            <div class="container grid-main wrap-container" :class="{'scaleMain': zoom}">
+                <div id="theGrid" class="main">
+                    <section class="grid">
+                        <a class="grid__item" href="#" v-for="item in new Array(20)">
+                            <h2 class="title title--preview">Hope for Amy Walters</h2>
+                            <div class="loader"></div>
+                            <span class="category">Life &amp; Death</span>
+                            <div class="meta meta--preview">
+                                <img class="meta__avatar" src="./static/img/authors/4.png" alt="author04" /> 
                                 <span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
                                 <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
-                                <span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 7 comments</span>
-                                <span class="meta__misc"><i class="fa fa-heart"></i> 12 favorites</span>
                             </div>
-                            大叔大婶阿达撒奥多所阿斯达所
-                        </article>
-                    </div>
-                    <button class="close-button"><i class="fa fa-close"></i><span>Close</span></button>
-                </section>
+                        </a>
+                        <footer class="page-meta">
+                            <span>Load more...</span>
+                        </footer>
+                    </section>
+                    <section class="content">
+                        <div class="scroll-wrap">
+                            <article class="content__item" v-for="item in new Array(20)">
+                                <span class="category category--full">Life &amp; Death</span>
+                                <h2 class="title title--full">Hope for Amy Walters</h2>
+                                <div class="meta meta--full">
+                                    <img class="meta__avatar" src="./static/img/authors/4.png" alt="author04" />
+                                    <span class="meta__author">Sandra Paulson</span>
+                                    <span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+                                    <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+                                    <span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 7 comments</span>
+                                    <span class="meta__misc"><i class="fa fa-heart"></i> 12 favorites</span>
+                                </div>
+                                大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所大叔大婶阿达撒奥多所阿斯达所
+                            </article>
+                        </div>
+                        <button class="close-button"><i class="fa fa-close"></i><span>Close</span></button>
+                    </section>
+                </div>
             </div>
             <sidebar></sidebar>
         </div>
+        
         <script src="./static/js/modernizr.custom.js"></script>
         <script src="./static/js/classie.js"></script>
         <script src="./static/js/snap.svg-min.js"></script>

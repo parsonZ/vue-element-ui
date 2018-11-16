@@ -119,7 +119,6 @@
       padding: 2px 0 10px 0;
       font-weight: bold;
       text-align: center;
-      padding-bottom: 30px;
   }
   /** For the moment only webkit supports the background-clip:text; */
   #wrapper h1{
@@ -131,15 +130,13 @@
       width: 100%;
       height: 2px;
       margin-top: 10px;
-      background: -webkit-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(154, 161, 162, 0.8) 20%,rgba(46, 49, 49,1) 53%,rgba(154, 161, 162,0.8) 79%,rgba(147,184,189,0) 100%); 
-      background: -o-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(154, 161, 162, 0.8) 20%,rgba(46, 49, 49,1) 53%,rgba(154, 161, 162,0.8) 79%,rgba(147,184,189,0) 100%); 
-      background: -ms-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(154, 161, 162, 0.8) 20%,rgba(46, 49, 49,1) 53%,rgba(154, 161, 162,0.8) 79%,rgba(147,184,189,0) 100%); 
       background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(154, 161, 162, 0.8) 20%,rgba(46, 49, 49,1) 53%,rgba(154, 161, 162,0.8) 79%,rgba(147,184,189,0) 100%); 
   }
 
   #wrapper p.login,
   #wrapper p.signin{
     text-align: right;
+    margin: 30px 0;
   }
   #wrapper p:first-child{
       margin: 0px;
@@ -169,7 +166,7 @@
 
   /* all the input except submit and checkbox */
   #wrapper input:not([type="checkbox"]){
-      width: 92%;
+      width: 100%;
       padding: 10px 5px 10px 50px;
       background: #fff; 
       border: 1px solid rgb(178, 178, 178);
@@ -275,9 +272,8 @@
   #register, 
   #login{
       position: absolute;
-      top: 30px;
-      width: 88%; 
-      margin-bottom: 30px;
+      width: 100%; 
+      margin: 30px 0;
       padding: 18px 6% 50px 6%;
       background: rgb(247, 247, 247);
   }
@@ -290,7 +286,7 @@
   }
   @media screen and (max-width: 768px) {
       #wrapper{
-          width: 80%;
+          width: 100%;
       }
       #login, #register{
           box-shadow: none;

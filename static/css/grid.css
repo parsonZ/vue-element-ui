@@ -2,25 +2,15 @@
   background: #fff;
   padding: 2em 6em;
 }
-a {
-  outline: none;
-  color: #81c483;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  color: #333;
-  outline: none;
-}
-
 button:focus {
   outline: none;
 }
-
-#gridMain{
+.fa-close{
+  margin-top: 4px;
+}
+.grid-main{
   background: #fff;
-  padding: 2em 6em;
+  padding: 2em 10em;
 }
 /* Codrops links */
 .codrops-links {
@@ -30,7 +20,9 @@ button:focus {
   white-space: nowrap;
   min-height: 45px;
 }
-
+.noscroll{
+  overflow: hidden !important;
+}
 .codrops-links::after {
   position: absolute;
   top: 0;
@@ -644,7 +636,7 @@ button:focus {
 }
 /* small screen changes for sidebar (it becomes an off-canvas menu) */
 @media screen and (max-width: 599px) {
-  #gridMain{
+  .grid-main{
     padding: 0;
   }
   .sidebar {

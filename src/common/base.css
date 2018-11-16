@@ -32,9 +32,15 @@ body{
     transition: .3s;
 }
 .scaleMain{
-    transform: scale(.5);
+    transform: perspective(300px) translateZ(-60px) translateX(0) rotateY(-5deg);
     overflow: hidden !important;
 }
+@media screen and (max-width: 768px) {
+  .scaleMain{
+    transform: perspective(300px) translateZ(-100px) translateX(40px) rotateY(-15deg);
+  }
+}
+
 
 /*wrap*/
 .wrap{

@@ -51,9 +51,7 @@ new Vue({
   },
   methods: {
     init(){
-      var overlay = document.getElementById( 'overlay' ),
-        overlayClose = overlay.querySelector( 'button' ),
-        header = document.getElementById( 'header' ),
+        var header = document.getElementById( 'header' ),
         switchBtnn = header.querySelector( 'button.slider-switch' ),
         toggleBtnn = function() {
             if( slideshow.isFullscreen ) {
@@ -81,15 +79,10 @@ new Vue({
         toggleSlideshow = function() {
             slideshow.toggle();
             toggleBtnn();
-        },
-        closeOverlay = function() {
-            classie.add( overlay, 'hide' );
         };
 
       // toggle between fullscreen and small slideshow
       switchBtnn.addEventListener( 'click', toggleSlideshow );
-      // close overlay
-      overlayClose.addEventListener( 'click', closeOverlay );
     }
   }
 })
