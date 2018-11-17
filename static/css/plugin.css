@@ -95,9 +95,11 @@ a {
     color: #cecece;
     text-decoration: none;
 }
-
-a:hover {
-    color: #fff;
+.grid__item{
+    transition: .3s;
+}
+.grid__item:hover {
+    color: #92ea94;
     outline: none;
 }
 .menu a.active{

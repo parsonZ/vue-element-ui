@@ -1,17 +1,12 @@
-html, 
-body,
-.js .container,
-.js .dragslider,
-.js .img-dragger .handle {
+.html,.body {
+	overflow: hidden;
+	position: relative;
 	height: 100%;
 }
 
-html.js,
-.js body {
-	overflow: hidden;
-	position: relative;
+.container{
+	height: 100%
 }
-
 .js .dragslider {
 	position: absolute;
 	top: 0;
@@ -111,6 +106,7 @@ button.slider-switch:hover {
 	transform-style: preserve-3d;
 	white-space: nowrap;
 	font-size: 0;
+	height: 100%;
 }
 
 .no-js .img-dragger,
@@ -314,7 +310,7 @@ button.content-switch:hover {
 }
 
 .pages .content.show {
-	height: 100%;
+	height: auto;
 	-webkit-transition: none;
 	transition: none;
 }

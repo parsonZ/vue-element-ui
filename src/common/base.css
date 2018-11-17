@@ -40,6 +40,10 @@ body{
     transform: perspective(300px) translateZ(-150px) translateX(40px) rotateY(-15deg);
   }
 }
+.scaleMain1{
+    transform: scaleX(.8);
+    overflow: hidden !important;
+}
 
 
 /*wrap*/
