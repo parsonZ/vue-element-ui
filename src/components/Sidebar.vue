@@ -4,7 +4,7 @@
       <div class="menu__inner">
           <ul>
               <li><a href="./index.html" class="active"><i class="fa fa-fw fa-home"></i>首页</a></li>
-              <li><a href="./article.html"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>文章</a></li>
+              <li><a href="./article.html"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>简历</a></li>
               <li><a href="./topping.html"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>置顶</a></li>
               <li><a href="./login.html"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>登录</a></li>
           </ul>

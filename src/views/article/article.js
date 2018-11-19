@@ -34,7 +34,11 @@ new Vue({
         smallTitle: '很多学设计的小伙伴在入门的时候不知道从何入手。本文就为大家总结一下UI设计学习的的4个技巧，相信对初学者一定非常有用。学习ui设计的小技巧之一：软件学习',
       }
     ],
-    zoom: false
+    zoom: false,
+    slideshow: {
+      isFullscreen: true,
+      isContent: true
+    }
   },
   mounted(){
     this.init()
@@ -51,38 +55,19 @@ new Vue({
   },
   methods: {
     init(){
-        var header = document.getElementById( 'header' ),
-        switchBtnn = header.querySelector( 'button.slider-switch' ),
-        toggleBtnn = function() {
-            if( slideshow.isFullscreen ) {
-                classie.add( switchBtnn, 'view-maxi' );
-            }
-            else {
-                classie.remove( switchBtnn, 'view-maxi' );
-            }
-        },
-        toggleCtrls = function() {
-            if( !slideshow.isContent ) {
-                classie.add( header, 'hide' );
-            }
-        },
-        toggleCompleteCtrls = function() {
-            if( !slideshow.isContent ) {
-                classie.remove( header, 'hide' );
-            }
-        },
-        slideshow = new DragSlideshow( document.getElementById( 'slideshow' ), { 
-            onToggle : toggleBtnn,
-            onToggleContent : toggleCtrls,
-            onToggleContentComplete : toggleCompleteCtrls
-        }),
-        toggleSlideshow = function() {
-            slideshow.toggle();
-            toggleBtnn();
-        };
-
-      // toggle between fullscreen and small slideshow
-      switchBtnn.addEventListener( 'click', toggleSlideshow );
+      this.initAnimate()
+      this.getAboutMe()
+    },
+    initAnimate(){
+      this.slideshow = new DragSlideshow( document.getElementById( 'slideshow' ),{})
+    },
+    toggleSlideshow () {
+      this.slideshow.toggle();
+    },
+    getAboutMe(){
+      this.$http.get('/get_resume', {}).then(res => {
+        console.log(res)
+      })
     }
   }
 })
