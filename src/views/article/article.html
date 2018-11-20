@@ -25,7 +25,7 @@
                                     <span>{{item.description}}</span>
                                     <ul>
                                         <li v-for="link in item.links">
-                                            <svg v-html="link.icon"></svg>
+                                            <svg v-html="link.icon" fill="#007bff"></svg>
                                             <a :href="link.link_href" target="_blank">{{link.tag_name}}</a>
                                         </li>
                                     </ul>

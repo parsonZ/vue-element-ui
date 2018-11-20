@@ -14,7 +14,7 @@ Vue.prototype.$notify = Notification;
 
 const axiosIns = axios.create({
   baseURL: process.env.NODE_ENV == 'development' ? 'http://localhost:9009' : 'http://www.parsonz.xyz:9009',
-  timeout: 5000
+  timeout: 30000
 });
 
 /*请求拦截器*/

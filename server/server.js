@@ -9,14 +9,14 @@ const bodyParser = require("body-parser")
 const interface = async () => {
   await fs.readdir(routeGet, (err, files) => {
     files.map(file => {
-      const callback = require(routeGet + '\\' + file)
+      const callback = require(routeGet + '/' + file)
       app.get('/' + file.replace('.js', ''), callback)
     })
   })
 
   await fs.readdir(routePost, (err, files) => {
     files.map(file => {
-      const callback = require(routePost + '\\' + file);
+      const callback = require(routePost + '/' + file);
       app.post('/' + file.replace('.js', ''), bodyParser.json(), callback)
     })
   })

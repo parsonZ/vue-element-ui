@@ -49,6 +49,7 @@ new Vue({
       }
     },
     toggleBtnn() {
+      console.log(this.slideshow.isFullscreen)
       if( this.slideshow.isFullscreen ) {
         classie.add( this.$refs.switchBtnn, 'view-maxi' );
       } else {
@@ -57,7 +58,6 @@ new Vue({
     },
     toggleSlideshow(){
       this.slideshow.toggle();
-      this.toggleBtnn();
     },
     getAboutMe(){
       this.$http.get('/get_resume', {}).then(res => {
