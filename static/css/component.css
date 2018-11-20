@@ -45,6 +45,26 @@
     line-height: 1.5;
 }
 
+.dragslider h2 ul{
+	font-size: .4em;
+    font-weight: 300;
+    padding: 1em 0;
+    text-indent: 1rem;
+    letter-spacing: 2px;
+    text-align: left;
+    line-height: 1.5;
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+.dragslider h2 ul li{
+	display: flex;
+}
+.dragslider h2 ul svg{
+	width: 25px;
+	height: 25px;
+}
+
 /* Switch button */
 button.slider-switch {
 	font-size: 0;
@@ -186,7 +206,7 @@ button.slider-switch:hover {
 .js .img-dragger-large .slide h2 {
 	width: 70%;
 	left: 15%;
-	top: 50%;
+	top: 43%;
 	-webkit-transform: translate3d(0,-50%,0);
 	transform: translate3d(0,-50%,0);
 }
@@ -289,6 +309,8 @@ button.content-switch:hover {
 	-webkit-transition: none;
 	transition: none;
 	height: 100%;
+	overflow: auto;
+	background: #dfe3e3;
 }
 
 .pages .content {
@@ -310,7 +332,7 @@ button.content-switch:hover {
 }
 
 .pages .content.show {
-	height: auto;
+	height: 100%;
 	-webkit-transition: none;
 	transition: none;
 }

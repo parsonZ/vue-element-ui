@@ -12,8 +12,8 @@
             <sidebar></sidebar>
             <!-- <placeholder></placeholder> -->
             <div class="container wrap-container">
-                <header id="header" class="codrops-header" :class="{'hide': slideshow.isContent}">
-                    <button class="slider-switch" :class="{'view-maxi': slideshow.isFullscreen}" @click="toggleSlideshow">Switch view</button>
+                <header id="header" class="codrops-header" ref="header">
+                    <button class="slider-switch" ref="switchBtnn" @click="toggleSlideshow">Switch view</button>
                 </header>
                 <div id="slideshow" ref="slideshow" class="dragslider" :class="{'scaleMain': zoom}">
                     <section class="img-dragger img-dragger-large dragdealer">
@@ -21,8 +21,14 @@
                             <div class="slide" v-for="item in lists" :data-content="'content-'+item.id">
                                 <div class="img-wrap"><img src="./static/img/articles/1.jpg"/></div>
                                 <h2>
-                                    {{item.title}}
-                                    <span>{{item.smallTitle}}</span>
+                                    {{item.name}}
+                                    <span>{{item.description}}</span>
+                                    <ul>
+                                        <li v-for="link in item.links">
+                                            <svg v-html="link.icon"></svg>
+                                            <a :href="link.link_href" target="_blank">{{link.tag_name}}</a>
+                                        </li>
+                                    </ul>
                                 </h2>
                                 <button class="content-switch">
                                     <i class="fa fa-arrow-down" aria-hidden="true"></i>
@@ -35,12 +41,10 @@
                     <section class="pages">
                         <div class="content" v-for="item in lists" :data-content="'content-'+item.id">
                             <h2>
-                                {{item.title}}
+                                {{item.name}}
                             </h2>
                             <p>
-                                {{item.smallTitle}}
-                                dasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadka
-                                dasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadkadasndkjahdjadka
+                                {{item.description_details}}
                             </p>
                         </div>
                     </section>
