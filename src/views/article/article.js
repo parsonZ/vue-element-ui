@@ -9,7 +9,8 @@ new Vue({
   data: {
     lists: [],
     zoom: false,
-    slideshow: {}
+    slideshow: {},
+    loadingObj: {}
   },
   mounted(){
     this.init()
@@ -29,6 +30,7 @@ new Vue({
   },
   methods: {
     init(){
+      this.$refs.loading.show()
       this.getAboutMe()
     },
     initAnimate(){
@@ -49,7 +51,6 @@ new Vue({
       }
     },
     toggleBtnn() {
-      console.log(this.slideshow.isFullscreen)
       if( this.slideshow.isFullscreen ) {
         classie.add( this.$refs.switchBtnn, 'view-maxi' );
       } else {
@@ -60,11 +61,18 @@ new Vue({
       this.slideshow.toggle();
     },
     getAboutMe(){
-      this.$http.get('/get_resume', {}).then(res => {
-        this.lists = res.data.list;
-        this.$nextTick(() => {
-            this.initAnimate()
-        })
+      this.$http.get('/get_tags', {}).then(res => {
+        if(res.status == 200){
+          this.lists = res.data.list;
+          this.$nextTick(() => {
+              this.initAnimate()
+              this.$refs.loading.hide()
+          })
+        }else{
+          this.$notify({
+            title:'error', message: res.message, type: 'error'
+          });
+        }
       })
     }
   }
