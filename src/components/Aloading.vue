@@ -1,9 +1,11 @@
 <template>
-  <div id="loader" v-show="mode" class="pageload-overlay pageload-loading" data-opening="M20,15 50,30 50,30 30,30 Z;M0,0 80,0 50,30 20,45 Z;M0,0 80,0 60,45 0,60 Z;M0,0 80,0 80,60 0,60 Z" data-closing="M0,0 80,0 60,45 0,60 Z;M0,0 80,0 50,30 20,45 Z;M20,15 50,30 50,30 30,30 Z;M30,30 50,30 50,30 30,30 Z">
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
-          <path d="M0,0C0,0,80,0,80,0C80,0,80,60,80,60C80,60,0,60,0,60C0,60,0,0,0,0"></path>
-        <desc>Created with Snap</desc><defs></defs></svg>
-      </div>
+  <div class="loading_wrapper" v-show="mode">
+    <div id="loader" class="pageload-overlay pageload-loading" data-opening="M20,15 50,30 50,30 30,30 Z;M0,0 80,0 50,30 20,45 Z;M0,0 80,0 60,45 0,60 Z;M0,0 80,0 80,60 0,60 Z" data-closing="M0,0 80,0 60,45 0,60 Z;M0,0 80,0 50,30 20,45 Z;M20,15 50,30 50,30 30,30 Z;M30,30 50,30 50,30 30,30 Z">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
+            <path d="M0,0C0,0,80,0,80,0C80,0,80,60,80,60C80,60,0,60,0,60C0,60,0,0,0,0"></path>
+          <desc>Created with Snap</desc><defs></defs></svg>
+    </div>
+  </div>
 </template>
 <script>
   export default {
@@ -29,6 +31,14 @@
   }
 </script>
 <style scoped>
+  .loading_wrapper{
+    background: rgba(0, 0, 0, 0.24);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+  }
   .pageload-overlay {
     position: fixed;
     width: 100%;

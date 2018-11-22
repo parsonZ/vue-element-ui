@@ -339,13 +339,14 @@ button.content-switch:hover {
 }
 
 .pages .content.show {
-	height: 100%;
+	height: auto;
 	-webkit-transition: none;
 	transition: none;
+	padding-top: 5em;
 }
 
 .pages .content h2 {
-	font-size: 2em;
+	font-size: 1em;
 	max-width: 70%;
 	color: #4e4e4e;
 }

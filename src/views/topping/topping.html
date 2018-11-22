@@ -10,40 +10,7 @@
     <body>
         <div id="gridMain">
             <div class="container wrap-container" style="background: #fff;" :class="{'scaleMain1': zoom}">
-                <div id="theGrid">
-                    <section class="grid">
-                        <a class="grid__item" href="#" v-for="item in lists" :dataId="item.id">
-                            <h2 class="title title--preview">{{item.title}}</h2>
-                            <div class="loader"></div>
-                            <span class="category">{{item.author}}</span>
-                            <div class="meta meta--preview">
-                                <img class="meta__avatar" src="../static/img/authors/4.png" alt="author01" /> 
-                                <span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
-                                <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
-                            </div>
-                        </a>
-                        <footer class="page-meta">
-                            <span @click="loadMore" v-if="loadMoreBtn">Load more...</span>
-                            <span v-else>no results ...</span>
-                        </footer>
-                    </section>
-                    <section class="content">
-                        <div class="scroll-wrap">
-                            <article class="content__item" v-for="item in lists" :dataContentId="item.id">
-                                <span class="category category--full">{{item.title}}</span>
-                                <h2 class="title title--full">{{item.title}}</h2>
-                                <div class="meta meta--full">
-                                    <img class="meta__avatar" src="../static/img/authors/4.png" alt="author01" />
-                                    <span class="meta__author">{{item.author}}</span>
-                                    <span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
-                                    <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
-                                </div>
-                                <p>content</p>
-                            </article>
-                        </div>
-                        <button class="close-button"><i class="fa fa-close"></i><span>Close</span></button>
-                    </section>
-                </div>
+                <gridload :data="propsData" ref="gridload" @load-more="loadMore"></gridload>
             </div>
             <sidebar></sidebar>
             <aloading :loading-content="loadingObj" ref="loading"></aloading>

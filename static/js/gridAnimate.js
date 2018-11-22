@@ -24,7 +24,7 @@
 			gridEl = document.getElementById('theGrid'),
 			sidebarEl = document.getElementById('theSidebar'),
 			gridItemsContainer = gridEl.querySelector('section.grid'),
-			contentItemsContainer = gridEl.querySelector('section.content'),
+			contentItemsContainer = gridEl.querySelector('section.content_me'),
 			gridItems = gridItemsContainer.querySelectorAll('.grid__item'),
 			contentItems = contentItemsContainer.querySelectorAll('.content__item'),
 			closeCtrl = contentItemsContainer.querySelector('.close-button'),
@@ -55,7 +55,11 @@
 		function scrollY() { return window.pageYOffset || docElem.scrollTop; }
 
 		function initEvents() {
-			[].slice.call(gridItems).forEach(function(item, pos) {
+			gridItems = gridItemsContainer.querySelectorAll('.grid__item'),
+			contentItems = contentItemsContainer.querySelectorAll('.content__item'),
+			closeCtrl = contentItemsContainer.querySelector('.close-button');
+
+			;[].slice.call(gridItems).forEach(function(item, pos) {
 				// grid item click event
 				item.addEventListener('click', function(ev) {
 					ev.preventDefault();
@@ -149,7 +153,7 @@
 
 			setTimeout(function() {
 				var dummy = gridItemsContainer.querySelector('.placeholder');
-
+				gridItemsContainer = gridEl.querySelector('section.grid');
 				classie.removeClass(bodyEl, 'noscroll');
 
 				dummy.style.WebkitTransform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
@@ -158,7 +162,7 @@
 				onEndTransition(dummy, function() {
 					// reset content scroll..
 					contentItem.parentNode.scrollTop = 0;
-					gridItemsContainer.removeChild(dummy);
+					dummy.remove()
 					classie.remove(gridItem, 'grid__item--loading');
 					classie.remove(gridItem, 'grid__item--animate');
 					lockScroll = false;

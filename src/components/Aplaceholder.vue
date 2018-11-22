@@ -1,5 +1,5 @@
 <template>
-  <div class="placeholder">
+  <div class="aplaceholder">
     <p>Pea horseradish azuki bean lettuce avocado asparagus okra.</p>
   </div>
 </template>
@@ -13,13 +13,14 @@
 </script>
 
 <style scoped>
-  .placeholder p{
+  .aplaceholder p{
     font-family: 'Blokk', sans-serif;
-    font-size: 1.4rem;
     text-align: center;
     opacity: 0.8;
     overflow: hidden;
     color: #fff;
-    position: absolute;
+    font-size: 1.5em;
+    letter-spacing: 0;
   }
+
 </style>

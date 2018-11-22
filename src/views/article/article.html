@@ -23,14 +23,14 @@
                                 <h2>
                                     {{item.name}}
                                     <span>{{item.description}}</span>
-                                    <ul>
+                                    <ul v-if="slideshow.isFullscreen">
                                         <li v-for="link in item.links">
                                             <svg v-html="link.icon" fill="#007bff"></svg>
                                             <a :href="link.link_href" target="_blank">{{link.tag_name}}</a>
                                         </li>
                                     </ul>
                                 </h2>
-                                <button class="content-switch">
+                                <button class="content-switch" @click="getTagType(item.id)">
                                     <i class="fa fa-arrow-down" aria-hidden="true"></i>
                                     查看
                                 </button>
@@ -38,25 +38,25 @@
                         </div>
                     </section>
                     <!-- Content section -->
-                    <section class="pages">
+                    <section class="pages" :style="{overflow: !hiddenPageScroll ? 'hidden' : 'auto'}">
                         <div class="content" v-for="item in lists" :data-content="'content-'+item.id">
-                            <h2>
-                                {{item.name}}
-                            </h2>
+                            <h2>{{item.name}}</h2>
                             <p>
                                 {{item.description_details}}
                             </p>
                         </div>
+                        <gridload :data="propsData" ref="gridload" @load-more="loadMore" @hidden-scroll="hiddenScroll" @show-scroll="showScroll"></gridload>
                     </section>
                 </div>
             </div>
             <aloading :loading-content="loadingObj" ref="loading"></aloading>
         </div>
-        <script src="./static/js/snap.svg-min.js"></script>
-        <script src="./static/js/classie.js"></script>
+        
         <script src="./static/js/modernizr.custom.js"></script>
         <script src="./static/js/dragdealer.js"></script>
         <script src="./static/js/dragslideshow.js"></script>
+        <script src="./static/js/classie.js"></script>
+        <script src="./static/js/snap.svg-min.js"></script>
     </body>
 </html>
 

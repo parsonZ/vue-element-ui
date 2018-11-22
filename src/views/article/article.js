@@ -1,4 +1,5 @@
 import '../../common/app'
+import '../../../static/css/grid.css'
 
 import Vue from 'vue'
 import store from 'src/store/index'
@@ -10,7 +11,19 @@ new Vue({
     lists: [],
     zoom: false,
     slideshow: {},
-    loadingObj: {}
+    loadingObj: {},
+    hiddenPageScroll: true,
+    params: {
+      page: 1,
+      counts: 1,
+      tag_type: ''
+    },
+    propsData: {
+      lists: [],
+      loadMoreBtn: true,
+      marginTop: 0
+    },
+    tag_list: []
   },
   mounted(){
     this.init()
@@ -43,6 +56,8 @@ new Vue({
     toggleCompleteCtrls () {
       if( !this.slideshow.isContent ) {
         classie.remove( this.$refs.header, 'hide' );
+      } else {
+        this.propsData.marginTop = document.querySelector('.content.show').clientHeight
       }
     },
     toggleCtrls() {
@@ -74,6 +89,52 @@ new Vue({
           });
         }
       })
+    },
+    getTagType (id){
+      if (!this.slideshow.isContent) {
+        
+        //初始化参数
+        this.params = {
+          page: 1,
+          counts: 1,
+          tag_type: id
+        }
+        this.propsData.loadMoreBtn = true
+        this.propsData.lists = []
+        
+        this.getArticlesByTag()
+      }
+    },
+    getArticlesByTag(){
+      const that = this
+      this.$http.get('/get_articles', {
+        params: this.params
+      }).then(res => {
+        if(res.status == 200){
+          if(this.propsData.lists.length >= res.data.counts){
+            this.propsData.loadMoreBtn = false
+            this.$refs.loading.hide()
+            return false;
+          }
+          this.propsData.lists = [...this.propsData.lists, ...res.data.list]
+          this.$refs.loading.hide()
+        }else{
+          this.$notify({
+            title:'error', message: res.message, type: 'error'
+          });
+        }
+      })
+    },
+    loadMore(){
+      this.$refs.loading.show()
+      this.params.page ++;
+      this.getArticlesByTag()
+    },
+    hiddenScroll(){
+      this.hiddenPageScroll = false
+    },
+    showScroll(){
+      this.hiddenPageScroll = true
     }
   }
 })
