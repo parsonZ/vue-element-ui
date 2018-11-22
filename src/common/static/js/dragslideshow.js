@@ -8,6 +8,8 @@
  * Copyright 2014, Codrops
  * http://www.codrops.com
  */
+ const Modernizr = require("node_modules/modernizr/src/Modernizr.js");
+ const Dragdealer = require('./dragdealer.js');
 ;( function( window ) {
 	
 	'use strict';
@@ -344,6 +346,18 @@
 	/**
 	 * add to global namespace
 	 */
-	window.DragSlideshow = DragSlideshow;
+	
+	 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+	    module.exports = DragSlideshow;
+	 } else {
+	    if (typeof define === 'function' && define.amd) {
+	      define([], function() {
+	        return DragSlideshow;
+	      });
+	    }
+	    else {
+	      window.DragSlideshow = DragSlideshow;
+	    }
+	  }
 
 } )( window );

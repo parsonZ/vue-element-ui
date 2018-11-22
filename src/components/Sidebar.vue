@@ -18,6 +18,7 @@
 </template>
 
 <script>
+  import classie from 'src/common/static/js/classie.js'
   export default {
     data() {
       return {}

@@ -48,7 +48,7 @@
     },
     methods: {
       init(){
-        const gridInit = require('../../static/js/gridAnimate.js')
+        const gridInit = require('src/common/static/js/gridAnimate.js')
         gridInit.init()
       }
     },

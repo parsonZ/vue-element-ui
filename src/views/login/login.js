@@ -1,5 +1,7 @@
 import '../../common/app'
 
+import Snap from 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
+
 import Vue from 'vue'
 import store from 'src/store/index'
 

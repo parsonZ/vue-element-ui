@@ -1,6 +1,10 @@
 import '../../common/app'
 import '../../../static/css/grid.css'
 
+import Snap from 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
+import classie from 'src/common/static/js/classie.js'
+import DragSlideshow from 'src/common/static/js/dragslideshow.js'
+
 import Vue from 'vue'
 import store from 'src/store/index'
 

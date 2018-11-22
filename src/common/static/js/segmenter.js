@@ -8,7 +8,10 @@
  * Copyright 2016, Codrops
  * http://www.codrops.com
  */
+const imagesLoaded = require('imagesloaded');
+const anime = require('./anime.js');
 ;(function(window) {
+
 
 	'use strict';
 
@@ -429,6 +432,18 @@
 		}
 	};
 
-	window.Segmenter = Segmenter;
+	  if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+	    module.exports = Segmenter;
+	  }
+	  else {
+	    if (typeof define === 'function' && define.amd) {
+	      define([], function() {
+	        return Segmenter;
+	      });
+	    }
+	    else {
+	      window.Segmenter = Segmenter;
+	    }
+	  }
 
 })(window);

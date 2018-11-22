@@ -68,13 +68,26 @@ var classie = {
   toggle: toggleClass
 };
 
-// transport
-if ( typeof define === 'function' && define.amd ) {
-  // AMD
-  define( classie );
-} else {
-  // browser global
-  window.classie = classie;
-}
+// // transport
+// if ( typeof define === 'function' && define.amd ) {
+//   // AMD
+//   define( classie );
+// } else {
+//   // browser global
+//   window.classie = classie;
+// }
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+      module.exports = classie;
+    }
+    else {
+      if (typeof define === 'function' && define.amd) {
+        define([], function() {
+          return classie;
+        });
+      }
+      else {
+        window.classie = classie;
+      }
+    }
 
 })( window );

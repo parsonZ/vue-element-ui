@@ -1,5 +1,4 @@
-
-
+const classie = require('./classie.js');
 		var bodyEl = document.body,
 			docElem = window.document.documentElement,
 			support = { transitions: Modernizr.csstransitions },
