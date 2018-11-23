@@ -3,10 +3,10 @@
       <button class="menu__handle" @click="onChangeSidebarState"><span>Menu</span></button>
       <div class="menu__inner">
           <ul>
-              <li><a href="./index.html" class="active"><i class="fa fa-fw fa-home"></i>首页</a></li>
-              <li><a href="./article.html"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>标签</a></li>
-              <li><a href="./topping.html"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>置顶</a></li>
-              <li><a href="./login.html"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>登录</a></li>
+              <li><a href="javascript:;" @click="redirecterTo('index')" class="active"><i class="fa fa-fw fa-home"></i>首页</a></li>
+              <li><a href="javascript:;" @click="redirecterTo('article')"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>标签</a></li>
+              <li><a href="javascript:;" @click="redirecterTo('topping')"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>置顶</a></li>
+              <li><a href="javascript:;" @click="redirecterTo('login')"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>登录</a></li>
           </ul>
       </div>
       <div class="morph-shape" data-morph-open="M300-10c0,0,295,164,295,410c0,232-295,410-295,410" data-morph-close="M300-10C300-10,5,154,5,400c0,232,295,410,295,410">
@@ -18,16 +18,21 @@
 </template>
 
 <script>
-  import classie from 'src/common/static/js/classie.js'
+  import classie from 'src/common/js/classie.js'
+  import Snap from 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
+
   export default {
     data() {
-      return {}
+      return {
+        isClick: false
+      }
     },
     mounted (){
       this.init()
     },
     methods: {
       init(){
+        var that = this;
         function SVGMenu( el, options ) {
             this.el = el;
             this.init();
@@ -56,7 +61,6 @@
 
         SVGMenu.prototype.toggle = function() {
             var self = this;
-
             if( this.isOpen ) {
                 classie.remove( self.el, 'menu--anim' );
                 setTimeout( function() { classie.remove( self.el, 'menu--open' );   }, 250 );
@@ -65,10 +69,6 @@
                 classie.add( self.el, 'menu--anim' );
                 setTimeout( function() { classie.add( self.el, 'menu--open' );  }, 250 );
             }
-           /* this.pathEl.stop().animate( { 'path' : this.isOpen ? this.paths.close : this.paths.open }, 350, mina.easeout, function() {
-                self.pathEl.stop().animate( { 'path' : self.paths.reset }, 800, mina.elastic );
-            } );*/
-            
             this.isOpen = !this.isOpen;
         };
 
@@ -76,6 +76,11 @@
       },
       onChangeSidebarState(){
         this.$store.dispatch('changeState')
+      },
+      redirecterTo(href){
+        window.location.href = `${href}.html`
+        classie.remove( document.getElementById( 'menu' ), 'menu--anim' );
+        setTimeout( function() { classie.remove( document.getElementById( 'menu' ), 'menu--open' );   }, 250 );
       }
     }
   }

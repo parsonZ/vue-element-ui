@@ -101,7 +101,7 @@ const classie = require('./classie.js');
 			// add expanding element/placeholder 
 			var dummy = document.createElement('div');
 			dummy.className = 'placeholder';
-
+			
 			// set the width/heigth and position
 			dummy.style.WebkitTransform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
 			dummy.style.transform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
@@ -114,21 +114,21 @@ const classie = require('./classie.js');
 			
 			// body overlay
 			classie.add(bodyEl, 'view-single');
-
+			var scrollMe = document.querySelector(".pages") ?  document.querySelector(".pages").scrollTop-gridEl.offsetTop  : scrollY();
 			setTimeout(function() {
 				// expands the placeholder
-				dummy.style.WebkitTransform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
-				dummy.style.transform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
+				dummy.style.WebkitTransform = 'translate3d(-5px, ' + (scrollMe - 5) + 'px, 0px)';
+				dummy.style.transform = 'translate3d(-5px, ' + (scrollMe - 5) + 'px, 0px)';
 				// disallow scroll
 				window.addEventListener('scroll', noscroll);
 			}, 25);
-
 			onEndTransition(dummy, function() {
 				// add transition class 
+
 				classie.remove(dummy, 'placeholder--trans-in');
 				classie.add(dummy, 'placeholder--trans-out');
 				// position the content container
-				contentItemsContainer.style.top = scrollY() + 'px';
+				contentItemsContainer.style.top = scrollMe + 'px'
 				// show the main content container
 				classie.add(contentItemsContainer, 'content--show');
 				// show content item:
@@ -137,7 +137,6 @@ const classie = require('./classie.js');
 				classie.add(closeCtrl, 'close-button--show');
 				// sets overflow hidden to the body and allows the switch to the content scroll
 				classie.addClass(bodyEl, 'noscroll');
-
 				isAnimating = false;
 			});
 		}

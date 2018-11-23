@@ -1,12 +1,12 @@
 <template>
-  <div id="theGrid" :style="{marginTop: m+'px'}">
+  <div id="theGrid" :style="{top: top+'px'}">
       <section class="grid">
           <a class="grid__item" href="#" @click="$emit('hidden-scroll')" v-for="item in data.lists" :dataId="item.id">
               <h2 class="title title--preview" style="font-size: 1.5em;">{{item.title}}</h2>
               <div class="loader"></div>
               <span class="category">{{item.author}}</span>
               <div class="meta meta--preview">
-                  <img class="meta__avatar" src="../../static/img/authors/4.png" alt="author01" /> 
+                  <img class="meta__avatar" src="../common/img/authors/4.png" alt="author01" /> 
                   <span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
                   <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
               </div>
@@ -22,7 +22,7 @@
                   <span class="category category--full">{{item.title}}</span>
                   <h2 class="title title--full" style="font-size: 1.5em;">{{item.title}}</h2>
                   <div class="meta meta--full">
-                      <img class="meta__avatar" src="../../static/img/authors/4.png" alt="author01" />
+                      <img class="meta__avatar" src="../common/img/authors/4.png" alt="author01" />
                       <span class="meta__author">{{item.author}}</span>
                       <span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
                       <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
@@ -43,31 +43,34 @@
     },
     data() {
       return {
-        m: 0
+        top: 0
       }
+    },
+    mounted(){
+      
     },
     methods: {
       init(){
-        const gridInit = require('src/common/static/js/gridAnimate.js')
+        const gridInit = require('../common/js/gridAnimate.js')
         gridInit.init()
-      }
+      },
     },
     computed: {
-      marginTop(){
-        return this.data.marginTop;
-      },
       lists(){
         return this.data.lists;
+      },
+      m(){
+        return this.data.marginTop;
       }
     },
     watch: {
-      marginTop(n, o){
-        this.m = n
-      },
       lists(){
         this.$nextTick(() => {
           this.init()
         })
+      },
+      m(n, o){
+        this.top = n
       }
     }
   }
@@ -80,7 +83,10 @@
   }
   #theGrid{
     background: #fff;
+    position: absolute;
+    transition: .3s;
     height: 100%;
+    width: 100%;
   }
   @-webkit-keyframes moveUp {
     0% { }

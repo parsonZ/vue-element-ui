@@ -28,7 +28,6 @@
               <a href="#toregister" class="to_register">Join us</a>
           </p>
       </form>
-      <adialog :dialog-content="dialogObj" ref="dialogContent"></adialog>
   </div>
 </template>
 <script>
@@ -74,7 +73,6 @@
               title: 'Tips', message: res.data.message, type: res.data.status == 200 ? 'success':'error'
             });
             this.loading = res.loading
-            this.$refs.dialogContent.modal()
           } else {
             this.$notify({
               title:'error', message: res.message, type: 'error'
@@ -90,7 +88,7 @@
 <style>
   /***login form **/
   #container{
-      background: url('/static/img/3.jpg');
+      background: url('/src/common/img/3.jpg');
       background-size: cover;
       height: 100%;
       position: absolute;

@@ -8,6 +8,7 @@
  * Copyright 2014, Codrops
  * http://www.codrops.com
  */
+const classie = require('./classie.js');
 ;( function( window ) {
 	
 	'use strict';
@@ -95,6 +96,18 @@
 	};
 
 	// add to global namespace
-	window.DialogFx = DialogFx;
-
+	// window.DialogFx = DialogFx;
+	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+	    module.exports = DialogFx;
+	  }
+	  else {
+	    if (typeof define === 'function' && define.amd) {
+	      define([], function() {
+	        return DialogFx;
+	      });
+	    }
+	    else {
+	      window.DialogFx = DialogFx;
+	    }
+	  }
 })( window );

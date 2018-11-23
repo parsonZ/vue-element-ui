@@ -8,8 +8,9 @@
  * Copyright 2014, Codrops
  * http://www.codrops.com
  */
- const Modernizr = require("node_modules/modernizr/src/Modernizr.js");
+ // const Modernizr = require("./modernizr.custom.js");
  const Dragdealer = require('./dragdealer.js');
+ const classie = require('./classie.js');
 ;( function( window ) {
 	
 	'use strict';

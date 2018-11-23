@@ -41,6 +41,7 @@
     height: 100vh;
     position: relative;
     overflow: hidden;
+    background-size: cover;
 }
 
 .segmenter__image {
@@ -88,8 +89,9 @@
 
 /*menu*/
 a {
-    color: #cecece;
+    color: #797878;
     text-decoration: none;
+    transition: .2s;
 }
 .grid__item{
     transition: .3s;
@@ -98,7 +100,9 @@ a {
     color: #92ea94;
     outline: none;
 }
-.menu a.active{
+.menu a.active,
+.menu a:focus, 
+.menu a:hover{
     color: #fff;
 }
 .menu {
@@ -440,110 +444,40 @@ a {
 }
 
 /* Content */
-.dialog h2 {
-    margin: 0;
-    font-weight: 400;
-    font-size: 2em;
-    padding: 0 0 2em;
-    margin: 0;
-}
-.dialog--open .dialog__overlay {
-    -webkit-transition-duration: 0.8s;
-    transition-duration: 0.8s;
-}
-
-.dialog--close .dialog__overlay {
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s;
-}
-
-.dialog__content {
-    padding: 0;
-    background: transparent;
+.dialog.dialog--open .dialog__content,
+.dialog.dialog--close .dialog__content {
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 .dialog.dialog--open .dialog__content {
-    opacity: 1;
+    -webkit-animation-name: anim-open;
+    animation-name: anim-open;
 }
 
-.morph-shape {
-    position: absolute;
-    width: calc(100% + 0px);
-    height: calc(100% + 0px);
-    top: 0px;
-    left: 0px;
-    z-index: -1;
+.dialog.dialog--close .dialog__content {
+    -webkit-animation-name: anim-close;
+    animation-name: anim-close;
 }
 
-.morph-shape svg rect {
-    stroke: #fff;
-    stroke-width: 2px;
-    stroke-dasharray: 1680;
+@-webkit-keyframes anim-open {
+    0% { opacity: 0; -webkit-transform: scale3d(1.1, 1.1, 1); }
+    100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); }
 }
 
-.dialog--open .morph-shape svg rect {
-    -webkit-animation: anim-dash 0.6s forwards;
-    animation: anim-dash 0.6s forwards;
+@keyframes anim-open {
+    0% { opacity: 0; -webkit-transform: scale3d(1.1, 1.1, 1); transform: scale3d(1.1, 1.1, 1); }
+    100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1); }
 }
 
-.dialog-inner {
-    opacity: 0;
-    background: #fff;
+@-webkit-keyframes anim-close {
+    0% { opacity: 1; }
+    100% { opacity: 0; -webkit-transform: scale3d(0.9, 0.9, 1); }
 }
 
-.dialog--open .dialog-inner {
-    padding: 2em;
-    opacity: 1;
-    -webkit-transition: opacity 0.85s 0.35s;
-    transition: opacity 0.85s 0.35s;
-}
-
-.dialog.dialog--open h2 {
-    -webkit-animation: anim-elem-1 0.7s ease-out both;
-    animation: anim-elem-1 0.7s ease-out both;
-}
-
-.dialog.dialog--open button {
-    -webkit-animation: anim-elem-2 0.7s ease-out both;
-    animation: anim-elem-2 0.7s ease-out both;
-}
-
-@keyframes anim-dash {
-    0% {
-        stroke-dashoffset: 1680;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-
-@-webkit-keyframes anim-dash {
-    0% {
-        stroke-dashoffset: 1680;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-
-/* Inner elements animations */
-
-@-webkit-keyframes anim-elem-1 {
-    0% { opacity: 0; -webkit-transform: translate3d(-150px, 0, 0); }
-    100% { opacity: 1; -webkit-transform: translate3d(0, 0, 0); }
-}
-
-@keyframes anim-elem-1 {
-    0% { opacity: 0; -webkit-transform: translate3d(-150px, 0, 0); transform: translate3d(-150px, 0, 0); }
-    100% { opacity: 1; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
-}
-
-@-webkit-keyframes anim-elem-2 {
-    0% { opacity: 0; -webkit-transform: translate3d(150px, 0, 0); }
-    100% { opacity: 1; -webkit-transform: translate3d(0, 0, 0); }
-}
-
-@keyframes anim-elem-2 {
-    0% { opacity: 0; -webkit-transform: translate3d(150px, 0, 0); transform: translate3d(150px, 0, 0); }
-    100% { opacity: 1; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+@keyframes anim-close {
+    0% { opacity: 1; }
+    100% { opacity: 0; -webkit-transform: scale3d(0.9, 0.9, 1); transform: scale3d(0.9, 0.9, 1); }
 }

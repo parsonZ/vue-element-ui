@@ -1,9 +1,8 @@
-import '../../common/app'
-import '../../../static/css/grid.css'
+import 'src/common/app'
+import 'src/common/css/grid.css'
 
-import Snap from 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
-import classie from 'src/common/static/js/classie.js'
-import DragSlideshow from 'src/common/static/js/dragslideshow.js'
+import classie from 'src/common/js/classie.js'
+import DragSlideshow from 'src/common/js/dragslideshow.js'
 
 import Vue from 'vue'
 import store from 'src/store/index'
@@ -19,7 +18,7 @@ new Vue({
     hiddenPageScroll: true,
     params: {
       page: 1,
-      counts: 1,
+      counts: 6,
       tag_type: ''
     },
     propsData: {
@@ -85,13 +84,13 @@ new Vue({
           this.lists = res.data.list;
           this.$nextTick(() => {
               this.initAnimate()
-              this.$refs.loading.hide()
           })
         }else{
           this.$notify({
             title:'error', message: res.message, type: 'error'
           });
         }
+        this.$refs.loading.hide()
       })
     },
     getTagType (id){
@@ -100,7 +99,7 @@ new Vue({
         //初始化参数
         this.params = {
           page: 1,
-          counts: 1,
+          counts: this.params.counts,
           tag_type: id
         }
         this.propsData.loadMoreBtn = true
@@ -121,12 +120,12 @@ new Vue({
             return false;
           }
           this.propsData.lists = [...this.propsData.lists, ...res.data.list]
-          this.$refs.loading.hide()
         }else{
           this.$notify({
             title:'error', message: res.message, type: 'error'
           });
         }
+        this.$refs.loading.hide()
       })
     },
     loadMore(){
@@ -139,6 +138,6 @@ new Vue({
     },
     showScroll(){
       this.hiddenPageScroll = true
-    }
+    },
   }
 })

@@ -1,7 +1,5 @@
-import '../../common/app'
-import '../../../static/css/grid.css'
-
-import Snap from 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
+import 'src/common/app'
+import 'src/common/css/grid.css'
 
 import Vue from 'vue'
 import store from 'src/store/index'
@@ -15,7 +13,7 @@ new Vue({
     loadingObj: {},
     params: {
       page: 1,
-      counts: 2
+      counts: 6
     },
     propsData: {
       lists: [],
@@ -51,12 +49,12 @@ new Vue({
             return false;
           }
           this.propsData.lists = [...this.propsData.lists, ...res.data.list]
-          this.$refs.loading.hide()
         }else{
           this.$notify({
             title:'error', message: res.message, type: 'error'
           });
         }
+        this.$refs.loading.hide()
       })
     },
     loadMore(){

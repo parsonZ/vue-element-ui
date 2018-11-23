@@ -1,11 +1,11 @@
-import './base.css'
-import './button.css'
+import './css/base.css'
+import './css/button.css'
 import 'font-awesome/css/font-awesome.css'
 
-import '../../static/css/normalize.css'
-import '../../static/css/component.css'
-import '../../static/css/animate.css'
-import '../../static/css/plugin.css'
+import './css/normalize.css'
+import './css/component.css'
+import './css/animate.css'
+import './css/plugin.css'
 
 import Vue from 'vue';
 import axios from 'axios';

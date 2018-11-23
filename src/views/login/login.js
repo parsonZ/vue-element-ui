@@ -1,7 +1,5 @@
 import '../../common/app'
 
-import Snap from 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
-
 import Vue from 'vue'
 import store from 'src/store/index'
 
@@ -16,7 +14,7 @@ new Vue({
     }
   },
   mounted(){
-    setTimeout(this.testShowDialog, 3000)
+    this.$refs.dialogContent.modal()
   },
   computed: {
     sidebarStatus(){
@@ -26,11 +24,6 @@ new Vue({
   watch: {
     sidebarStatus(n, o){
       this.zoom = n
-    }
-  },
-  methods: {
-    testShowDialog(){
-      this.$refs.dialogContent.modal()
     }
   }
 })
