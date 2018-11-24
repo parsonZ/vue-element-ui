@@ -697,6 +697,7 @@
 .content__item--show .title--full {
   -webkit-transition-delay: 0.05s;
   transition-delay: 0.05s;
+  font-size: 1.5em;
 }
 
 .content__item--show .meta--full .meta__avatar {
@@ -728,7 +729,7 @@
   margin: 0;
   z-index: 100;
   top: 0;
-  right: 0;
+  right: 15px;
   font-size: 18px;
   color: #ddd;
   cursor: pointer;

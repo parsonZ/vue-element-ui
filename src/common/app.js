@@ -1,7 +1,6 @@
 import './css/base.css'
 import './css/button.css'
 import 'font-awesome/css/font-awesome.css'
-
 import './css/normalize.css'
 import './css/component.css'
 import './css/animate.css'

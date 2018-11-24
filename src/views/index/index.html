@@ -10,7 +10,7 @@
     <body>
         <div id="nav_menu">
             <main class="wrap-container" :class="{'scaleMain': zoom}">
-                <div class="segmenter" style="background: url('../src/common/img/3.jpg')"></div>
+                <div class="segmenter" :style="{backgroundImage: 'url(' + bgImg + ')'}"></div>
                 <h2 class="trigger-headline" style="opacity: 0;">
                     <span>h</span>
                     <span>e</span>
@@ -21,7 +21,7 @@
             </main>
             <sidebar></sidebar>
         </div>
-        <script src="./static/modernizr.custom.js"></script>
+        <script src="./static/js/modernizr.custom.js"></script>
     </body>
 </html>
 

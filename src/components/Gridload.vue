@@ -17,10 +17,10 @@
           </footer>
       </section>
       <section class="content_me">
-          <div class="scroll-wrap">
+          <div class="scroll-wrap" @mousewheel="handleScroll($event)">
               <article class="content__item" v-for="item in data.lists" :dataContentId="item.id">
                   <span class="category category--full">{{item.title}}</span>
-                  <h2 class="title title--full" style="font-size: 1.5em;">{{item.title}}</h2>
+                  <h2 class="title title--full" :class="{'title-full-fixed': fixedHeader}">{{item.title}}</h2>
                   <div class="meta meta--full">
                       <img class="meta__avatar" src="../common/img/authors/4.png" alt="author01" />
                       <span class="meta__author">{{item.author}}</span>
@@ -43,17 +43,23 @@
     },
     data() {
       return {
-        top: 0
+        top: 0,
+        fixedHeader: false
       }
     },
     mounted(){
-      
     },
     methods: {
       init(){
         const gridInit = require('../common/js/gridAnimate.js')
         gridInit.init()
       },
+      handleScroll(e){
+        this.fixedHeader = e.deltaY > 0 ? true : false;
+        var x = document.querySelector('.content__item--show>p').scrollTop ;
+        var y = document.documentElement.scrollTop;
+        console.log(x, y)
+      }
     },
     computed: {
       lists(){
@@ -96,5 +102,15 @@
   @keyframes moveUp {
     0% { }
     100% { transform: translateY(0); transform: translateY(0); opacity: 1; }
+  }
+
+  .title-full-fixed{
+    font-size: 1.3em;
+    position: fixed;
+    top: 0;
+    padding: 50px 50px 20px 50px;
+    width: calc(100% - 2.5em);
+    background: #fff;
+    z-index: 1;
   }
 </style>
