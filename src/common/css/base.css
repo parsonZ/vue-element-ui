@@ -30,6 +30,7 @@ body{
 
 .wrap-container{
     transition: .3s;
+    transition-delay: .5s;
 }
 .scaleMain{
     transform: perspective(300px) translateZ(-100px) translateX(0) rotateY(-5deg);

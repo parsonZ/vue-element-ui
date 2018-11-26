@@ -5,12 +5,18 @@ const routeGet = path.resolve('./route/get')
 const routePost = path.resolve('./route/post')
 const sql = require('../mysql.js')
 const bodyParser = require("body-parser")
+const ejs = require('ejs');
+app.set('view engine','ejs');
 
 const interface = async () => {
   await fs.readdir(routeGet, (err, files) => {
     files.map(file => {
       const callback = require(routeGet + '/' + file)
       app.get('/' + file.replace('.js', ''), callback)
+      //获取详情
+      if( file.includes('get_article_details') ) {
+        app.get('/' + file.replace('.js', '') + "/:id", callback)
+      }
     })
   })
 
@@ -22,7 +28,6 @@ const interface = async () => {
   })
 
 }
-
 interface().then(res => {
   //设置跨域
   app.all("*", (req, res, next) => {
