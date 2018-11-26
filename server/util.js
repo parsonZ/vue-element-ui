@@ -8,9 +8,6 @@ module.exports = {
         error ? reject(error) : resolve(results);
       })
     })
-    .catch(err => {
-        console.log(err)
-    })
   },
   valid: validator
 }
