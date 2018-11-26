@@ -48,6 +48,7 @@
       }
     },
     mounted(){
+      
     },
     methods: {
       init(){
@@ -63,6 +64,10 @@
 
           }
         })
+      },
+      handleScroll(e) {
+        console.log(e)
+        console.log(e.wheelDelta)
       }
     },
     computed: {

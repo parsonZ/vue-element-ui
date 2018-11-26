@@ -5,8 +5,6 @@ const routeGet = path.resolve('./route/get')
 const routePost = path.resolve('./route/post')
 const sql = require('../mysql.js')
 const bodyParser = require("body-parser")
-const ejs = require('ejs');
-app.set('view engine','ejs');
 
 const interface = async () => {
   await fs.readdir(routeGet, (err, files) => {
