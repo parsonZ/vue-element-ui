@@ -86,9 +86,8 @@
 </script>
 
 <style>
-  /***login form **/
   #container{
-      background: url('/src/common/img/3.jpg');
+      background: url('../common/img/3.jpg');
       background-size: cover;
       height: 100%;
       position: absolute;
@@ -100,10 +99,7 @@
       width: 28rem;
       position: relative; 
   }
-  /**** Styling the form elements **/
-
-  /**** general text styling ****/
-  #wrapper a{
+  form a{
       color: rgb(95, 155, 198);
       text-decoration: underline;
   }
@@ -111,7 +107,7 @@
       background: rgb(97, 97, 97);
   }
 
-  #wrapper h1{
+  form h1{
       font-size: 48px;
       color: #4e4e4e;
       padding: 2px 0 10px 0;
@@ -119,10 +115,8 @@
       text-align: center;
   }
   /** For the moment only webkit supports the background-clip:text; */
-  #wrapper h1{
-      
-  }
-  #wrapper h1:after{
+  
+  form h1:after{
       content: ' ';
       display: block;
       width: 100%;
@@ -131,15 +125,15 @@
       background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(154, 161, 162, 0.8) 20%,rgba(46, 49, 49,1) 53%,rgba(154, 161, 162,0.8) 79%,rgba(147,184,189,0) 100%); 
   }
 
-  #wrapper p.login,
-  #wrapper p.signin{
+  form p.login,
+  form p.signin{
     text-align: right;
     margin: 30px 0;
   }
-  #wrapper p:first-child{
+  form p:first-child{
       margin: 0px;
   }
-  #wrapper label{
+  form label{
       color: #505050;
       position: relative;
       font-weight: 600;
@@ -163,21 +157,19 @@
   }
 
   /* all the input except submit and checkbox */
-  #wrapper input:not([type="checkbox"]){
+  form input:not([type="checkbox"]){
       width: 100%;
       padding: 10px 5px 10px 50px;
       background: #fff; 
       border: 1px solid rgb(178, 178, 178);
   }
-  #wrapper input:not([type="checkbox"]):focus{
+  form input:not([type="checkbox"]):focus{
     border: 1px solid rgb(78, 78, 78);
   }
   .fa::before{
     transition: .3s;
   }
-  #wrapper input:not([type="checkbox"]):focus+.fa{
 
-  }
   /** the magic icon trick ! **/
   [data-icon]:after {
       content: attr(data-icon);
@@ -189,7 +181,7 @@
   }
 
   /*styling both submit buttons */
-  #wrapper p.button input{
+  form p.button input{
       width: 20%;
       cursor: pointer;    
       background: rgb(97, 97, 97);
@@ -199,7 +191,7 @@
       border: 1px solid rgb(178, 180, 181);    
       text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
   }
-  #wrapper p.button input:hover{
+  form p.button input:hover{
       background: rgb(112, 122, 123);
   }
 
@@ -253,7 +245,7 @@
     -webkit-transition: .2s;
     transition: .2s;
   }
-  #wrapper p.change_link a {
+  form p.change_link a {
       display: inline-block;
       font-weight: bold;
       padding: 2px 6px;

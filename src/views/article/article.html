@@ -19,7 +19,7 @@
                     <section class="img-dragger img-dragger-large dragdealer">
                         <div class="handle">
                             <div class="slide" v-for="item in lists" :data-content="'content-'+item.id">
-                                <div class="img-wrap"><img src="../src/common/img/articles/1.jpg"/></div>
+                                <div class="img-wrap"><img :src="bgImg"/></div>
                                 <h2>
                                     {{item.name}}
                                     <span>{{item.description}}</span>
@@ -51,7 +51,7 @@
             </div>
             <aloading :loading-content="loadingObj" ref="loading"></aloading>
         </div>
-        <script src="./static/modernizr.custom.js"></script>
+        <script src="./static/js/modernizr.custom.js"></script>
     </body>
 </html>
 

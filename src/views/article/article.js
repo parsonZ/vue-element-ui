@@ -1,6 +1,6 @@
 import 'src/common/app'
 import 'src/common/css/grid.css'
-
+const requireImg = require('src/common/img/articles/1.jpg')
 import classie from 'src/common/js/classie.js'
 import DragSlideshow from 'src/common/js/dragslideshow.js'
 
@@ -26,7 +26,8 @@ new Vue({
       loadMoreBtn: true,
       marginTop: 0
     },
-    tag_list: []
+    tag_list: [],
+    bgImg: requireImg
   },
   mounted(){
     this.init()

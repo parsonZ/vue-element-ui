@@ -17,7 +17,7 @@
           </footer>
       </section>
       <section class="content_me">
-          <div class="scroll-wrap">
+          <div class="scroll-wrap" @mousewheel="handleScroll($event)">
               <article class="content__item" v-for="item in data.lists" :dataContentId="item.id">
                   <h2 class="title title--full" style="font-size: 1.5em;">{{item.title}}</h2>
                   <div class="meta meta--full">
@@ -36,7 +36,6 @@
   </div>
 </template>
 <script>
-  import 'highlight.js/styles/default.css';
   import '../common/css/markdown.css'
   export default {
     props: {
@@ -65,6 +64,10 @@
 
           }
         })
+      },
+      handleScroll(e) {
+        console.log(e)
+        console.log(e.wheelDelta)
       }
     },
     computed: {
@@ -108,5 +111,15 @@
   @keyframes moveUp {
     0% { }
     100% { transform: translateY(0); transform: translateY(0); opacity: 1; }
+  }
+
+  .title-full-fixed{
+    font-size: 1.3em;
+    position: fixed;
+    top: 0;
+    padding: 50px 50px 20px 50px;
+    width: calc(100% - 2.5em);
+    background: #fff;
+    z-index: 1;
   }
 </style>
