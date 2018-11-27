@@ -25,3 +25,7 @@ article pre{
     border-radius: 5px;
     font-size: .8em;
 }
+article p img{
+    width: auto;
+    max-width: 100%;
+}

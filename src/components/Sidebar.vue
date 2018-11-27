@@ -18,9 +18,7 @@
 </template>
 
 <script>
-  import classie from 'src/common/js/classie.js'
-  import Snap from 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js'
-
+  import SVGDDMenu from 'src/common/js/menu.js'
   export default {
     data() {
       return {
@@ -32,55 +30,15 @@
     },
     methods: {
       init(){
-        var that = this;
-        function SVGMenu( el, options ) {
-            this.el = el;
-            this.init();
-        }
-
-        SVGMenu.prototype.init = function() {
-            this.trigger = this.el.querySelector( 'button.menu__handle' );
-            this.shapeEl = this.el.querySelector( 'div.morph-shape' );
-
-            var s = Snap( this.shapeEl.querySelector( 'svg' ) );
-            this.pathEl = s.select( 'path' );
-            this.paths = {
-                reset : this.pathEl.attr( 'd' ),
-                open : this.shapeEl.getAttribute( 'data-morph-open' ),
-                close : this.shapeEl.getAttribute( 'data-morph-close' )
-            };
-
-            this.isOpen = false;
-
-            this.initEvents();
-        };
-
-        SVGMenu.prototype.initEvents = function() {
-            this.trigger.addEventListener( 'click', this.toggle.bind(this) );
-        };
-
-        SVGMenu.prototype.toggle = function() {
-            var self = this;
-            if( this.isOpen ) {
-                classie.remove( self.el, 'menu--anim' );
-                setTimeout( function() { classie.remove( self.el, 'menu--open' );   }, 250 );
-            }
-            else {
-                classie.add( self.el, 'menu--anim' );
-                setTimeout( function() { classie.add( self.el, 'menu--open' );  }, 250 );
-            }
-            this.isOpen = !this.isOpen;
-        };
-
-        new SVGMenu( document.getElementById( 'menu' ) );
+        new SVGDDMenu( document.getElementById( 'menu' ), {
+          name: 'sidebar'
+        } );
       },
       onChangeSidebarState(){
         this.$store.dispatch('changeState')
       },
       redirecterTo(href){
-        window.location.href = `${href}.html`
-        classie.remove( document.getElementById( 'menu' ), 'menu--anim' );
-        setTimeout( function() { classie.remove( document.getElementById( 'menu' ), 'menu--open' );   }, 250 );
+        window.location.href = `${href}.html`;
       }
     }
   }
