@@ -19,12 +19,17 @@ const path = require('path');
 const articlesPath = path.resolve('./articles')
 
 module.exports = (req, res) => {
-  // let sql = 'select a.*, b.content from articles a join article_details b on a.id = b.id where b.id = ?';
-  // let sql_param = [req.params.id]
-  fs.readFile(articlesPath + '/test.md', { encoding: 'utf8' }, function (err, data){
+  let sql = 'select a.*, b.content from articles a join article_details b on a.id = b.id where b.id = ?';
+  let sql_param = [req.params.id]
+  util.requestHandle({ sql, sql_param}).then(response => {
     res.send({
-      data: marked(data)
+      data: response[0].content
     })
   })
+  // fs.readFile(articlesPath + '/test.md', { encoding: 'utf8' }, function (err, data){
+  //   res.send({
+  //     data: marked(data)
+  //   })
+  // })
 }
 
