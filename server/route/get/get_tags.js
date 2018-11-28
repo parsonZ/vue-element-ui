@@ -20,11 +20,11 @@ module.exports = (req, res) => {
         list: r
       })
     })
+    
   }).catch(err => {
     res.send({
       status: 500,
-      message: 'error',
-      list: '数据库连接错误'
+      message: err,
     })
   })
 }

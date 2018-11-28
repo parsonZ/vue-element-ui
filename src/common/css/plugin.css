@@ -107,7 +107,7 @@ a {
 }
 .menu {
     position: fixed;
-    width: 150px;
+    width: 160px;
     top: 0;
     left: 0;
     height: 100%;
@@ -212,7 +212,7 @@ a {
     outline: none;
     position: absolute;
     top: 13px;
-    right: -47px;
+    right: -60px;
     background: none;
     transition: .3s;
     z-index: 2000;
@@ -277,7 +277,7 @@ a {
 .morph-shape {
     position: absolute;
     height: 100%;
-    width: 400px;
+    width: 0;
     top: 0;
     left: -100%;
 }

@@ -17,7 +17,10 @@ module.exports = (req, res) => {
       counts: response[1][0].counts
     })
   }).catch(err => {
-    console.log(err)
+    res.send({
+      status: 500,
+      message: err,
+    })
   })
 }
 

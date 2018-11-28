@@ -719,6 +719,7 @@
   opacity: 1;
   -webkit-transition: opacity 0.5s 0.25s;
   transition: opacity 0.5s 0.25s;
+  font-size: 1rem;
 }
 
 /* close button (for content and sidebar) */
@@ -937,5 +938,57 @@
   body #cdawrap {
     display: none;
   }
+}
+  .grid-componments.effect-2 li.animate {
+    transform: translateY(200px);
+    animation: moveUp 0.65s ease forwards;
+  }
+  #theGrid{
+    background: #fff;
+    position: absolute;
+    transition: .3s;
+    height: 100%;
+    width: 100%;
+  }
+  @-webkit-keyframes moveUp {
+    0% { }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes moveUp {
+    0% { }
+    100% { transform: translateY(0); transform: translateY(0); opacity: 1; }
+  }
+
+.articles_details blockquote{
+  padding: .625rem .9375rem;
+  border-left: .5rem #e8edee solid;
+  background: #f2f4f6;
+  margin: 0;
+}
+
+.articles_details blockquote a{
+  color: #0366d6!important;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-weight: normal;
+  color: #757272;
+}
+
+.articles_details p{
+  margin: 0;
+}
+
+.articles_details{
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.articles_details code {
+  padding: 1em 2em;
+  letter-spacing: 1px;
+  max-height: 25rem;
+  font-size: 14px;
 }
 

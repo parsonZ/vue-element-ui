@@ -43,7 +43,6 @@ body{
 }
 .scaleMain1{
     transform: scaleX(.8);
-    overflow: hidden !important;
 }
 
 
