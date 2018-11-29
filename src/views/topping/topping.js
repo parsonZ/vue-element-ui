@@ -42,14 +42,16 @@ new Vue({
       this.$http.get('/get_articles', {
         params: this.params
       }).then(res => {
-        if(res.status == 200){
-          if(this.propsData.lists.length >= res.data.counts){
+        return res.data
+      }).then(res => {
+        if(res.status == 200) {
+          if(this.propsData.lists.length >= res.counts){
             this.propsData.loadMoreBtn = false
             this.$refs.loading.hide()
             return false;
           }
-          this.propsData.lists = [...this.propsData.lists, ...res.data.list]
-        }else{
+          this.propsData.lists = [...this.propsData.lists, ...res.list]
+        } else {
           this.$notify({
             title:'error', message: res.message, type: 'error'
           });

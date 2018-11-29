@@ -81,12 +81,14 @@ new Vue({
     },
     getAboutMe(){
       this.$http.get('/get_tags', {}).then(res => {
-        if(res.status == 200){
-          this.lists = res.data.list;
+        return res.data;
+      }).then(res => {
+        if(res.status == 200) {
+          this.lists = res.list;
           this.$nextTick(() => {
               this.initAnimate()
           })
-        }else{
+        } else {
           this.$notify({
             title:'error', message: res.message, type: 'error'
           });

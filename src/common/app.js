@@ -26,12 +26,10 @@ axiosIns.interceptors.request.use((config) => {
 /*响应拦截器*/
 axiosIns.interceptors.response.use(config => {
   config['loading'] = config.status == 200 ? false : true
-  return config
+  return config;
 }, error => {
-  return {
-    status: 500,
-    message: 'Network Error'
-  }
+  document.querySelector('.loading_wrapper').remove()
+  alert('network error')
 })
 
 Vue.prototype.$http = axiosIns;
