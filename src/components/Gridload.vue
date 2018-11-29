@@ -1,6 +1,6 @@
 <template>
   <div id="theGrid" :style="{top: top+'px'}">
-      <section class="grid">
+      <section class="grid" ref="grid">
           <a class="grid__item" href="#" @click="articleDetails(item.id)" v-for="item in data.lists" :dataId="item.id">
               <h2 class="title title--preview" style="font-size: 1.5em;">{{item.title}}</h2>
               <div class="loader"></div>
@@ -17,27 +17,31 @@
           </footer>
       </section>
       <section class="content_me">
-          <div class="scroll-wrap" @mousewheel="handleScroll($event)">
+          <div class="scroll-wrap" @scroll="scrollWrap($event)">
               <article class="content__item" v-for="item in data.lists" :dataContentId="item.id">
-                  <h2 class="title title--full" style="font-size: 1.5em;">{{item.title}}</h2>
+                  <h2 class="title title--full" :class="{'title-fix': scrollRange > 80 }" style="font-size: 1.5em;">{{item.title}}</h2>
                   <div class="meta meta--full">
                       <img class="meta__avatar" src="../common/img/authors/4.png" alt="author01" />
-                      <span class="meta__author">{{item.author}}</span>
+                      <span class="meta__author" :class="{'meta__author-fix': scrollRange > 80 }">{{item.author}}</span>
                       <span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
                       <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
                   </div>
                   <p v-html="content" class="articles_details" ref="articles_details">
                     <aplaceholder></aplaceholder>
                   </p>
+                  <acomment></acomment>
               </article>
           </div>
-          <button class="close-button" @click="$emit('show-scroll')"><i class="fa fa-close"></i><span>Close</span></button>
+          <button class="close-button" @click="closeButton"><i class="fa fa-close"></i><span>Close</span></button>
       </section>
   </div>
 </template>
 <script>
   import 'highlight.js/styles/default.css'
   import hljs from 'highlight.js'
+  import ClipboardJS from 'clipboard'
+  import classie from 'src/common/js/classie.js'
+
   export default {
     props: {
       data: Object
@@ -45,7 +49,8 @@
     data() {
       return {
         top: 0,
-        content: ''
+        content: '',
+        scrollRange: 0
       }
     },
     mounted(){
@@ -70,29 +75,102 @@
           }
         })
       },
-      handleScroll(e) {
-        //console.log(e)
-        //console.log(e.wheelDelta)
+      closeButton(){
+        this.$emit('show-scroll');
+        this.content = ''
       },
       codeFromat(){
         this.$nextTick(() => {
-          let codes = document.querySelectorAll('code');
+          let codes = document.querySelectorAll('pre>code');
           for (let code of codes) {
-            this.codeView(code);
             hljs.highlightBlock(code)
+            this.codeView(code);
           }
-          
         })
       },
       codeView(code){
         let type = code.getAttribute('data-code-type');
-        let el = `<div>
-          <span class="${type}">${type}</span>
-          <span class="fullScreen">全屏</span>
-          <span class="copy">复制</span>
-        </div>`
-        //code.insertBefore(el)
-      }
+        let div = document.createElement("div");
+        div.setAttribute('class', 'codeView')
+
+        let span = document.createElement("span");
+        let node = document.createTextNode(type);
+        span.setAttribute('class', 'codeType')
+
+        let span1 = document.createElement("span");
+        let node1 = document.createTextNode("全屏");
+        span1.setAttribute('class', 'fullScreen fa fa-tv')
+
+        let span2 = document.createElement("span");
+        let node2 = document.createTextNode("复制");
+        span2.setAttribute('class', 'copyCode fa fa-copy')
+
+        span.appendChild(node)
+        span1.appendChild(node1)
+        span1.addEventListener('click', (e) => {
+          this.fullScreen(e.target, classie.hasClass(e.target, 'open'))
+        })
+        span2.appendChild(node2)
+        span2.addEventListener('click', (e) => {
+          this.copyCode(e.target)
+        })
+
+        div.appendChild(span)
+        div.appendChild(span1)
+        div.appendChild(span2)
+        code.before(div)
+
+        //创建行数
+        let lineHeight = Number(window.getComputedStyle(code, null).getPropertyValue('line-height').replace('px',''));
+        let codeHeight = code.scrollHeight;
+        let lineCounts = Math.floor( codeHeight / lineHeight );
+        let div1 = document.createElement("div");
+        div1.setAttribute('class', 'lineNum')
+        for(let i=1; i<=lineCounts; i++){
+          let span3 = document.createElement("span");
+          let node3 = document.createTextNode(i);
+          span3.appendChild(node3)
+          div1.appendChild(span3)
+          div1.style.lineHeight = lineHeight + 'px'
+        }
+        code.insertBefore(div1, null)
+      },
+      //复制
+      copyCode(el){
+        el.setAttribute('data-clipboard-text', el.parentNode.nextSibling.innerText)
+        let clipboard = new ClipboardJS(el);
+        clipboard.on('success', e => {
+          this.$notify({
+            title: 'Tips', message: '复制成功', type: 'success'
+          });
+          e.clearSelection();
+          clipboard.destroy()
+        })
+      },
+      //全屏
+      fullScreen(el, isFullScreen){ 
+        if(!isFullScreen) {
+          classie.add(el, 'open')
+          classie.add(el.parentNode.parentNode, 'full-screen-open')
+          classie.add(el.parentNode.nextSibling, 'full-code')
+          classie.add(document.querySelector('.scroll-wrap'), 'noscroll')
+          classie.add(el.parentNode.nextSibling.lastChild, 'full')
+          classie.add(document.querySelector('.menu__handle'), 'full')
+          classie.add(document.querySelector('.close-button'), 'full')
+        } else {
+          classie.remove(el, 'open')
+          classie.remove(el.parentNode.parentNode, 'full-screen-open')
+          classie.remove(el.parentNode.nextSibling, 'full-code')
+          classie.remove(document.querySelector('.scroll-wrap'), 'noscroll')
+          classie.remove(el.parentNode.nextSibling.lastChild, 'full')
+          classie.remove(document.querySelector('.menu__handle'), 'full')
+          classie.remove(document.querySelector('.close-button'), 'full')
+        }
+      },
+      //滚动事件
+      scrollWrap(e){
+        this.scrollRange = e.target.scrollTop
+      },
     },
     computed: {
       lists(){
