@@ -115,21 +115,26 @@ new Vue({
       const that = this
       this.$http.get('/get_articles', {
         params: this.params
-      }).then(res => {
+      }).then(res => res.data).then( res => {
         if(res.status == 200){
-          if(this.propsData.lists.length >= res.data.counts){
+          if(this.propsData.lists.length >= res.counts){
             this.propsData.loadMoreBtn = false
             this.$refs.loading.hide()
             return false;
           }
-          this.propsData.lists = [...this.propsData.lists, ...res.data.list]
+          res.list.map( item => {
+            item['localData'] = new Date(item.create_time).toLocaleDateString()
+            item['localTime'] = new Date(item.create_time).toLocaleTimeString()
+            return item;
+          })
+          this.propsData.lists = [...this.propsData.lists, ...res.list]
         }else{
           this.$notify({
             title:'error', message: res.message, type: 'error'
           });
         }
         this.$refs.loading.hide()
-      })
+      })  
     },
     loadMore(){
       this.$refs.loading.show()

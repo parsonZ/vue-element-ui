@@ -1,4 +1,6 @@
 const classie = require('./classie.js');
+const  lazyloadimg = require('./lazyloadimg.js');
+
 		var bodyEl = document.body,
 			docElem = window.document.documentElement,
 			support = { transitions: Modernizr.csstransitions },
@@ -138,6 +140,10 @@ const classie = require('./classie.js');
 				// sets overflow hidden to the body and allows the switch to the content scroll
 				classie.addClass(bodyEl, 'noscroll');
 				isAnimating = false;
+
+				//初始化懒加载
+				lazyloadimg.init(document.querySelector('.content__item--show'), {})
+
 			});
 		}
 

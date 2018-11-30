@@ -50,6 +50,11 @@ new Vue({
             this.$refs.loading.hide()
             return false;
           }
+          res.list.map( item => {
+            item['localData'] = new Date(item.create_time).toLocaleDateString()
+            item['localTime'] = new Date(item.create_time).toLocaleTimeString()
+            return item;
+          })
           this.propsData.lists = [...this.propsData.lists, ...res.list]
         } else {
           this.$notify({

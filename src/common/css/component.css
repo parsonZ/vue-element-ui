@@ -22,7 +22,7 @@
 	transform: translate3d(0,-100%,0);
 }
 
-.dragslider h2 {
+.dragslider .slide h2 {
 	font-size: 3em;
 	font-weight: 700;
 	margin: 0 auto;
@@ -342,13 +342,7 @@ button.content-switch:hover {
 	height: auto;
 	-webkit-transition: none;
 	transition: none;
-	padding-top: 5em;
-}
-
-.pages .content h2 {
-	font-size: 1em;
-	max-width: 70%;
-	color: #4e4e4e;
+	padding-top: 3em;
 }
 
 .pages .content h2 span {

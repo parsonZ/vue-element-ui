@@ -2,13 +2,13 @@
   <div id="theGrid" :style="{top: top+'px'}">
       <section class="grid" ref="grid">
           <a class="grid__item" href="#" @click="articleDetails(item.id)" v-for="item in data.lists" :dataId="item.id">
-              <h2 class="title title--preview" style="font-size: 1.5em;">{{item.title}}</h2>
+              <h2 class="title title--preview" style="font-size: 1.5em">{{item.title}}</h2>
               <div class="loader"></div>
-              <span class="category">{{item.author}}</span>
+              <span class="category">{{item.author_name}}</span>
               <div class="meta meta--preview">
-                  <img class="meta__avatar" src="../common/img/authors/4.png" alt="author01" /> 
-                  <span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
-                  <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
+                  <img class="meta__avatar" :src="item.avatar_img"/> 
+                  <span class="meta__date"><i class="fa fa-calendar-o"></i>{{item.localData}}</span>
+                  <span class="meta__reading-time"><i class="fa fa-clock-o"></i>{{item.localTime}}</span>
               </div>
           </a>
           <footer class="page-meta">
@@ -21,10 +21,10 @@
               <article class="content__item" v-for="item in data.lists" :dataContentId="item.id">
                   <h2 class="title title--full" :class="{'title-fix': scrollRange > 80 }" style="font-size: 1.5em;">{{item.title}}</h2>
                   <div class="meta meta--full">
-                      <img class="meta__avatar" src="../common/img/authors/4.png" alt="author01" />
-                      <span class="meta__author" :class="{'meta__author-fix': scrollRange > 80 }">{{item.author}}</span>
-                      <span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
-                      <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
+                      <img class="meta__avatar" :src="item.avatar_img"/>
+                      <span class="meta__author" :class="{'meta__author-fix': scrollRange > 80 }">{{item.author_name}}</span>
+                      <span class="meta__date"><i class="fa fa-calendar-o"></i>{{item.localData}}</span>
+                      <span class="meta__reading-time"><i class="fa fa-clock-o"></i>{{item.localTime}}</span>
                   </div>
                   <p v-html="content" class="articles_details" ref="articles_details">
                     <aplaceholder></aplaceholder>
@@ -54,7 +54,6 @@
       }
     },
     mounted(){
-      
     },
     methods: {
       init(){
