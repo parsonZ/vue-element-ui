@@ -5,8 +5,8 @@ module.exports = (req, res) => {
   util.requestHandle({ sql, sql_param: [] }).then(response => {
     async function as () {
       for(let item of response){
-        let sql = 'select b.link_href, c.name as tag_name, c.icon from tag a join tag_link b on a.id = b.tag_id join tag_link_type c on b.tag_link_type_id = c.id where a.id = ? order by a.name, c.name';
-        await util.requestHandle({ sql, sql_param: [item.id] }).then(r => {
+        let sql = 'SELECT b.link_href, c.name AS tag_name, c.icon FROM tag a JOIN tag_link b ON a.tag_id = b.tag_id JOIN tag_link_type c ON b.link_type_id = c.id WHERE a.tag_id = ? ORDER BY a.tag_name , c.name';
+        await util.requestHandle({ sql, sql_param: [item.tag_id] }).then(r => {
           item['links'] = r
         });
       }
