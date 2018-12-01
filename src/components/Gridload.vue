@@ -4,7 +4,7 @@
           <a class="grid__item" href="#" @click="articleDetails(item.id)" v-for="item in data.lists" :dataId="item.id">
               <h2 class="title title--preview" style="font-size: 1.5em">{{item.title}}</h2>
               <div class="loader"></div>
-              <span class="category">{{item.author_name}}</span>
+              <span class="category">{{item.avatar_name}}</span>
               <div class="meta meta--preview">
                   <img class="meta__avatar" :src="item.avatar_img"/> 
                   <span class="meta__date"><i class="fa fa-calendar-o"></i>{{item.localData}}</span>
@@ -22,7 +22,7 @@
                   <h2 class="title title--full" :class="{'title-fix': scrollRange > 80 }" style="font-size: 1.5em;">{{item.title}}</h2>
                   <div class="meta meta--full">
                       <img class="meta__avatar" :src="item.avatar_img"/>
-                      <span class="meta__author" :class="{'meta__author-fix': scrollRange > 80 }">{{item.author_name}}</span>
+                      <span class="meta__author" :class="{'meta__author-fix': scrollRange > 80 }">{{item.avatar_name}}</span>
                       <span class="meta__date"><i class="fa fa-calendar-o"></i>{{item.localData}}</span>
                       <span class="meta__reading-time"><i class="fa fa-clock-o"></i>{{item.localTime}}</span>
                   </div>
@@ -50,7 +50,8 @@
       return {
         top: 0,
         content: '',
-        scrollRange: 0
+        scrollRange: 0,
+        titlePosition: 0
       }
     },
     mounted(){
@@ -88,7 +89,7 @@
         })
       },
       codeView(code){
-        let type = code.getAttribute('data-code-type');
+        let type = code.getAttribute('data-code-type') || 'text';
         let div = document.createElement("div");
         div.setAttribute('class', 'codeView')
 

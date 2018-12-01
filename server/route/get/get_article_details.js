@@ -1,7 +1,7 @@
 const util = require('../../util.js');
 
 module.exports = (req, res) => {
-  let sql = 'select a.*, b.content from articles a join article_details b on a.id = b.id where b.id = ?';
+  let sql = 'select a.*, b.content from articles a join articles_details b on a.id = b.id where b.id = ?';
   let sql_param = [req.params.id]
   util.requestHandle({ sql, sql_param}).then(response => {
     res.send({
