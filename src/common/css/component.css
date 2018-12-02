@@ -63,14 +63,12 @@
 }
 .dragslider h2 ul li a{
 	color: #007bff;
-	font-size: .8em;
 }
 .dragslider h2 ul svg{
 	width: 1em;
     height: 1em;
     position: relative;
     left: 12px;
-    top: -2px;
 }
 
 /* Switch button */
@@ -452,7 +450,6 @@ button.content-switch:hover {
 	}
 	.dragslider h2 ul{
 		display: block;
-		font-size: .5em;
     	line-height: 2;
 	}
 	.dragslider h2 ul svg {

@@ -1,29 +1,23 @@
 const mysql = require("mysql2")
 
-const connection = mysql.createConnection({
-  host: 'www.parsonz.xyz',
-  user: 'root',
-  password: 'pang800820zong',
-  database: 'test',
-  multipleStatements: true
+const pool = mysql.createPool({
+ host: 'www.parsonz.xyz',
+ user: 'root',
+ password: 'pang800820zong',
+ database: 'test',
+ port: 3306
 });
-
-connection.connect((err) => {
-  if(err) {
-    console.log(err)
-    return;
+const connection = (sql, params, callback) => {
+ pool.getConnection((err,conn) => {
+  if(err){
+   callback(err,null,null);
+  }else{
+   conn.query(sql, params, (qerr,vals,fields) => {
+    callback(qerr,vals,fields);
+    conn.release();
+   });
   }
-  console.log('mysql connection')
+ });
+};
 
-})
-
-// const pool = mysql.createPool({
-//   host: 'parsonz.xyz',
-//   user: 'root',
-//   database: 'test',
-//   waitForConnections: true,
-//   connectionLimit: 10,
-//   queueLimit: 0,
-// });
-
-module.exports = connection
+module.exports = connection;

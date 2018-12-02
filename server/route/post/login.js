@@ -4,7 +4,12 @@ module.exports = (req, res) => {
   let sql = 'SELECT * from user where username = ?';
   let sql_param = [req.body.name];
   let obj = {}
-  util.requestHandle({sql, sql_param}).then(data => {
+  const logins = async () => {
+    let results = util.requestHandle({sql, sql_param});
+    return results;
+  }
+
+  logins().then(data => {
     if (!data.length) {
       obj = {
         status: 0,
@@ -25,9 +30,6 @@ module.exports = (req, res) => {
     }
     res.send(obj)
   }).catch(err => {
-    res.send({
-      status: 500,
-      message: err,
-    })
+    console.log(err)
   })
 }

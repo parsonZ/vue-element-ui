@@ -26,7 +26,6 @@ new Vue({
       loadMoreBtn: true,
       marginTop: 0
     },
-    tag_list: [],
     bgImg: requireImg
   },
   mounted(){
@@ -48,7 +47,7 @@ new Vue({
   methods: {
     init(){
       this.$refs.loading.show()
-      this.getAboutMe()
+      this.getTags()
     },
     initAnimate(){
       this.slideshow = new DragSlideshow( this.$refs.slideshow, { 
@@ -79,7 +78,7 @@ new Vue({
     toggleSlideshow(){
       this.slideshow.toggle();
     },
-    getAboutMe(){
+    getTags(){
       this.$http.get('/get_tags', {}).then(res => {
         return res.data;
       }).then(res => {
