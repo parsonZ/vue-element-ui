@@ -1,6 +1,6 @@
 <template>
   <div id="operate">
-    <div class="setting">
+    <div class="setting" :style="{'bottom': data ? '-100%' : 0}">
       <i class="fa fa-dot-circle-o fa-2x"
         @click="show = true" v-if="!show"></i>
 
@@ -8,20 +8,28 @@
         :style="{'bottom': scrolltop ? 0 : -100+'px', 'position': 'relative'}"
         @click="$emit('back-to-top')"></i>
     </div>
-    
-    <div id="drop-area" class="drop-area" :class="{'show': show}">
-      <div class="drop-area__item"><i class="fa fa-fw fa-share-square fa-lg"></i><span>分享</span></div>
-      <div class="drop-area__item"><i class="fa fa-fw fa-star-o fa-lg"></i><span>收藏</span></div>
-      <div class="drop-area__item"><i class="fa fa-fw fa-thumbs-o-up fa-lg"></i><span>点赞</span></div>
-      <div class="drop-area__item"><i class="fa fa-fw fa-user-secret fa-lg"></i><span>我的</span></div>
-      <i class="fa fa-check-circle-o fa-2x" 
-        :class="{'circle-close': show}"
-        @click="show = false"></i>
-    </div>
+    <transition
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @leave="leave"
+    >
+      <div id="drop-area" class="drop-area" v-if="show">
+        <div class="drop-area__item"><i class="fa fa-fw fa-share-square fa-lg"></i><span>分享</span></div>
+        <div class="drop-area__item"><i class="fa fa-fw fa-star-o fa-lg"></i><span>收藏</span></div>
+        <div class="drop-area__item"><i class="fa fa-fw fa-thumbs-o-up fa-lg"></i><span>点赞</span></div>
+        <div class="drop-area__item"><i class="fa fa-fw fa-user-secret fa-lg"></i><span>我的</span></div>
+        <i class="fa fa-check-circle-o fa-2x" 
+          @click="show = false"></i>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
+  import Velocity from 'velocity-animate'
   export default {
+    props: {
+      data: Number
+    },
     data() {
       return {
         show: false,
@@ -34,6 +42,27 @@
       },
       atBottom(){
         this.scrolltop = false
+      },
+      beforeEnter(el){
+        el.style.opacity = 0
+      },
+      enter(el, done){
+        Velocity(el, { opacity: 1, top: 0 })
+        this.items = document.querySelectorAll('.drop-area__item');
+        for(let [index, item] of this.items.entries()) {
+          Velocity(item, { top: '-50px' }, { duration: 500, delay: 100*index} )
+          Velocity(item, { top: '+=50px' }, { duration: 200 })
+        }
+        this.fa = document.querySelector('.fa-check-circle-o');
+        Velocity(this.fa, { top: '70%' }, { duration: 500, complete: done })
+      },
+      leave(el, done){
+        Velocity(this.fa, { top: '100%' }, { duration: 100 })
+        for(let [index, item] of this.items.entries()) {
+          Velocity(item, { top: '-=50px' }, { duration: 200, delay: 100*index})
+          Velocity(item, { top: '100%' }, { duration: 500})
+        }
+        Velocity(el, { opacity: 1, top: 'auto' }, { duration: 1000, complete: done })
       }
     }
   }
@@ -49,7 +78,6 @@
     .setting{
       position: fixed;
       display: flex;
-      bottom: 3em;
       right: calc((100% - 960px) / 2 - 100px);
       z-index: 102;
       flex-direction: column;
@@ -81,8 +109,6 @@
       height: 100%;
       top: 100%;
       background: linear-gradient(to bottom, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.65) 100%);
-      transition: .3s;
-      opacity: 0;
       z-index: 101;
 
       .fa-check-circle-o{
@@ -95,15 +121,13 @@
         transition-delay: .2s !important;
       }
 
-      .circle-close{
-        top: 70%;
-      }
-
       .drop-area__item{
         margin: 0 1em;
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative;
+        top: 100%;
         
         @media (max-width: 768px) {
           margin: .5em;
@@ -127,11 +151,6 @@
           transform: scale(1.1);
         }
       }
-    }
-
-    .show{
-      top: 0 !important;
-      opacity: 1 !important;
     }
   }
 </style>

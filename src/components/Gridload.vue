@@ -33,7 +33,7 @@
                   <acomment></acomment>
               </article>
           </div>
-          <aoperate ref="operate" @back-to-top="backToTop"></aoperate>
+          <aoperate ref="operate" :data="data.marginTop ? 1 : 0" @back-to-top="backToTop"></aoperate>
           <button class="close-button" @click="closeButton"><i class="fa fa-close"></i><span>Close</span></button>
       </section>
   </div>
@@ -55,8 +55,6 @@
         scrollRange: 0,
         titlePosition: 0
       }
-    },
-    mounted(){
     },
     methods: {
       init(){
@@ -182,7 +180,6 @@
       },
       backToTop(){
         this.$refs.scrollWrap.scrollTo(0,0);
-        console.log('das')
       }
     },
     computed: {
