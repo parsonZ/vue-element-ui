@@ -42,7 +42,7 @@
     position: relative;
     background-color: #fff;
     font-size: 14px;
-    max-width: 1200px;
+    max-width: 960px;
     margin: 0 auto;
 
     .title{

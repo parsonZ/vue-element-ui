@@ -17,21 +17,23 @@
           </footer>
       </section>
       <section class="content_me">
-          <div class="scroll-wrap" @scroll="scrollWrap($event)">
+          <div class="scroll-wrap" @scroll="scrollWrapHandle($event)" ref="scrollWrap">
               <article class="content__item" v-for="item in data.lists" :dataContentId="item.id">
-                  <h2 class="title title--full" :class="{'title-fix': scrollRange > 80 }" style="font-size: 1.5em;">{{item.title}}</h2>
+                  <h2 class="title title--full" :class="{'title-fix': scrollRange > 80 && data.marginTop, 'title-fix1': scrollRange > 80 && !data.marginTop }" style="font-size: 1.5em;">{{item.title}}</h2>
                   <div class="meta meta--full">
                       <img class="meta__avatar" :src="item.avatar_img"/>
-                      <span class="meta__author" :class="{'meta__author-fix': scrollRange > 80 }">{{item.avatar_name}}</span>
+                      <span class="meta__author" :class="{'meta__author-fix': scrollRange > 80 && data.marginTop, 'meta__author-fix1': scrollRange > 80 && !data.marginTop}">{{item.avatar_name}}</span>
                       <span class="meta__date"><i class="fa fa-calendar-o"></i>{{item.localData}}</span>
                       <span class="meta__reading-time"><i class="fa fa-clock-o"></i>{{item.localTime}}</span>
                   </div>
-                  <p v-html="content" class="articles_details" ref="articles_details">
+                  <p class="articles_details" ref="articles_details" v-html="content" v-if="content.length"></p>
+                  <p v-else>
                     <aplaceholder></aplaceholder>
                   </p>
                   <acomment></acomment>
               </article>
           </div>
+          <aoperate ref="operate" @back-to-top="backToTop"></aoperate>
           <button class="close-button" @click="closeButton"><i class="fa fa-close"></i><span>Close</span></button>
       </section>
   </div>
@@ -65,8 +67,10 @@
         this.$emit('hidden-scroll')
         this.$http.get('/get_article_details/'+id).then(res => {
           if( res.status == 200 ) {
-            this.content = res.data.data
-            this.codeFromat()
+            setTimeout(() => {
+              this.content = res.data.data
+              this.codeFromat()
+            }, 2000)
           }
           if (res.data.status == 500) {
             this.$notify({
@@ -77,7 +81,7 @@
       },
       closeButton(){
         this.$emit('show-scroll');
-        this.content = ''
+        this.content = '';
       },
       codeFromat(){
         this.$nextTick(() => {
@@ -149,9 +153,10 @@
       },
       //全屏
       fullScreen(el, isFullScreen){ 
+        console.log(this.data.marginTop)
         if(!isFullScreen) {
           classie.add(el, 'open')
-          classie.add(el.parentNode.parentNode, 'full-screen-open')
+          classie.add(el.parentNode.parentNode, this.data.marginTop ? 'full-screen-open' : 'full-screen-open1')
           classie.add(el.parentNode.nextSibling, 'full-code')
           classie.add(document.querySelector('.scroll-wrap'), 'noscroll')
           classie.add(el.parentNode.nextSibling.lastChild, 'full')
@@ -160,6 +165,7 @@
         } else {
           classie.remove(el, 'open')
           classie.remove(el.parentNode.parentNode, 'full-screen-open')
+          classie.remove(el.parentNode.parentNode, 'full-screen-open1')
           classie.remove(el.parentNode.nextSibling, 'full-code')
           classie.remove(document.querySelector('.scroll-wrap'), 'noscroll')
           classie.remove(el.parentNode.nextSibling.lastChild, 'full')
@@ -168,9 +174,16 @@
         }
       },
       //滚动事件
-      scrollWrap(e){
+      scrollWrapHandle(e){
         this.scrollRange = e.target.scrollTop
+
+        //图标控制
+        this.scrollRange > 100 ? this.$refs.operate.atTop() : this.$refs.operate.atBottom()
       },
+      backToTop(){
+        this.$refs.scrollWrap.scrollTo(0,0);
+        console.log('das')
+      }
     },
     computed: {
       lists(){

@@ -430,14 +430,12 @@ button.content-switch:hover {
 }
 
 @media screen and (max-width: 63.125em) {
-	.dragslider h2 {
-		font-size: 1.5em;
-	}
 	.pages .content {
 		font-size: 16px;
 	}
 	.pages .content h2 {
 		font-size: 1.3em;
+		margin-top: 2em;
 	}
 	.dragslider h2 span{
 		font-size: .8rem;

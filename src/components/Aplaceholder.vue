@@ -18,9 +18,10 @@
     text-align: center;
     opacity: 0.8;
     overflow: hidden;
-    color: #fff;
+    color: rgba(245,245,245,.9);
     font-size: 1.5em;
     letter-spacing: 0;
+    text-align: left;
   }
 
 </style>
