@@ -24,7 +24,6 @@ module.exports = (req, res) => {
   }
 
   get_articles().then(response => {
-    console.log(response)
     res.send({
       status: 200,
       message: 'success',

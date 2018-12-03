@@ -30,7 +30,7 @@
                                         </li>
                                     </ul>
                                 </h2>
-                                <button class="content-switch" @click="getTagType(item.tag_id)">
+                                <button class="content-switch" @click="getTagType(item.tag_id)" :class="{hiddenButton: pageScrollTop > pageScrollRange}">
                                     <i class="fa fa-arrow-down" aria-hidden="true"></i>
                                     查看
                                 </button>
@@ -38,10 +38,10 @@
                         </div>
                     </section>
                     <!-- Content section -->
-                    <section class="pages" :style="{overflow: !hiddenPageScroll ? 'hidden' : 'auto'}">
+                    <section class="pages" @scroll="pageScrollHandle($event)" :style="{overflow: !hiddenPageScroll ? 'hidden' : 'auto'}">
                         <div class="content" v-for="item in lists" :data-content="'content-'+item.tag_id">
-                            <h2>{{item.tag_name}}</h2>
-                            <p>
+                            <h2 :class="{translatey100: pageScrollTop > pageScrollRange}">{{item.tag_name}}</h2>
+                            <p :class="{translatey100: pageScrollTop > pageScrollRange}">
                                 {{item.tag_description}}
                             </p>
                         </div>

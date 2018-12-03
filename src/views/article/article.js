@@ -26,7 +26,9 @@ new Vue({
       loadMoreBtn: true,
       marginTop: 0
     },
-    bgImg: requireImg
+    bgImg: requireImg,
+    pageScrollTop: 0,
+    pageScrollRange: 30
   },
   mounted(){
     this.init()
@@ -146,5 +148,8 @@ new Vue({
     showScroll(){
       this.hiddenPageScroll = true
     },
+    pageScrollHandle(e){
+      this.pageScrollTop = e.target.scrollTop
+    }
   }
 })
