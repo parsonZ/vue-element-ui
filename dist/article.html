@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html class=html>
+    <head>
+        <meta charset=UTF-8>
+        <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+        <meta name=viewport content="width=device-width,initial-scale=1">
+        <title>Article</title>
+        <link rel="shortcut icon" href=./static/assets/fav.ico>
+    <link href=./static/css/article.0d23ed2e496b1efc9da277d095120e1b.css rel=stylesheet></head>
+    <body class=body>
+        <div id=main>
+            <sidebar></sidebar>
+            
+            <div class="container wrap-container">
+                <header id=header class=codrops-header ref=header>
+                    <button class=slider-switch ref=switchBtnn @click=toggleSlideshow>Switch view</button>
+                </header>
+                <div id=slideshow ref=slideshow class=dragslider :class="{'scaleMain': zoom}">
+                    <section class="img-dragger img-dragger-large dragdealer">
+                        <div class=handle>
+                            <div class=slide v-for="item in lists" :data-content="'content-'+item.tag_id">
+                                <div class=img-wrap><img :src=bgImg></div>
+                                <h2>
+                                    {{item.tag_name}}
+                                    <span>{{item.tag_description}}</span>
+                                    <ul v-if=slideshow.isFullscreen>
+                                        <li v-for="link in item.links">
+                                            <svg v-html=link.icon fill=#007bff></svg>
+                                            <a :href=link.link_href target=_blank>{{link.tag_name}}</a>
+                                        </li>
+                                    </ul>
+                                </h2>
+                                <button class=content-switch @click=getTagType(item.tag_id) :class="{hiddenButton: pageScrollTop > pageScrollRange}">
+                                    <i class="fa fa-arrow-down" aria-hidden=true></i>
+                                    查看
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class=pages @scroll=pageScrollHandle($event) :style="{overflow: !hiddenPageScroll ? 'hidden' : 'auto'}">
+                        <div class=content v-for="item in lists" :data-content="'content-'+item.tag_id">
+                            <h2 :class="{translatey100: pageScrollTop > pageScrollRange}">{{item.tag_name}}</h2>
+                            <p :class="{translatey100: pageScrollTop > pageScrollRange}">
+                                {{item.tag_description}}
+                            </p>
+                        </div>
+                        <gridload :data=propsData ref=gridload @load-more=loadMore @hidden-scroll=hiddenScroll @show-scroll=showScroll></gridload>
+                    </section>
+                </div>
+            </div>
+            <aloading :loading-content=loadingObj ref=loading></aloading>
+        </div>
+        <script src=./static/js/modernizr.custom.js></script>
+    <script type=text/javascript src=./static/js/manifest.fa75d42566179fe51f57.js></script><script type=text/javascript src=./static/js/vendor.89cd8e421fee9457af3e.js></script><script type=text/javascript src=./static/js/article.7fa016532bdba6b0b1a5.js></script></body>
+</html>
+
