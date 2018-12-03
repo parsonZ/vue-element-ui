@@ -1,8 +1,9 @@
 <template>
   <div id="operate">
     <div class="setting">
-      <i class="fa fa-dot-circle-o fa-2x" 
-        @click="settingTrgger"></i>
+      <i class="fa fa-dot-circle-o fa-2x"
+        @click="show = true" v-if="!show"></i>
+
       <i class="fa fa-arrow-circle-o-up fa-2x" 
         :style="{'bottom': scrolltop ? 0 : -100+'px', 'position': 'relative'}"
         @click="$emit('back-to-top')"></i>
@@ -13,6 +14,9 @@
       <div class="drop-area__item"><i class="fa fa-fw fa-star-o fa-lg"></i><span>收藏</span></div>
       <div class="drop-area__item"><i class="fa fa-fw fa-thumbs-o-up fa-lg"></i><span>点赞</span></div>
       <div class="drop-area__item"><i class="fa fa-fw fa-user-secret fa-lg"></i><span>我的</span></div>
+      <i class="fa fa-check-circle-o fa-2x" 
+        :class="{'circle-close': show}"
+        @click="show = false"></i>
     </div>
   </div>
 </template>
@@ -25,9 +29,6 @@
       }
     },
     methods: {
-      settingTrgger(){
-        this.show = !this.show
-      },
       atTop(){
         this.scrolltop = true
       },
@@ -54,7 +55,7 @@
       flex-direction: column;
 
       .fa{
-        margin: .1em 0;
+        margin: .4em 0;
         cursor: pointer;
         transition: .3s;
 
@@ -64,7 +65,7 @@
       }
 
       @media (max-width: 768px) {
-        right: 20px;
+        right: 2em;
       }
   
     }
@@ -84,10 +85,20 @@
       opacity: 0;
       z-index: 101;
 
-      @media (max-width: 768px) {
-        align-items: flex-end;
-        padding: 1em 0;
+      .fa-check-circle-o{
+        top: 100%;
+        position: fixed;
+        left: 50%;
+        color: #fff;
+        font-size: 1em;
+        transition: .3s;
+        transition-delay: .2s !important;
       }
+
+      .circle-close{
+        top: 70%;
+      }
+
       .drop-area__item{
         margin: 0 1em;
         display: flex;
