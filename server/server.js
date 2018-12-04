@@ -3,9 +3,60 @@ const fs = require('fs');
 const path = require('path');
 const routeGet = path.resolve('./route/get')
 const routePost = path.resolve('./route/post')
-const sql = require('../mysql.js')
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser")
+const fileStore = require('session-file-store')(session);
 
+/**
+  post的请求参数处理
+**/
+app.use(bodyParser.urlencoded({ extended: true }))
+
+/**
+ *session处理
+**/
+app.use(cookieParser('parsonz'));
+
+app.use(session({
+  secret: 'parsonz',
+  cookie: { maxAge:  120000 },
+  resave: true,
+  rolling: true,
+  saveUninitialized: true,
+  store:new fileStore()
+}));
+
+/**
+ *跨域请求设置
+**/
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:9000")
+  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS")
+  res.header('Access-Control-Allow-Credentials', true)
+  res.header("Content-Type", "application/html;charset=utf-8")
+  res.header("Access-Control-Allow-Headers", "Content-Type,XFILENAME,XFILECATEGORY,XFILESIZE");
+  next()
+})
+
+/**
+ * 请求拦截器
+ * 用户端若登录状态过期或未登录则自动抛出错误
+**/
+app.use((req, res, next) => {
+  if( req.originalUrl !== '/login' && !req.session.username ){ //登录过期
+    res.send({
+      status: 401,
+      message: '登录过期'
+    })
+  }
+  next()
+})
+
+
+/**
+  *异步自动化接口处理
+**/
 const interface = async () => {
   await fs.readdir(routeGet, (err, files) => {
     files.map(file => {
@@ -24,25 +75,8 @@ const interface = async () => {
       app.post('/' + file.replace('.js', ''), bodyParser.json(), callback)
     })
   })
-
 }
+
 interface().then(res => {
-  //设置跨域
-  app.all("*", (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS")
-    res.header("Content-Type", "application/json;charset=utf-8")
-    res.header("Access-Control-Allow-Headers", "Content-Type,XFILENAME,XFILECATEGORY,XFILESIZE");
-    next()
-  })
-
-  //中间件处理
-  app.use((req, res, next) => {
-    req['sql'] = sql;
-    next();
-  })
-
-  app.use(bodyParser.urlencoded({ extended: true }));
-
   app.listen(9009, () => console.log('Example app listening on port 9009!'))
 })

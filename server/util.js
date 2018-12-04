@@ -1,4 +1,4 @@
-const db = require('../mysql.js');
+const db = require('./mysql.js');
 const validator = require('validator');
 
 module.exports = {

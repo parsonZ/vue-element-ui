@@ -84,7 +84,7 @@
 
         if ( this.form.password.length<6 || this.form.password.length>18) {
           this.$notify({
-            title:'Tips', message: '请输入长度为6-18的字符',type: 'info'
+            title:'Tips', message: '请输入长度为6-18的密码',type: 'info'
           });
           return;
         }

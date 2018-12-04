@@ -28,10 +28,10 @@ module.exports = (req, res) => {
       status: 200,
       message: 'success',
       list: response.results1,
-      counts: response.results2[0].counts
+      counts: response.results2[0].counts,
     })
   }).catch(err => {
-    console.log(err)
+    return false
   })
 }
 

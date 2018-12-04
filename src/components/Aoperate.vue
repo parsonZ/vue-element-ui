@@ -5,7 +5,7 @@
         @click="show = true" v-if="!show"></i>
 
       <i class="fa fa-arrow-circle-o-up fa-2x" 
-        :style="{'bottom': scrolltop ? 0 : -100+'px', 'position': 'relative'}"
+        :style="{'bottom': scrolltop ? '.5em' : -100+'px', 'position': 'relative'}"
         @click="$emit('back-to-top')"></i>
     </div>
     <transition
@@ -19,7 +19,7 @@
         <div class="drop-area__item"><i class="fa fa-fw fa-thumbs-o-up fa-lg"></i><span>点赞</span></div>
         <div class="drop-area__item"><i class="fa fa-fw fa-user-secret fa-lg"></i><span>我的</span></div>
         <i class="fa fa-check-circle-o fa-2x" 
-          @click="show = false"></i>
+          @click="show = false" :style="{'top': data ? '200%' : '100%'}"></i>
       </div>
     </transition>
   </div>
@@ -28,7 +28,7 @@
   import Velocity from 'velocity-animate'
   export default {
     props: {
-      data: Number
+      data: Number //区分articles:1和topping:0
     },
     data() {
       return {
@@ -47,17 +47,17 @@
         el.style.opacity = 0
       },
       enter(el, done){
-        Velocity(el, { opacity: 1, top: 0 })
         this.items = document.querySelectorAll('.drop-area__item');
+        this.fa = document.querySelector('.fa-check-circle-o');
+        Velocity(el, { opacity: 1, top: 0 })
         for(let [index, item] of this.items.entries()) {
           Velocity(item, { top: '-50px' }, { duration: 500, delay: 100*index} )
           Velocity(item, { top: '+=50px' }, { duration: 200 })
         }
-        this.fa = document.querySelector('.fa-check-circle-o');
-        Velocity(this.fa, { top: '70%' }, { duration: 500, complete: done })
+        Velocity(this.fa, { top: this.data ? '170%' : '70%' }, { duration: 500, complete: done })
       },
       leave(el, done){
-        Velocity(this.fa, { top: '100%' }, { duration: 100 })
+        Velocity(this.fa, { top: this.data ? '200%' : '100%'}, { duration: 100 })
         for(let [index, item] of this.items.entries()) {
           Velocity(item, { top: '-=50px' }, { duration: 200, delay: 100*index})
           Velocity(item, { top: '100%' }, { duration: 500})

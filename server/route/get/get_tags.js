@@ -11,7 +11,6 @@ module.exports = (req, res) => {
       results2
     };
   }
-
   get_tags().then(response => {
     let r1 = response.results1;
     let r2 = response.results2;
@@ -27,8 +26,10 @@ module.exports = (req, res) => {
     res.send(obj = {
       status: 200,
       message: 'success',
-      list: r1
+      list: r1,
     })
+  }).catch(err => {
+    return false
   })
 }
 

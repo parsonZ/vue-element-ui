@@ -34,9 +34,6 @@ module.exports = (req, res) => {
     }
     res.send(obj)
   }).catch(err => {
-    res.send({
-      status: 500,
-      message: err,
-    })
+    return false
   })
 }

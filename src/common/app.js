@@ -11,6 +11,7 @@ import axios from 'axios';
 import { Notification } from 'element-ui';
 Vue.prototype.$notify = Notification;
 
+axios.defaults.withCredentials = true
 const axiosIns = axios.create({
   baseURL: process.env.NODE_ENV == 'development' ? 'http://localhost:9009' : 'http://www.parsonz.xyz:9009',
   timeout: 30000
@@ -25,11 +26,18 @@ axiosIns.interceptors.request.use((config) => {
 
 /*响应拦截器*/
 axiosIns.interceptors.response.use(config => {
-  config['loading'] = config.status == 200 ? false : true
+  config['loading'] = config.status == 200 ? false : true;
+  //401登录状态过期
+  if(config.data.status == 401) {
+    setTimeout( () => {
+      window.location.href = 'login.html'
+    }, 3000)
+  }
+  
   return config;
 }, error => {
   document.querySelector('.loading_wrapper').remove()
-  alert('network error')
+  alert('网络错误')
 })
 
 Vue.prototype.$http = axiosIns;

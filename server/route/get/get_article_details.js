@@ -14,7 +14,7 @@ module.exports = (req, res) => {
       data: response.length ? response[0].content : '这篇文章没有内容....'
     })
   }).catch( err => {
-    console.log(err)
+    return false
   })
 }
 

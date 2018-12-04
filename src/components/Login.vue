@@ -70,8 +70,14 @@
         .then(res => {
           if (res.status == 200) {
             this.$notify({
-              title: 'Tips', message: res.data.message, type: res.data.status == 200 ? 'success':'error'
+              title: 'Tips', message: res.data.message, type: res.data.status ? 'success':'error',
+              onClose: () => {
+                if(res.data.status) {
+                  window.location.href = 'article.html'
+                }
+              }
             });
+
             this.loading = res.loading
           } else {
             this.$notify({

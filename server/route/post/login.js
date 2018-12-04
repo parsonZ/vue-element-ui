@@ -8,7 +8,6 @@ module.exports = (req, res) => {
     let results = util.requestHandle({sql, sql_param});
     return results;
   }
-
   logins().then(data => {
     if (!data.length) {
       obj = {
@@ -18,9 +17,10 @@ module.exports = (req, res) => {
     } else {
       if (util.valid.equals(data[0].password, req.body.password)) {
         obj = {
-          status: 200,
+          status: 1,
           message: '登录成功'
         }
+        req.session.username = req.body.name
       } else {
         obj = {
           status: 0,
@@ -30,6 +30,6 @@ module.exports = (req, res) => {
     }
     res.send(obj)
   }).catch(err => {
-    console.log(err)
+    return false
   })
 }
