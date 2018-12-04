@@ -31,7 +31,8 @@ app.use(session({
  *跨域请求设置
 **/
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:9000")
+  console.log(req.headers.origin)
+  res.header("Access-Control-Allow-Origin", req.headers.origin)
   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS")
   res.header('Access-Control-Allow-Credentials', true)
   res.header("Content-Type", "application/html;charset=utf-8")
