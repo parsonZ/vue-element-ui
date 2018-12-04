@@ -264,6 +264,7 @@
   flex-direction: column;
   -webkit-justify-content: center;
   justify-content: center;
+  opacity: 0;
 }
 
 /* Grid item "border" */

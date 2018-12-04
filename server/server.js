@@ -44,7 +44,7 @@ app.use((req, res, next) => {
  * 用户端若登录状态过期或未登录则自动抛出错误
 **/
 app.use((req, res, next) => {
-  if( req.originalUrl !== '/login' && !req.session.username ){ //登录过期
+  if( req.originalUrl == '/get_tags' && !req.session.username ){ //登录过期
     res.send({
       status: 401,
       message: '登录过期'

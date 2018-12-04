@@ -1,7 +1,9 @@
 <template>
   <div id="theGrid" :style="{top: top+'px'}">
-      <section class="grid" ref="grid">
-          <a class="grid__item" href="#" @click="articleDetails(item.id)" v-for="item in data.lists" :dataId="item.id">
+      <transition
+        @enter="enter">
+        <section class="grid" ref="grid" v-show="show">
+          <a class="grid__item" href="#" data-complete="true" @click="articleDetails(item.id)" v-for="item in data.lists" :dataId="item.id">
               <h2 class="title title--preview" style="font-size: 1.5em">{{item.title}}</h2>
               <div class="loader"></div>
               <span class="category">{{item.avatar_name}}</span>
@@ -12,10 +14,11 @@
               </div>
           </a>
           <footer class="page-meta">
-              <span @click="$emit('load-more')" v-if="data.loadMoreBtn">Load more...</span>
-              <span v-else>no results ...</span>
+            <span @click="$emit('load-more')" v-if="data.loadMoreBtn">Load more...</span>
+            <span v-else>no results ...</span>
           </footer>
-      </section>
+        </section>
+      </transition>
       <section class="content_me">
           <div class="scroll-wrap" @scroll="scrollWrapHandle($event)" ref="scrollWrap">
               <article class="content__item" v-for="item in data.lists" :dataContentId="item.id">
@@ -43,6 +46,7 @@
   import hljs from 'highlight.js'
   import ClipboardJS from 'clipboard'
   import classie from 'src/common/js/classie.js'
+  import Velocity from 'velocity-animate'
 
   export default {
     props: {
@@ -53,8 +57,12 @@
         top: 0,
         content: '',
         scrollRange: 0,
-        titlePosition: 0
+        titlePosition: 0,
+        show: false
       }
+    },
+    mounted(){
+      
     },
     methods: {
       init(){
@@ -180,7 +188,17 @@
       },
       backToTop(){
         this.$refs.scrollWrap.scrollTo(0,0);
+      },
+      enter(el, done){
+        for(let [index, grid] of this.grids.entries()) {
+          Velocity(grid, { opacity: 1 }, { duration: 200, delay: 200*index,complete: (elements) => {
+            elements[0].setAttribute('data-complete', false)
+          }})
+        }
       }
+    },
+    updated(){
+      this.show = true
     },
     computed: {
       lists(){
@@ -193,6 +211,9 @@
     watch: {
       lists(){
         this.$nextTick(() => {
+          this.grids = document.querySelectorAll('.grid__item[data-complete="true"]');
+
+          this.enter()
           this.init()
         })
       },
