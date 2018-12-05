@@ -34,22 +34,19 @@ new Vue({
     this.init()
   },
   computed: {
-    sidebarStatus(){
-      return this.$store.state.sidebar.show
-    },
+    
     slideCounts(){
       return this.lists.length
     }
   },
-  watch: {
-    sidebarStatus(n, o){
-      this.zoom = n
-    }
-  },
+  
   methods: {
     init(){
       this.$refs.loading.show()
       this.getTags()
+    },
+    zoomState() {
+      this.zoom = !this.zoom
     },
     initAnimate(){
       this.slideshow = new DragSlideshow( this.$refs.slideshow, { 

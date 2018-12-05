@@ -12,7 +12,7 @@
             <div class="container wrap-container" style="background: #fff;" :class="{'scaleMain1': zoom}">
                 <gridload :data="propsData" ref="gridload" @load-more="loadMore"></gridload>
             </div>
-            <sidebar></sidebar>
+            <sidebar @zoom="zoomState"></sidebar>
             <aloading :loading-content="loadingObj" ref="loading"></aloading>
         </div>
         <script src="./static/js/modernizr.custom.js"></script>

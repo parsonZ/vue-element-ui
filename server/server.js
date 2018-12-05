@@ -20,7 +20,7 @@ app.use(cookieParser('parsonz'));
 
 app.use(session({
   secret: 'parsonz',
-  cookie: { maxAge:  120000 },
+  cookie: { maxAge:  60*1000*60 },
   resave: true,
   rolling: true,
   saveUninitialized: true,
@@ -44,7 +44,14 @@ app.use((req, res, next) => {
  * 用户端若登录状态过期或未登录则自动抛出错误
 **/
 app.use((req, res, next) => {
-  if( req.originalUrl == '/get_tags' && !req.session.username ){ //登录过期
+  let originalUrlFind;
+  
+  ['/get_tags', '/get_user_info'].find(item => {
+    originalUrlFind = req.originalUrl.includes(item)
+    if(originalUrlFind) return;
+  })
+
+  if( originalUrlFind && !req.session.username ){ //登录过期
     res.send({
       status: 401,
       message: '登录过期'

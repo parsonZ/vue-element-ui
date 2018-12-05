@@ -14,7 +14,8 @@
 }
 
 body{
-    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;font-size: 14px;
+    font-family: "microsoft yahei","helvetica","simhei","simsun","sans-serif";
+    font-size: 14px;
     background: #454545;
     line-height: 1.25;
 }

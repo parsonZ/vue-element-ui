@@ -16,14 +16,9 @@ new Vue({
   mounted(){
     this.$refs.dialogContent.modal()
   },
-  computed: {
-    sidebarStatus(){
-      return this.$store.state.sidebar.show
-    }
-  },
-  watch: {
-    sidebarStatus(n, o){
-      this.zoom = n
+  methods: {
+    zoomState() {
+      this.zoom = !this.zoom
     }
   }
 })

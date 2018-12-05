@@ -29,8 +29,10 @@ axiosIns.interceptors.response.use(config => {
   config['loading'] = config.status == 200 ? false : true;
   //401登录状态过期
   if(config.data.status == 401) {
+    alert(config.data.message)
     setTimeout( () => {
       window.location.href = 'login.html'
+      window.localStorage.removeItem('userid')
     }, 3000)
   }
   

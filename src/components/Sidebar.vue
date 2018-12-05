@@ -6,8 +6,8 @@
               <li><a href="javascript:;" @click="redirecterTo('index')" class="active"><i class="fa fa-fw fa-home"></i>首页</a></li>
               <li><a href="javascript:;" @click="redirecterTo('article')"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>标签</a></li>
               <li><a href="javascript:;" @click="redirecterTo('topping')"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>置顶</a></li>
-              <li><a href="javascript:;" @click="redirecterTo('login')"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>登录</a></li>
-              <li><a href="javascript:;" @click="redirecterTo('user')"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>我的</a></li>
+              <li><a href="javascript:;" @click="redirecterTo('login')" v-if="userid==null || ''"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>登录</a></li>
+              <li><a href="javascript:;" @click="redirecterTo('user')" v-if="userid"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>我的</a></li>
           </ul>
       </div>
       <div class="morph-shape" data-morph-open="M300-10c0,0,295,164,295,410c0,232-295,410-295,410" data-morph-close="M300-10C300-10,5,154,5,400c0,232,295,410,295,410">
@@ -20,14 +20,19 @@
 
 <script>
   import SVGDDMenu from 'src/common/js/menu.js'
+  import { mapState } from 'vuex'
+  import util from '../common/util.js'
+
   export default {
     data() {
       return {
-        isClick: false
+        isClick: false,
+        userid: ''
       }
     },
     mounted (){
       this.init()
+      this.userid = util.getStorage('userid')
     },
     methods: {
       init(){
@@ -37,9 +42,23 @@
       },
       onChangeSidebarState(){
         this.$store.dispatch('changeState')
+        this.$emit('zoom')
       },
       redirecterTo(href){
         window.location.href = `${href}.html`;
+      }
+    },
+    computed: {
+      ...mapState([
+        'user'
+      ]),
+      getUserId(){
+        return this.$store.state.user.id
+      }
+    },
+    watch: {
+      getUserId(n, o){
+        this.userid = n
       }
     }
   }

@@ -16,9 +16,11 @@ module.exports = (req, res) => {
       }
     } else {
       if (util.valid.equals(data[0].password, req.body.password)) {
+        data[0].password = '';
         obj = {
           status: 1,
-          message: '登录成功'
+          message: '登录成功',
+          info: data[0]
         }
         req.session.username = req.body.name
       } else {

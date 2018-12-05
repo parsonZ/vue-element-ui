@@ -16,16 +16,6 @@ new Vue({
   mounted(){
     this.init()
   },
-  computed: {
-    sidebarStatus(){
-      return this.$store.state.sidebar.show
-    }
-  },
-  watch: {
-    sidebarStatus(n, o){
-      this.zoom = n
-    }
-  },
   methods: {
     init(){
       var headline = document.querySelector('.trigger-headline'),
@@ -51,6 +41,9 @@ new Vue({
             segmenter.animate();
           }
       });
+    },
+    zoomState(){
+      this.zoom = !this.zoom
     }
   }
 })

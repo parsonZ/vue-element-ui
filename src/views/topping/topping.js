@@ -23,20 +23,13 @@ new Vue({
   mounted(){
     this.init()
   },
-  computed: {
-    sidebarStatus(){
-      return this.$store.state.sidebar.show
-    }
-  },
-  watch: {
-    sidebarStatus(n, o){
-      this.zoom = n
-    }
-  },
   methods: {
     init(){
       this.$refs.loading.show()
       this.getArticles()
+    },
+    zoomState(){
+      this.zoom = !this.zoom
     },
     getArticles(){
       this.$http.get('/get_articles', {

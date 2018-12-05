@@ -23,7 +23,7 @@ module.exports = (req, res) => {
       })
       return item
     })
-    res.send(obj = {
+    res.send({
       status: 200,
       message: 'success',
       list: r1,

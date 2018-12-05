@@ -12,7 +12,7 @@
             <div class="container wrap-container" :class="{'scaleMain1': zoom}">
                 <auser></auser>
             </div>
-            <sidebar></sidebar>
+            <sidebar @zoom="zoomState"></sidebar>
         </div>
         <script src="./static/js/modernizr.custom.js"></script>
     </body>

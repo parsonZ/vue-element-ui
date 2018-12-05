@@ -11,11 +11,6 @@ const sidebar = {
     changeState({commit}) {
       commit('changeState')
     }
-  },
-  getters: {
-    getSidebarState(state) {
-      return state
-    }
   }
 }
 

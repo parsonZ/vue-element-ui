@@ -5,12 +5,12 @@ Vue.use(vuex);
 
 //导入module
 import sidebar from './modules/sidebar.js'
-import other from './modules/other.js'
+import user from './modules/user.js'
 
 export default new vuex.Store({
   modules: {
     sidebar,
-    other
+    user
   }
 })
 

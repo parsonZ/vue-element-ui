@@ -1,4 +1,5 @@
 const crypto = require('crypto')
+const storage = window.localStorage;
 
 module.exports = {
   md5Encrypt (encryptString) {
@@ -6,5 +7,16 @@ module.exports = {
     hash.update(encryptString);
     encryptString = hash.digest('hex');
     return encryptString;
+  },
+
+  //localstorage
+  addStorage(key, value){
+    return storage.setItem(key, value);
+  },
+  removeStorage(key){
+    return storage.removeItem(key);
+  },
+  getStorage(key) {
+    return storage.getItem(key)
   }
 }
