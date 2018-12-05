@@ -7,21 +7,30 @@
     </div>
     <button class="menu__label_user"><i class="fa fa-fw fa-user-circle-o"></i><span>{{data.username}}</span></button>
     <ul class="menu__inner_user">
-      <li><a href="#"><i class="fa fa-fw fa-sign-out"></i><span>登出</span></a></li>
+      <li @click="logOnout"><a href="#"><i class="fa fa-fw fa-sign-out"></i><span>登出</span></a></li>
       <li><a href="#"><i class="fa fa-fw fa-plus-circle"></i><span>其他</span></a></li>
     </ul>
+    <adialog :dialog-content="dialogObj" ref="dialogContent"></adialog>
   </nav>
 </template>
 
 <script>
   
   import SVGDDMenu from 'src/common/js/menu.js'
+  import { mapActions, mapState } from 'vuex'
+
   export default {
     props: {
       data: Object
     },
     data() {
-      return {}
+      return {
+        dialogObj: {
+          title: '注销登录',
+          content: '确认退出登录吗?',
+          type: 1
+        }
+      }
     },
     mounted(){
       this.init()
@@ -31,7 +40,19 @@
         new SVGDDMenu( this.$refs.menu_user, {
           name: 'menu_user'
         } );
-      }
+      },
+      logOnout(){
+        //this.logout('') //提交登出actions
+        //this.$http.post('/logout').then(res => {
+          //this.$notify({
+            //title: 'Tips', message: res.data.message, type: res.data.status == 200 ? 'success':'error'
+          //});
+        //})
+        this.$refs.dialogContent.toggle()
+      },
+      ...mapActions([
+        'logout'
+      ])
     }
   }
 </script>
@@ -90,6 +111,7 @@
 
   .menu_user.menu--open_user .menu__inner_user {
     height: 100px;
+    width: 100%;
   }
 
   .menu__inner_user li a {

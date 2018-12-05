@@ -53,7 +53,7 @@
         'user'
       ]),
       getUserId(){
-        return this.$store.state.user.id
+        return this.user.id
       }
     },
     watch: {

@@ -7,14 +7,7 @@ new Vue({
   el: "#start",
   store,
   data: {
-    zoom: false,
-    dialogObj: {
-      title: 'test',
-      content: 'hello world'
-    }
-  },
-  mounted(){
-    this.$refs.dialogContent.modal()
+    zoom: false
   },
   methods: {
     zoomState() {

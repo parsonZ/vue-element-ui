@@ -76,7 +76,6 @@
         this.$http.get('/get_user_info', { params:{
           id: util.getStorage('userid')
         } }).then(res => {
-        res.data.userinfo
           this.userinfo = res.data.userinfo
         })
       }

@@ -75,8 +75,7 @@
         .then(res => {
           if (res.status == 200) {
             //登录成功
-            this.login(res.data.info.id) //更改sidebar数目的状态
-            util.addStorage('userid', res.data.info.id)
+            this.login(res.data.info.id) //提交登录actions
             this.$notify({
               title: 'Tips', message: res.data.message, type: res.data.status ? 'success':'error'
             });

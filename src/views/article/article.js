@@ -34,7 +34,6 @@ new Vue({
     this.init()
   },
   computed: {
-    
     slideCounts(){
       return this.lists.length
     }
