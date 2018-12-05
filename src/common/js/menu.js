@@ -9,7 +9,6 @@ export default class SVGDDMenu {
     } else if (options.name == 'sidebar'){
       this.sidebarInit()
     }
-    
   }
 
   usercenterInit(){

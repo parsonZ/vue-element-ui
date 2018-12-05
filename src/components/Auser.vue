@@ -1,6 +1,6 @@
 <template>
   <section class="pricing-section bg-10">
-     <div class="pricing pricing--rabten">
+      <div class="pricing pricing--rabten">
           <div class="pricing__item">
             <div class="icon icon--home"><i class="fa fa-universal-access"></i></div>
             <h3 class="pricing__title">个人信息</h3>
@@ -17,7 +17,7 @@
                       {{new Date(userinfo.create_time).toLocaleTimeString()}}
                     </li>
                 </ul>
-                <button type="button" class="button button--nina button--text-thick" data-text="编辑">
+                <button type="button" @click="edit($event,1)" class="button button--nina button--text-thick" data-text="编辑">
                   <span>编</span><span>辑</span>
                 </button>
            	</div>
@@ -38,7 +38,7 @@
                     <li class="pricing__feature">vue组件传值（一）：父组件向子组件传值</li>
                     <li class="pricing__feature">vue组件传值（一）：父组件向子组件传值</li>
                 </ul>
-                <button type="button" class="button button--nina button--text-thick" data-text="查看更多">
+                <button @click="edit($event, 2)" type="button" class="button button--nina button--text-thick" data-text="查看更多">
                   <span>查</span><span>看</span><span>更</span><span>多</span>
                 </button>
             </div>
@@ -51,21 +51,46 @@
                     <li class="pricing__feature">javascript</li>
                     <li class="pricing__feature">javascript</li>
                 </ul>
-                <button type="button" class="button button--nina button--text-thick" data-text="编辑">
+                <button @click="edit($event,3)" type="button" class="button button--nina button--text-thick" data-text="编辑">
                   <span>编</span><span>辑</span>
                 </button>
             </div>
       </div>
+      <transition
+        @enter="enter"
+        @leave="leave"
+        @before-enter="beforeEnter"
+      >
+        <div class="edit-wrapper" v-if="editshow">
+          <div v-if="this.type == 1" class="edit-content">
+            个人信息
+          </div>
+          <div v-if="this.type == 3" class="edit-content">
+            我的标签
+          </div>
+
+          <div class="edit-footer">
+            <button type="button" class="button button--nina button--text-thick" data-text="update">
+              <span>更</span><span>新</span>
+            </button>
+            <button type="button" class="button button--nina button--text-thick" data-text="close" @click="editshow = false">
+              <span>关</span><span>闭</span>
+            </button>
+          </div>
+        </div>
+      </transition>
       <ausercenter :data="userinfo"></ausercenter>
-    </section>
+  </section>
 </template>
 <script>
   import util from '../common/util'
+  import Velocity from 'velocity-animate'
 
   export default {
     data() {
       return {
-        userinfo: {}
+        userinfo: {},
+        editshow: false
       }
     },
     mounted(){
@@ -78,6 +103,24 @@
         } }).then(res => {
           this.userinfo = res.data.userinfo
         })
+      },
+      edit(e, type) {
+        if(type == 2){
+          //查看更多
+        } else {
+          this.editshow = true
+          this.type = type
+        }
+      },
+      beforeEnter(el){
+        document.body.style.overflow = 'hidden'
+      },
+      enter(el, done) {
+        Velocity(el, { opacity: 1, width: '100%' },{ duration: 300, complete: done })
+      },
+      leave(el, done) {
+        Velocity(el, { opacity: 0, width: '0px' },{ duration: 300, complete: done })
+        document.body.style.overflow = 'auto'
       }
     }
   }
@@ -107,6 +150,7 @@
   			color: #fff;
         min-width: 26em;
         max-width: 26em;
+        min-height: 500px;
         transition: all .3s;
 
         &:hover{
@@ -219,20 +263,42 @@
   }
 
   @media screen and (max-width: 60em) {
-  	.pricing-section{
-  		padding: 5em 0;
-  	}
     .pricing-section .pricing--rabten .pricing__item:nth-child(2){
       border: none;
     }
     .pricing-section .pricing--rabten .pricing__item{
-      min-height: 75vh;
-      border-bottom: 1px solid #8e8b8b;
+      height: 100%;
+      border-bottom: 1px solid #8e8b8b !important;
     }
     .pricing-section .pricing--rabten .pricing__item:hover{
       background: none;
     }
   }
 
+  .edit-wrapper{
+    position: fixed;
+    width: 0;
+    height: 100%;
+    top: 0;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, rgb(158, 158, 158) 0%, rgb(88, 88, 88) 100%);
+    overflow: hidden;
+    z-index: 1;
+    opacity: 0;
+
+    .edit-footer{
+      position: absolute;
+      bottom: 2em;
+      width: 100%;
+      text-align: center;
+    }
+
+    .edit-content{
+      padding: 5em 0;
+      width: 60%;
+      margin: 0 auto;
+      color: #fff;
+    }
+  }
 </style>
 

@@ -11,7 +11,7 @@
         </div>
 
         <div class="dialog__footer">
-          <button @click="successCallback" type="button" class="button button--nina button--text-thick button--text-upper button--size-s" data-text="ok" v-if="dialogContent.type==1">
+          <button @click="$emit('success')" type="button" class="button button--nina button--text-thick button--text-upper button--size-s" data-text="ok" v-if="dialogContent.type==1">
             <span>确</span><span>认</span>
           </button>
           <button data-dialog-close type="button" class="button button--nina button--text-thick button--text-upper button--size-s" data-text="close">
@@ -44,9 +44,6 @@
       toggle(){
         this.dlg.toggle()
       },
-      successCallback(callback){
-        callback instanceof Function ? callback() : false;
-      }
     }
   }
 </script>

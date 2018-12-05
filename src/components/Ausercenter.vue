@@ -7,10 +7,10 @@
     </div>
     <button class="menu__label_user"><i class="fa fa-fw fa-user-circle-o"></i><span>{{data.username}}</span></button>
     <ul class="menu__inner_user">
-      <li @click="logOnout"><a href="#"><i class="fa fa-fw fa-sign-out"></i><span>登出</span></a></li>
+      <li @click="$refs.dialogContent.toggle()"><a href="#"><i class="fa fa-fw fa-sign-out"></i><span>登出</span></a></li>
       <li><a href="#"><i class="fa fa-fw fa-plus-circle"></i><span>其他</span></a></li>
     </ul>
-    <adialog :dialog-content="dialogObj" ref="dialogContent"></adialog>
+    <adialog :dialog-content="dialogObj" @success="logOnout" ref="dialogContent"></adialog>
   </nav>
 </template>
 
@@ -42,13 +42,13 @@
         } );
       },
       logOnout(){
-        //this.logout('') //提交登出actions
-        //this.$http.post('/logout').then(res => {
-          //this.$notify({
-            //title: 'Tips', message: res.data.message, type: res.data.status == 200 ? 'success':'error'
-          //});
-        //})
-        this.$refs.dialogContent.toggle()
+        this.logout('') //提交登出actions
+        this.$http.post('/logout').then(res => {
+          this.$notify({
+            title: 'Tips', message: res.data.message, type: res.data.status == 200 ? 'success':'error'
+          });
+          this.$refs.dialogContent.toggle()
+        })
       },
       ...mapActions([
         'logout'

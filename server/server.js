@@ -47,14 +47,16 @@ app.use((req, res, next) => {
   let originalUrlFind;
   
   ['/get_tags', '/get_user_info'].find(item => {
-    originalUrlFind = req.originalUrl.includes(item)
-    if(originalUrlFind) return;
+    if (req.originalUrl.includes(item)){
+      originalUrlFind = true
+      return true;
+    } 
+    originalUrlFind = false
   })
-
   if( originalUrlFind && !req.session.username ){ //登录过期
     res.send({
       status: 401,
-      message: '登录过期'
+      message: '请重新登录'
     })
   }
   next()
