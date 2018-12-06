@@ -30,6 +30,11 @@ new Vue({
     pageScrollTop: 0,
     pageScrollRange: 30
   },
+  created(){
+    //获取user
+    this.userid = window.localStorage.getItem('userid')
+    this.$store.dispatch('login', this.userid)
+  },
   mounted(){
     this.init()
   },
@@ -38,7 +43,6 @@ new Vue({
       return this.lists.length
     }
   },
-  
   methods: {
     init(){
       this.$refs.loading.show()
@@ -77,7 +81,11 @@ new Vue({
       this.slideshow.toggle();
     },
     getTags(){
-      this.$http.get('/get_tags', {}).then(res => {
+      this.$http.get('/get_tags', {
+        params: {
+          userid: this.userid
+        }
+      }).then(res => {
         return res.data;
       }).then(res => {
         if(res.status == 200) {
@@ -115,6 +123,8 @@ new Vue({
       }).then(res => res.data).then( res => {
         if(res.status == 200){
           if(this.propsData.lists.length >= res.counts){
+            this.hiddenPageScroll = this.propsData.lists.length;
+            console.log(this.hiddenPageScroll)
             this.propsData.loadMoreBtn = false
             this.$refs.loading.hide()
             return false;
@@ -125,6 +135,7 @@ new Vue({
             return item;
           })
           this.propsData.lists = [...this.propsData.lists, ...res.list]
+          this.hiddenPageScroll = this.propsData.lists.length;
         }else{
           this.$notify({
             title:'error', message: res.message, type: 'error'

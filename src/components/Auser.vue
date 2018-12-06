@@ -43,13 +43,13 @@
                 </button>
             </div>
             <div class="pricing__item">
-              <div class="icon icon--home"><i class="fa fa-fw fa-external-link"></i></div>
+              <div class="icon icon--home"><i class="fa fa-fw fa-tags"></i></div>
                 <h3 class="pricing__title" style="margin-bottom: 0;">我的标签</h3>
                 <ul class="pricing__tag-list">
-                    <li class="pricing__feature">javascript</li>
-                    <li class="pricing__feature">javascript</li>
-                    <li class="pricing__feature">javascript</li>
-                    <li class="pricing__feature">javascript</li>
+                  <li class="pricing__feature" v-for="tag in userinfo.tags">
+                    <i class="fa fa-fw fa-tag"></i>
+                    {{tag.tag_name}}
+                  </li>
                 </ul>
                 <button @click="edit($event,3)" type="button" class="button button--nina button--text-thick" data-text="编辑">
                   <span>编</span><span>辑</span>
@@ -66,11 +66,11 @@
             个人信息
           </div>
           <div v-if="this.type == 3" class="edit-content">
-            我的标签
+            <edittags :tags="allTags" @operate-tags="operateTags"></edittags>
           </div>
 
           <div class="edit-footer">
-            <button type="button" class="button button--nina button--text-thick" data-text="update">
+            <button type="button" @click="updateTags" class="button button--nina button--text-thick" data-text="update">
               <span>更</span><span>新</span>
             </button>
             <button type="button" class="button button--nina button--text-thick" data-text="close" @click="editshow = false">
@@ -90,7 +90,7 @@
     data() {
       return {
         userinfo: {},
-        editshow: false
+        editshow: false,
       }
     },
     mounted(){
@@ -108,9 +108,58 @@
         if(type == 2){
           //查看更多
         } else {
-          this.editshow = true
-          this.type = type
+          if(type == 3){
+            this.getAlltags().then(() => {
+              this.editshow = true
+              this.type = type
+            })
+          }
         }
+      },
+      getAlltags(){
+        this.$store.dispatch('openLoading')
+        return this.$http.get('/get_tags', {}).then(res => {
+          this.$store.dispatch('closeLoading')
+          this.allTags = res.data.list
+
+          this.allTags.map(item => {
+            this.userinfo.tags.map(item1 => {
+              if(item1.tag_id == item.tag_id){
+                item['isCheck'] = true
+              }
+            })
+            return item;
+          })
+        })
+      },
+      operateTags(data){
+        this.allTags.map(item => {
+          if(item.tag_id == data.id) {
+            item['isCheck'] = data.type == 'add' ? true : false;
+          }
+        })
+      },
+      updateTags(){
+        let ids = [];
+        this.allTags.find(item => {
+          if(item.isCheck){
+            ids.push(item.tag_id)
+          }
+        })
+
+        this.$http.get('/update_tags', {
+          params: {
+            ids: ids.join(','),
+            userid: this.userinfo.id
+          }
+        }).then(res => {
+          this.$notify({
+            title: 'Tips',
+            message: res.data.message,
+            type: 'success'
+          })
+          this.getUserInfo()
+        })
       },
       beforeEnter(el){
         document.body.style.overflow = 'hidden'
@@ -153,8 +202,13 @@
         min-height: 500px;
         transition: all .3s;
 
+        &:focus{
+          outline: none;
+        }
+
         &:hover{
-          background: linear-gradient(to bottom, rgba(158, 158, 158, 0.7) 0%, rgba(88, 88, 88, 0.58) 100%);
+          background: #383434;
+          cursor: pointer;
           box-shadow: 0px 0px 2px 0px #a7a4a4;
         }
 
@@ -207,9 +261,10 @@
 
           .pricing__feature{
             white-space: nowrap;
-            width: 100%;
+            width: 70%;
+            margin: 0 auto;
             overflow: hidden;
-            font-size: .8em;
+            font-size: 0.8em;
             text-overflow: ellipsis;
           }
 			  }
@@ -225,12 +280,14 @@
           margin-bottom: 1.8em;
 
           li{
-            background: #6f6f6f;
-            width: 50%;
+            border: 1px solid #fff;
+            width: 70%;
+            border-radius: 0.2em;
             margin: 0.5em 0;
             text-transform: uppercase;
-            padding: 0.4em 0.2em;
-            font-size: .8em;
+            padding: 0.4em 1em;
+            font-size: 0.8em;
+            text-align: left;
           }
         }
 
@@ -273,6 +330,10 @@
     .pricing-section .pricing--rabten .pricing__item:hover{
       background: none;
     }
+
+    .edit-wrapper .edit-content{
+      width: 100% !important;
+    }
   }
 
   .edit-wrapper{
@@ -285,17 +346,16 @@
     overflow: hidden;
     z-index: 1;
     opacity: 0;
+    overflow-y: auto;
+    padding-bottom: 5em;
 
     .edit-footer{
-      position: absolute;
-      bottom: 2em;
-      width: 100%;
       text-align: center;
     }
 
     .edit-content{
       padding: 5em 0;
-      width: 60%;
+      width: 65%;
       margin: 0 auto;
       color: #fff;
     }

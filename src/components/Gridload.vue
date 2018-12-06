@@ -14,8 +14,11 @@
               </div>
           </a>
           <footer class="page-meta">
-            <span @click="$emit('load-more')" v-if="data.loadMoreBtn">Load more...</span>
-            <span v-else>no results ...</span>
+            <span @click="$emit('load-more')" v-if="data.loadMoreBtn">
+              <i class="fa fa-arrow-circle-o-down"></i>
+              Load more
+            </span>
+            <span v-else>no results</span>
           </footer>
         </section>
       </transition>

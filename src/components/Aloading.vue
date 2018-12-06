@@ -18,14 +18,22 @@
         mode: false
       }
     },
-    mounted(){
-    },
     methods: {
       show(){
         this.mode = true
       },
       hide(){
         this.mode = false
+      }
+    },
+    computed: {
+      loadingState(){
+        return this.$store.state.loading.isopen
+      }
+    },
+    watch: {
+      loadingState(n, o) {
+        n ? this.show() : this.hide()
       }
     }
   }

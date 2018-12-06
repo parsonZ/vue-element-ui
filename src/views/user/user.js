@@ -8,6 +8,7 @@ new Vue({
   store,
   data: {
   	zoom: false,
+    loadingObj: {}
   },
   methods: {
     zoomState(){

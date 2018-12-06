@@ -512,10 +512,23 @@
   font-size: 0.75em;
   font-weight: bold;
   cursor: default;
+  display: flex;
+  justify-content: center;
 }
 .page-meta span{
   padding: 10px;
   cursor: pointer;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5em;
+}
+.page-meta span i{
+  font-size: 1.5em;
+}
+
+.page-meta span:hover{
+  color: #0098f5;
 }
 
 /* Placeholder element (dummy that gets animated when we click on an item) */
