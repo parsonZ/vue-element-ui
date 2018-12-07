@@ -3,19 +3,20 @@ const fs = require('fs');
 const path = require('path');
 const uuid = require('node-uuid');
 
+
+
 //配置文件上传路径
-const uploadsPath = path.resolve('/statics/img/uploads');
+const uploadsPath = path.resolve('/root/statics/img/uploads');
 
 const form = new multiparty.Form({
   autoFiles: true,
-  maxFieldsSize: 200000 * 1024,
-  uploadDir: uploadsPath
+  maxFieldsSize: 200000 * 1024
 });
 
 module.exports = (req, res) => {
   form.parse(req, function(err, fields, files) {
     if (err) {
-	   console.log(err)
+	    console.log(err)
       res.send({
         message: '格式不正确',
         status: 500
@@ -36,10 +37,18 @@ module.exports = (req, res) => {
       return;
     }
     
-    res.send({
-      status: 200,
-      message: '暂存成功',
-      src: files.file[0].path
+    let arr = files.file[0].originalFilename.split('.');
+    let type = arr[arr.length-1];
+    let src = uploadsPath+'/'+uuid.v4()+'.'+type;
+
+    fs.rename(files.file[0].path, src, err => {
+      if (!err) {
+        res.send({
+          status: 200,
+          message: '暂存成功',
+          src
+        })
+      }
     })
   });
 }
