@@ -17,5 +17,5 @@ module.exports = {
         minutes = d.getMinutes()<10 ? '0'+d.getMinutes() : d.getMinutes(), 
         seconds = d.getSeconds()<10 ? '0'+d.getSeconds() : d.getSeconds();
         return year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds;
-  }
+  },
 }

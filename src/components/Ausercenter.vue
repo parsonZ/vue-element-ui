@@ -59,7 +59,7 @@
 
 <style scoped>
   .menu_user {
-    position: absolute;
+    position: fixed;
     text-align: left;
     right: 0;
     top: 0;

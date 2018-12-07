@@ -34,7 +34,6 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", req.headers.origin)
   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS")
   res.header('Access-Control-Allow-Credentials', true)
-  res.header("Content-Type", "application/html;charset=utf-8")
   res.header("Access-Control-Allow-Headers", "Content-Type,XFILENAME,XFILECATEGORY,XFILESIZE");
   next()
 })
@@ -70,10 +69,12 @@ const interface = async () => {
   await fs.readdir(routeGet, (err, files) => {
     files.map(file => {
       const callback = require(routeGet + '/' + file)
-      app.get('/' + file.replace('.js', ''), callback)
+      
       //获取详情
       if( file.includes('get_article_details') ) {
         app.get('/' + file.replace('.js', '') + "/:id", callback)
+      } else {
+        app.get('/' + file.replace('.js', ''), callback)
       }
     })
   })
@@ -87,5 +88,5 @@ const interface = async () => {
 }
 
 interface().then(res => {
-  app.listen(9009, () => console.log('Example app listening on port 9009!'))
+  app.listen(9009, '192.168.9.58', () => console.log('Example app listening on port 9009!'))
 })

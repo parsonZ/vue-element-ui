@@ -3,8 +3,7 @@
     <div id="tag_grid">
       <div class="tag_grid_item" draggable="true" v-for="tag in tags" :data-id="tag.tag_id" 
         @dragstart="dragstart($event)" 
-        @dragend="dragend($event)"
-        @touchstart="touchstart">
+        @dragend="dragend($event)">
         <i class="fa fa-check-circle" v-if="tag.isCheck" draggable="false"></i>
         <img :src="tag.tag_img" draggable="false">
         <div draggable="false">
@@ -55,9 +54,6 @@
       tags: Array
     },
     methods: {
-      touchstart(){
-        alert('das')
-      },
       dragstart(e){
         this.id = e.target.dataset.id
         this.isstart = true

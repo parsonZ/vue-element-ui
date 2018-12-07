@@ -1149,11 +1149,13 @@ h1,h2,h3,h4,h5,h6{
   }
   .title-fix, .title-fix1{
     width: 100%;
-    height: 6em;
-    line-height: 7;
+    height: 7em;
+    line-height: 1.2;
+    padding: 3em 1em 0 1em;
+    text-align: center;
   }
   .meta__author-fix,.meta__author-fix1{
-    transform: translateY(13.5em) !important;
+    transform: translateY(15em) !important;
   }
 }
 

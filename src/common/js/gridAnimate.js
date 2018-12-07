@@ -1,5 +1,5 @@
 const classie = require('./classie.js');
-const  lazyloadimg = require('./lazyloadimg.js');
+// const  lazyloadimg = require('./lazyloadimg.js');
 
 		var bodyEl = document.body,
 			docElem = window.document.documentElement,
@@ -142,7 +142,7 @@ const  lazyloadimg = require('./lazyloadimg.js');
 				isAnimating = false;
 
 				//初始化懒加载
-				lazyloadimg.init(document.querySelector('.content__item--show'), {})
+				// lazyloadimg.init(document.querySelector('.content__item--show'), {})
 
 			});
 		}

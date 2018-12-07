@@ -13,7 +13,7 @@ Vue.prototype.$notify = Notification;
 
 axios.defaults.withCredentials = true
 const axiosIns = axios.create({
-  baseURL: process.env.NODE_ENV == 'development' ? 'http://localhost:9009' : 'http://www.parsonz.xyz:9009',
+  baseURL: process.env.NODE_ENV == 'development' ? 'http://192.168.9.58:9009' : 'http://www.parsonz.xyz:9009',
   timeout: 30000
 });
 

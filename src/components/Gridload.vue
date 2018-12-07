@@ -24,7 +24,7 @@
       </transition>
       <section class="content_me">
           <div class="scroll-wrap" @scroll="scrollWrapHandle($event)" ref="scrollWrap">
-              <article class="content__item" v-for="item in data.lists" :dataContentId="item.id">
+              <article class="content__item" v-for="item in data.lists">
                   <h2 class="title title--full" :class="{'title-fix': scrollRange > 80 && data.marginTop, 'title-fix1': scrollRange > 80 && !data.marginTop }" style="font-size: 1.5em;">{{item.title}}</h2>
                   <div class="meta meta--full">
                       <img class="meta__avatar" :src="item.avatar_img"/>
@@ -32,7 +32,7 @@
                       <span class="meta__date"><i class="fa fa-calendar-o"></i>{{item.localData}}</span>
                       <span class="meta__reading-time"><i class="fa fa-clock-o"></i>{{item.localTime}}</span>
                   </div>
-                  <p class="articles_details" ref="articles_details" v-html="content" v-if="content.length"></p>
+                  <p class="articles_details" v-if="item.id == articleId && content.length" ref="articles_details" v-html="content"></p>
                   <p v-else>
                     <aplaceholder></aplaceholder>
                   </p>
@@ -50,6 +50,7 @@
   import ClipboardJS from 'clipboard'
   import classie from 'src/common/js/classie.js'
   import Velocity from 'velocity-animate'
+  import lazyloadimg from 'src/common/js/lazyloadimg.js'
 
   export default {
     props: {
@@ -61,11 +62,9 @@
         content: '',
         scrollRange: 0,
         titlePosition: 0,
-        show: false
+        show: false,
+        articleId: ''
       }
-    },
-    mounted(){
-      
     },
     methods: {
       init(){
@@ -74,12 +73,14 @@
       },
       articleDetails(id) {
         this.$emit('hidden-scroll')
+        this.articleId = id
         this.$http.get('/get_article_details/'+id).then(res => {
           if( res.status == 200 ) {
-            setTimeout(() => {
-              this.content = res.data.data
-              this.codeFromat()
-            }, 2000)
+            this.content = res.data.data
+            this.$nextTick(() => {
+              lazyloadimg.init()
+            })
+            this.codeFromat()
           }
           if (res.data.status == 500) {
             this.$notify({
@@ -162,7 +163,6 @@
       },
       //全屏
       fullScreen(el, isFullScreen){ 
-        console.log(this.data.marginTop)
         if(!isFullScreen) {
           classie.add(el, 'open')
           classie.add(el.parentNode.parentNode, this.data.marginTop ? 'full-screen-open' : 'full-screen-open1')

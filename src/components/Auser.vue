@@ -35,8 +35,8 @@
                   </span>
                 </div>
                 <ul class="pricing__feature-list">
-                    <li class="pricing__feature">vue组件传值（一）：父组件向子组件传值</li>
-                    <li class="pricing__feature">vue组件传值（一）：父组件向子组件传值</li>
+                    <li class="pricing__feature">父组件向子组件传值</li>
+                    <li class="pricing__feature">父组件向子组件传值</li>
                 </ul>
                 <button @click="edit($event, 2)" type="button" class="button button--nina button--text-thick" data-text="查看更多">
                   <span>查</span><span>看</span><span>更</span><span>多</span>
@@ -62,20 +62,27 @@
         @before-enter="beforeEnter"
       >
         <div class="edit-wrapper" v-if="editshow">
-          <div v-if="this.type == 1" class="edit-content">
-            个人信息
+          <div v-if="type == 1" class="edit-content">
+            <editusers :userinfo="userinfo"></editusers>
+            <div class="edit-footer">
+              <button type="button" @click="updateUsers" class="button button--nina button--text-thick" data-text="update">
+                <span>更</span><span>新</span>
+              </button>
+              <button type="button" class="button button--nina button--text-thick" data-text="close" @click="editshow = false">
+                <span>关</span><span>闭</span>
+              </button>
+            </div>
           </div>
-          <div v-if="this.type == 3" class="edit-content">
+          <div v-if="type == 3" class="edit-content">
             <edittags :tags="allTags" @operate-tags="operateTags"></edittags>
-          </div>
-
-          <div class="edit-footer">
-            <button type="button" @click="updateTags" class="button button--nina button--text-thick" data-text="update">
-              <span>更</span><span>新</span>
-            </button>
-            <button type="button" class="button button--nina button--text-thick" data-text="close" @click="editshow = false">
-              <span>关</span><span>闭</span>
-            </button>
+            <div class="edit-footer">
+              <button type="button" @click="updateTags" class="button button--nina button--text-thick" data-text="update">
+                <span>更</span><span>新</span>
+              </button>
+              <button type="button" class="button button--nina button--text-thick" data-text="close" @click="editshow = false">
+                <span>关</span><span>闭</span>
+              </button>
+            </div>
           </div>
         </div>
       </transition>
@@ -105,13 +112,13 @@
         })
       },
       edit(e, type) {
-        if(type == 2){
-          //查看更多
+        this.type = type
+        if(type == 1){
+          this.editshow = true
         } else {
           if(type == 3){
             this.getAlltags().then(() => {
               this.editshow = true
-              this.type = type
             })
           }
         }
@@ -130,6 +137,15 @@
             })
             return item;
           })
+        })
+      },
+      updateUsers(){
+        this.$http.get('/update_users', {
+          params: {
+            userinfo: this.userinfo
+          }
+        }).then(res => {
+          conosle.log(res)
         })
       },
       operateTags(data){
@@ -165,10 +181,12 @@
         document.body.style.overflow = 'hidden'
       },
       enter(el, done) {
-        Velocity(el, { opacity: 1, width: '100%' },{ duration: 300, complete: done })
+        Velocity(el, { opacity: 1, width: '100%' },{ duration: 300 })
+        Velocity(document.querySelector('.edit-content'), { opacity: 1 },{ duration: 300, delay: 300, complete: done })
       },
       leave(el, done) {
-        Velocity(el, { opacity: 0, width: '0px' },{ duration: 300, complete: done })
+        Velocity(document.querySelector('.edit-content'), { opacity: 0 },{ duration: 300 })
+        Velocity(el, { opacity: 0, width: '0px' },{ duration: 300, delay: 300, complete: done })
         document.body.style.overflow = 'auto'
       }
     }
@@ -209,7 +227,6 @@
         &:hover{
           background: #383434;
           cursor: pointer;
-          box-shadow: 0px 0px 2px 0px #a7a4a4;
         }
 
   			.pricing__title {
@@ -322,17 +339,24 @@
   @media screen and (max-width: 60em) {
     .pricing-section .pricing--rabten .pricing__item:nth-child(2){
       border: none;
+      padding: 7em 0;
     }
     .pricing-section .pricing--rabten .pricing__item{
-      height: 100%;
+      height: 100vh;
       border-bottom: 1px solid #8e8b8b !important;
     }
     .pricing-section .pricing--rabten .pricing__item:hover{
       background: none;
     }
 
+    .pricing-section .pricing--rabten .pricing__item button{
+      bottom: 7em;
+    }
     .edit-wrapper .edit-content{
       width: 100% !important;
+    }
+    .pricing-section .pricing--rabten .pricing__item .pricing__title{
+      letter-spacing: 1em;
     }
   }
 
@@ -341,16 +365,14 @@
     width: 0;
     height: 100%;
     top: 0;
-    min-height: 100vh;
     background: linear-gradient(to bottom, rgb(158, 158, 158) 0%, rgb(88, 88, 88) 100%);
-    overflow: hidden;
     z-index: 1;
     opacity: 0;
     overflow-y: auto;
-    padding-bottom: 5em;
 
     .edit-footer{
       text-align: center;
+      margin-top: 4em;
     }
 
     .edit-content{
@@ -358,6 +380,7 @@
       width: 65%;
       margin: 0 auto;
       color: #fff;
+      opacity: 0;
     }
   }
 </style>

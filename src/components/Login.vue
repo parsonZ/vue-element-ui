@@ -171,7 +171,9 @@
       width: 100%;
       padding: 10px 5px 10px 50px;
       background: #fff; 
-      border: 1px solid rgb(178, 178, 178);
+      border: 1px solid #fff;
+      outline: none;
+      -webkit-appearance: none;
   }
   form input:not([type="checkbox"]):focus{
     border: 1px solid rgb(78, 78, 78);
@@ -198,8 +200,8 @@
       padding: .2em .5em;
       color: #fff;
       font-size: 1.2em;    
-      border: 1px solid rgb(178, 180, 181);    
-      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgb(178, 180, 181);
+      outline: none;
   }
   form p.button input:hover{
       background: rgb(112, 122, 123);
@@ -293,6 +295,7 @@
           background: none;
           border: none;
           transition: .3s;
+          margin: 0;
       }
       #wrapper h1,#wrapper label,#wrapper a{
           color: #fff;

@@ -18,5 +18,13 @@ module.exports = {
   },
   getStorage(key) {
     return storage.getItem(key)
+  },
+  //图片上传
+  uploadImg(http, data){
+    return http.post('/upload', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   }
 }
