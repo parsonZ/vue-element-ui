@@ -65,7 +65,7 @@
         let fileData = new FormData();
         fileData.append("file", this.$refs.inputer.files[0]);
         
-        util.uploadImg(this.$http, fileData).then(res => {
+        util.uploadImg(fileData).then(res => {
           this.$notify({
             title: 'Tips',
             message: res.data.message,

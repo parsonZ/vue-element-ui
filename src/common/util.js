@@ -1,5 +1,7 @@
 const crypto = require('crypto')
 const storage = window.localStorage;
+const axios = require('axios');
+const uploadUrl = 'http://www.parsonz.xyz:9009';
 
 module.exports = {
   md5Encrypt (encryptString) {
@@ -20,8 +22,8 @@ module.exports = {
     return storage.getItem(key)
   },
   //图片上传
-  uploadImg(http, data){
-    return http.post('/upload', data, {
+  uploadImg(data){
+    return axios.post(uploadUrl+'/upload', data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
