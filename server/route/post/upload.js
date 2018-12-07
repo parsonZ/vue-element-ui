@@ -2,7 +2,7 @@ const multiparty = require('multiparty');
 const fs = require('fs');
 const path = require('path');
 const uuid = require('node-uuid');
-
+console.log(path.resolve(__dirname))
 //配置文件上传路径
 const uploadsPath = path.resolve('/statics/img/uploads');
 
