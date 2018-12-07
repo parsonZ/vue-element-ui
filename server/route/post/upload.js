@@ -1,7 +1,6 @@
 const multiparty = require('multiparty');
 const fs = require('fs');
 const path = require('path');
-const uuid = require('node-uuid');
 
 const uploadsPath = path.resolve('/root/statics/img/uploads');
 
