@@ -7,6 +7,7 @@ const uploadsPath = path.resolve('/root/statics/img/uploads');
 
 const form = new multiparty.Form({
   autoFiles: true,
+  uploadDir: uploadsPath,
   maxFieldsSize: 200000 * 1024
 });
 
@@ -33,19 +34,19 @@ module.exports = (req, res) => {
       })
       return;
     }
+    console.log(files.file[0])
     
-    let arr = files.file[0].originalFilename.split('.');
-    let type = arr[arr.length-1];
-    let src = uploadsPath+'/'+uuid.v4()+'.'+type;
+    let path = files.file[0].path;
+    let src = path.replace('/root', 'http://www.parsonz.xyz')
 
-    fs.rename(files.file[0].path, src, err => {
-      if (!err) {
+   // fs.rename(path, src, err => {
+     // if (!err) {
         res.send({
           status: 200,
           message: '暂存成功',
           src
         })
-      }
-    })
+     // }
+    //})
   });
 }
