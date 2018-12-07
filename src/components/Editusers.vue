@@ -64,13 +64,16 @@
       uploadImg(){
         let fileData = new FormData();
         fileData.append("file", this.$refs.inputer.files[0]);
-        
+        this.$store.dispatch('openLoading')
         util.uploadImg(fileData).then(res => {
           this.$notify({
             title: 'Tips',
             message: res.data.message,
             type: res.data.status == 200 ? 'success' : 'error'
           })
+
+          this.userinfo.avatar_img = res.data.src
+          this.$store.dispatch('closeLoading')
         })
       }
     }
