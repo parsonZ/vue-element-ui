@@ -17,6 +17,7 @@ const form = new multiparty.Form({
 module.exports = (req, res) => {
   form.parse(req, function(err, fields, files) {
     if (err) {
+	console.log(err)
       res.send({
         message: '格式不正确',
         status: 500
