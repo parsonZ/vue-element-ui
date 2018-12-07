@@ -9,7 +9,7 @@ const form = new multiparty.Form({
   autoFiles: true,
   uploadDir: uploadsPath,
   maxFieldsSize: 2 * 1024 * 1024
-});
+})
 
 module.exports = (req, res) => {
   form.parse(req, function(err, fields, files) {
@@ -33,7 +33,6 @@ module.exports = (req, res) => {
       })
       return;
     }
-    console.log(files.file[0].path)
     
     let path = files.file[0].path;
     let src = path.replace('/root', 'http://www.parsonz.xyz')
