@@ -88,5 +88,5 @@ const interface = async () => {
 }
 
 interface().then(res => {
-  app.listen(9009, '192.168.9.58', () => console.log('Example app listening on port 9009!'))
+  app.listen(9009, () => console.log('Example app listening on port 9009!'))
 })
