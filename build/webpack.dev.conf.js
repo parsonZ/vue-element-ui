@@ -20,7 +20,7 @@ module.exports = merge(baseWebpackConfig, {
   devtool: '#cheap-module-eval-source-map',
   devServer: {
     port: 9000,
-    host: '192.168.9.58',
+    // host: '192.168.9.58',
     open: false
   },
   plugins: [
