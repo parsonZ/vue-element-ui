@@ -26,7 +26,7 @@ const mixin = {
       return storage.getItem(key)
     },
     //图片上传
-    uploadImg(data){
+    upload(data){
       return axios.post(uploadUrl+'/upload', data, {
         headers: {
           'Content-Type': 'multipart/form-data'

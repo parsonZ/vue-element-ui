@@ -98,10 +98,7 @@
   export default {
     data() {
       return {
-        userinfo: {
-          password: '',
-          confirm_password: ''
-        },
+        userinfo: {},
         editshow: false,
       }
     },
@@ -114,7 +111,8 @@
           id: this.getStorage('userid')
         } }).then(res => {
           this.userinfo = res.data.userinfo
-          this.userinfo = Object.assign(res.data.userinfo, this.userinfo)
+          this.userinfo.password = ''
+          this.userinfo.confirm_password = ''
         })
       },
       edit(e, type) {
