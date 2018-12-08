@@ -46,7 +46,6 @@
   </div>
 </template>
 <script>
-  import util from '../common/util.js';
   export default {
     data() {
       return {
@@ -93,8 +92,8 @@
         this.$http.post('/register', {
           name: this.form.name,
           email: this.form.email,
-          password: util.md5Encrypt(this.form.password),
-          password_confirm: util.md5Encrypt(this.form.password_confirm)
+          password: this.md5Encrypt(this.form.password),
+          password_confirm: this.md5Encrypt(this.form.password_confirm)
         })
         .then(res => {
           if (res.data.status == 200) {

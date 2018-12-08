@@ -1,8 +1,5 @@
-import 'src/common/app'
+import {Vue, store} from '../../common/app.js'
 import 'src/common/css/grid.css'
-
-import Vue from 'vue'
-import store from 'src/store/index'
 
 new Vue({
   el: "#gridMain",

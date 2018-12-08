@@ -6,13 +6,23 @@ import './css/component.css'
 import './css/animate.css'
 import './css/plugin.css'
 //引入loading插件
-import Loading from 'src/plugins/loading/loading.js'
+import loading from 'src/plugins/loading/loading.js'
+
+//引入mixin
+import mixin from './mixin.js';
+
+//引入store
+import store from 'src/store/index'
 
 import Vue from 'vue';
 import axios from 'axios';
 import { Notification } from 'element-ui';
+
 Vue.prototype.$notify = Notification;
-Vue.use(Loading)
+
+Vue.use(loading)
+
+Vue.mixin(mixin) //混入全局方法
 
 const vue = new Vue();
 
@@ -30,11 +40,8 @@ axiosIns.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-
-
 /*响应拦截器*/
 axiosIns.interceptors.response.use(config => {
-  
   //401登录状态过期
   if(config.data.status == 401) {
     vue.$notify({
@@ -51,13 +58,12 @@ axiosIns.interceptors.response.use(config => {
   vue.$loading.hide()
   return config;
 }, error => {
-  document.querySelector('.loading_wrapper').remove()
-  
   vue.$notify({
     title: '提示',
     message: '网络错误',
     type: 'error'
   })
+  vue.$loading.hide()
 })
 
 Vue.prototype.$http = axiosIns;
@@ -85,3 +91,8 @@ requireComponent.keys().forEach(fileName => {
     componentConfig.default || componentConfig
   )
 })
+
+export {
+  Vue,
+  store
+}

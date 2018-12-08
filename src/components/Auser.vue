@@ -93,7 +93,6 @@
   </section>
 </template>
 <script>
-  import util from '../common/util'
   import Velocity from 'velocity-animate'
 
   export default {
@@ -112,7 +111,7 @@
     methods: {
       getUserInfo(){
         this.$http.get('/get_user_info', { params:{
-          id: util.getStorage('userid')
+          id: this.getStorage('userid')
         } }).then(res => {
           this.userinfo = res.data.userinfo
           this.userinfo = Object.assign(res.data.userinfo, this.userinfo)
@@ -164,8 +163,8 @@
           avatar_name: this.userinfo.avatar_name,
           email: this.userinfo.email,
           username: this.userinfo.username,
-          password: util.md5Encrypt(this.userinfo.password),
-          confirm_password: util.md5Encrypt(this.userinfo.confirm_password)
+          password: this.md5Encrypt(this.userinfo.password),
+          confirm_password: this.md5Encrypt(this.userinfo.confirm_password)
         }
 
         this.$http.post('/update_users', {

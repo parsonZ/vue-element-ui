@@ -21,7 +21,6 @@
 <script>
   import SVGDDMenu from 'src/common/js/menu.js'
   import { mapState } from 'vuex'
-  import util from '../common/util.js'
 
   export default {
     data() {
@@ -32,7 +31,7 @@
     },
     mounted (){
       this.init()
-      this.userid = util.getStorage('userid')
+      this.userid = this.getStorage('userid')
     },
     methods: {
       init(){

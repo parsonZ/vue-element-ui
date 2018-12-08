@@ -12,7 +12,7 @@ module.exports = (req, res) => {
       }
     } else if (!util.valid.isEmail(req.body.email)){
       obj = {
-        status: 500
+        status: 500,
         message: '邮箱格式不正确'
       }
     } else if (!util.valid.equals(req.body.password, req.body.password_confirm)){

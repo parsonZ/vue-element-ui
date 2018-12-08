@@ -1,5 +1,3 @@
-import util from 'src/common/util.js'
-
 const user = {
   state: {
     id: ''
@@ -14,11 +12,11 @@ const user = {
   },
   actions: {
     login({commit}, n) {
-      util.addStorage('userid', n)
+      window.localStorage.setItem('userid', n)
       commit('login', n)
     },
     logout({commit}){
-      util.removeStorage('userid');
+      window.localStorage.removeItem('userid');
       commit('logout')
     }
   }

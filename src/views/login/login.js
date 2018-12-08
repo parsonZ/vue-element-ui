@@ -1,7 +1,4 @@
-import '../../common/app'
-
-import Vue from 'vue'
-import store from 'src/store/index'
+import {Vue, store} from '../../common/app.js'
 
 new Vue({
   el: "#start",

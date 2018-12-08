@@ -1,10 +1,6 @@
-import '../../common/app'
-
+import {Vue, store} from '../../common/app.js'
 import Segmenter from 'src/common/js/segmenter.js'
 const requireImg = require('src/common/img/3.jpg')
-
-import Vue from 'vue'
-import store from 'src/store/index'
 
 new Vue({
   el: "#nav_menu",

@@ -31,7 +31,6 @@
   </div>
 </template>
 <script>
-  import util from '../common/util.js'
   import { mapActions, mapState } from 'vuex'
 
   export default {
@@ -47,9 +46,6 @@
           message: 'naisdiasdijsld'
         }
       }
-    },
-    mounted(){
-      
     },
     methods: {
       onSubmit() {
@@ -70,7 +66,7 @@
         this.loading = true
         this.$http.post('/login', {
           name: this.form.name,
-          password: util.md5Encrypt(this.form.password)
+          password: this.md5Encrypt(this.form.password)
         })
         .then(res => {
           if (res.data.status == 200) {

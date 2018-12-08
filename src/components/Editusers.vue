@@ -52,7 +52,6 @@
 <script>
   import Velocity from 'velocity-animate'
   import classie from 'src/common/js/classie.js'
-  import util from 'src/common/util.js'
   export default {
     props: {
       userinfo: Object
@@ -64,7 +63,7 @@
       uploadImg(){
         let fileData = new FormData();
         fileData.append("file", this.$refs.inputer.files[0]);
-        util.uploadImg(fileData).then(res => {
+        this.uploadImg(fileData).then(res => {
           this.$notify({
             title: 'Tips',
             message: res.data.message,

@@ -1,7 +1,4 @@
-import '../../common/app'
-
-import Vue from 'vue'
-import store from 'src/store/index'
+import {Vue, store} from '../../common/app.js'
 
 new Vue({
   el: "#userMain",
@@ -13,7 +10,5 @@ new Vue({
     zoomState(){
       this.zoom = !this.zoom
     },
-    //获取user状态
-
   }
 })

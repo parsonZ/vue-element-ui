@@ -1,11 +1,8 @@
-import 'src/common/app'
+import {Vue, store} from '../../common/app.js'
 import 'src/common/css/grid.css'
 const requireImg = require('src/common/img/articles/1.jpg')
 import classie from 'src/common/js/classie.js'
 import DragSlideshow from 'src/common/js/dragslideshow.js'
-
-import Vue from 'vue'
-import store from 'src/store/index'
 
 new Vue({
   el: "#main",
