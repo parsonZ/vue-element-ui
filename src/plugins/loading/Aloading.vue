@@ -10,31 +10,14 @@
 <script>
   export default {
     props: {
-      loadingContent: Object
+      mode: Boolean,
+      text: {
+        type: String,
+        default: '正在加载中...'
+      }
     },
     data() {
-      return {
-        content: this.loadingContent,
-        mode: false
-      }
-    },
-    methods: {
-      show(){
-        this.mode = true
-      },
-      hide(){
-        this.mode = false
-      }
-    },
-    computed: {
-      loadingState(){
-        return this.$store.state.loading.isopen
-      }
-    },
-    watch: {
-      loadingState(n, o) {
-        n ? this.show() : this.hide()
-      }
+      return {}
     }
   }
 </script>

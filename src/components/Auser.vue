@@ -37,6 +37,9 @@
                 <ul class="pricing__feature-list">
                     <li class="pricing__feature">父组件向子组件传值</li>
                     <li class="pricing__feature">父组件向子组件传值</li>
+                    <li class="pricing__feature">父组件向子组件传值</li>
+                    <li class="pricing__feature">父组件向子组件传值</li>
+                    <li class="pricing__feature">父组件向子组件传值</li>
                 </ul>
                 <button @click="edit($event, 2)" type="button" class="button button--nina button--text-thick" data-text="查看更多">
                   <span>查</span><span>看</span><span>更</span><span>多</span>
@@ -96,7 +99,10 @@
   export default {
     data() {
       return {
-        userinfo: {},
+        userinfo: {
+          password: '',
+          confirm_password: ''
+        },
         editshow: false,
       }
     },
@@ -109,24 +115,25 @@
           id: util.getStorage('userid')
         } }).then(res => {
           this.userinfo = res.data.userinfo
+          this.userinfo = Object.assign(res.data.userinfo, this.userinfo)
         })
       },
       edit(e, type) {
         this.type = type
         if(type == 1){
           this.editshow = true
-        } else {
-          if(type == 3){
-            this.getAlltags().then(() => {
-              this.editshow = true
-            })
-          }
+        }
+        if(type == 3){
+          this.getAlltags().then(() => {
+            this.editshow = true
+          })
+        }
+        if(type == 2){
+          window.location.href = 'topping.html'
         }
       },
       getAlltags(){
-        this.$store.dispatch('openLoading')
         return this.$http.get('/get_tags', {}).then(res => {
-          this.$store.dispatch('closeLoading')
           this.allTags = res.data.list
 
           this.allTags.map(item => {
@@ -140,12 +147,35 @@
         })
       },
       updateUsers(){
-        this.$http.get('/update_users', {
-          params: {
-            userinfo: this.userinfo
+        for(let item of Object.values(this.userinfo)){
+          if(item == '') {
+            this.$notify({
+              title: 'Tips',
+              message: '请填写完整信息',
+              type: 'info'
+            })
+            return false;
           }
+        }
+
+        let userinfo = {
+          id: this.userinfo.id,
+          avatar_img: this.userinfo.avatar_img,
+          avatar_name: this.userinfo.avatar_name,
+          email: this.userinfo.email,
+          username: this.userinfo.username,
+          password: util.md5Encrypt(this.userinfo.password),
+          confirm_password: util.md5Encrypt(this.userinfo.confirm_password)
+        }
+
+        this.$http.post('/update_users', {
+          userinfo
         }).then(res => {
-          conosle.log(res)
+          this.$notify({
+            title: 'Tips',
+            message: res.data.message,
+            type: res.data.status == 200 ? 'success' : 'error'
+          })
         })
       },
       operateTags(data){

@@ -11,21 +11,21 @@ module.exports = (req, res) => {
   logins().then(data => {
     if (!data.length) {
       obj = {
-        status: 0,
+        status: 500,
         message: '用户不存在'
       }
     } else {
       if (util.valid.equals(data[0].password, req.body.password)) {
         data[0].password = '';
         obj = {
-          status: 1,
+          status: 200,
           message: '登录成功',
           info: data[0]
         }
         req.session.username = req.body.name
       } else {
         obj = {
-          status: 0,
+          status: 500,
           message: '密码错误'
         }
       }

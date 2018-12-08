@@ -14,7 +14,6 @@ new Vue({
     lists: [],
     zoom: false,
     slideshow: {},
-    loadingObj: {},
     hiddenPageScroll: true,
     params: {
       page: 1,
@@ -45,7 +44,6 @@ new Vue({
   },
   methods: {
     init(){
-      this.$refs.loading.show()
       this.getTags()
     },
     zoomState() {
@@ -98,7 +96,6 @@ new Vue({
             title:'error', message: res.message, type: 'error'
           });
         }
-        this.$refs.loading.hide()
       })
     },
     getTagType (id){
@@ -124,9 +121,7 @@ new Vue({
         if(res.status == 200){
           if(this.propsData.lists.length >= res.counts){
             this.hiddenPageScroll = this.propsData.lists.length;
-            console.log(this.hiddenPageScroll)
             this.propsData.loadMoreBtn = false
-            this.$refs.loading.hide()
             return false;
           }
           res.list.map( item => {
@@ -141,11 +136,9 @@ new Vue({
             title:'error', message: res.message, type: 'error'
           });
         }
-        this.$refs.loading.hide()
       })  
     },
     loadMore(){
-      this.$refs.loading.show()
       this.params.page ++;
       this.getArticlesByTag()
     },

@@ -7,17 +7,17 @@ module.exports = (req, res) => {
   util.requestHandle({sql, sql_param}).then(data => {
     if (data.length) {
       obj = {
-        status: 0,
+        status: 500,
         message: '用户已存在'
       }
     } else if (!util.valid.isEmail(req.body.email)){
       obj = {
-        status: 0,
+        status: 500
         message: '邮箱格式不正确'
       }
     } else if (!util.valid.equals(req.body.password, req.body.password_confirm)){
       obj = {
-        status: 0,
+        status: 500,
         message: '两次密码不一致'
       }
     } else {

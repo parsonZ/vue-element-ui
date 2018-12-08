@@ -73,16 +73,16 @@
           password: util.md5Encrypt(this.form.password)
         })
         .then(res => {
-          if (res.status == 200) {
+          if (res.data.status == 200) {
             //登录成功
             this.login(res.data.info.id) //提交登录actions
             this.$notify({
-              title: 'Tips', message: res.data.message, type: res.data.status ? 'success':'error'
+              title: 'Tips', message: res.data.message, type: 'success'
             });
             this.loading = res.loading
           } else {
             this.$notify({
-              title:'error', message: res.message, type: 'error'
+              title:'error', message: res.data.message, type: 'error'
             });
             this.loading = false
           }

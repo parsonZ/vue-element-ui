@@ -16,6 +16,13 @@
         </label>
       </div>
       <div>
+        <input v-model="userinfo.email">
+        <label>
+          <i class="fa fa-fw fa-envelope-o icon icon--kohana"></i>
+          <span>邮箱</span>
+        </label>
+      </div>
+      <div>
         <input v-model="userinfo.password" type="password">
         <label>
           <i class="fa fa-fw fa-eye-slash icon"></i>
@@ -27,13 +34,6 @@
         <label>
           <i class="fa fa-fw fa-eye-slash icon"></i>
           <span>确认</span>
-        </label>
-      </div>
-      <div>
-        <input v-model="userinfo.email">
-        <label>
-          <i class="fa fa-fw fa-envelope-o icon icon--kohana"></i>
-          <span>邮箱</span>
         </label>
       </div>
     </div>
@@ -64,7 +64,6 @@
       uploadImg(){
         let fileData = new FormData();
         fileData.append("file", this.$refs.inputer.files[0]);
-        this.$store.dispatch('openLoading')
         util.uploadImg(fileData).then(res => {
           this.$notify({
             title: 'Tips',
@@ -73,7 +72,6 @@
           })
 
           this.userinfo.avatar_img = res.data.src
-          this.$store.dispatch('closeLoading')
         })
       }
     }

@@ -97,9 +97,9 @@
           password_confirm: util.md5Encrypt(this.form.password_confirm)
         })
         .then(res => {
-          if (res.status == 200) {
+          if (res.data.status == 200) {
             this.$notify({
-              title: 'Tips', message: res.data.message, type: res.data.status == 200 ? 'success':'error'
+              title: 'Tips', message: res.data.message, type: 'success'
             });
             this.loading = res.loading
           } else {

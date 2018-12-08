@@ -10,7 +10,6 @@ new Vue({
   data: {
     zoom: false,
     counts: '',
-    loadingObj: {},
     params: {
       page: 1,
       counts: 6
@@ -25,7 +24,6 @@ new Vue({
   },
   methods: {
     init(){
-      this.$refs.loading.show()
       this.getArticles()
     },
     zoomState(){
@@ -40,7 +38,6 @@ new Vue({
         if(res.status == 200) {
           if(this.propsData.lists.length >= res.counts){
             this.propsData.loadMoreBtn = false
-            this.$refs.loading.hide()
             return false;
           }
           res.list.map( item => {
@@ -54,11 +51,9 @@ new Vue({
             title:'error', message: res.message, type: 'error'
           });
         }
-        this.$refs.loading.hide()
       })
     },
     loadMore(){
-      this.$refs.loading.show()
       this.params.page ++;
       this.getArticles()
     }

@@ -5,11 +5,16 @@ import './css/normalize.css'
 import './css/component.css'
 import './css/animate.css'
 import './css/plugin.css'
+//引入loading插件
+import Loading from 'src/plugins/loading/loading.js'
 
 import Vue from 'vue';
 import axios from 'axios';
 import { Notification } from 'element-ui';
 Vue.prototype.$notify = Notification;
+Vue.use(Loading)
+
+const vue = new Vue();
 
 axios.defaults.withCredentials = true
 const axiosIns = axios.create({
@@ -19,27 +24,40 @@ const axiosIns = axios.create({
 
 /*请求拦截器*/
 axiosIns.interceptors.request.use((config) => {
+  vue.$loading.show()//loading
   return config;
 }, error => {
   return Promise.reject(error);
 });
 
+
+
 /*响应拦截器*/
 axiosIns.interceptors.response.use(config => {
-  config['loading'] = config.status == 200 ? false : true;
+  
   //401登录状态过期
   if(config.data.status == 401) {
-    alert(config.data.message)
+    vue.$notify({
+      title: '提示',
+      message: config.data.message,
+      type: 'error'
+    })
+    
     setTimeout( () => {
       window.location.href = 'login.html'
       window.localStorage.removeItem('userid')
     }, 3000)
   }
-  
+  vue.$loading.hide()
   return config;
 }, error => {
   document.querySelector('.loading_wrapper').remove()
-  alert('网络错误')
+  
+  vue.$notify({
+    title: '提示',
+    message: '网络错误',
+    type: 'error'
+  })
 })
 
 Vue.prototype.$http = axiosIns;

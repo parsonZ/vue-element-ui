@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const storage = window.localStorage;
 const axios = require('axios');
-const uploadUrl = 'http://localhost:9009';
+const uploadUrl = 'http://www.parsonz.xyz:9009';
 
 module.exports = {
   md5Encrypt (encryptString) {

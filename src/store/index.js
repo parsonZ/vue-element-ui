@@ -6,13 +6,11 @@ Vue.use(vuex);
 //导入module
 import sidebar from './modules/sidebar.js'
 import user from './modules/user.js'
-import loading from './modules/loading.js'
 
 export default new vuex.Store({
   modules: {
     sidebar,
-    user,
-    loading
+    user
   }
 })
 
