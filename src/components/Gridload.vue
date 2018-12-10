@@ -3,7 +3,7 @@
       <transition
         @enter="enter">
         <section class="grid" ref="grid" v-show="show">
-          <a class="grid__item" href="#" data-complete="true" @click="articleDetails(item.id)" v-for="item in data.lists" :dataId="item.id">
+          <a class="grid__item" href="#" data-complete="true" @click="articleDetails(item.id, item.user_id)" v-for="item in data.lists">
               <h2 class="title title--preview" style="font-size: 1.5em">{{item.title}}</h2>
               <div class="loader"></div>
               <span class="category">{{item.avatar_name}}</span>
@@ -32,14 +32,14 @@
                       <span class="meta__date"><i class="fa fa-calendar-o"></i>{{item.localData}}</span>
                       <span class="meta__reading-time"><i class="fa fa-clock-o"></i>{{item.localTime}}</span>
                   </div>
-                  <p class="articles_details" v-if="item.id == articleId && content.length" ref="articles_details" v-html="content"></p>
+                  <p class="articles_details" v-if="item.id == operate.articleid && content.length" ref="articles_details" v-html="content"></p>
                   <p v-else>
                     <aplaceholder></aplaceholder>
                   </p>
-                  <acomment></acomment>
               </article>
+              <acomment ref="comment" :data="operate"></acomment>
           </div>
-          <aoperate ref="operate" :data="data.marginTop ? 1 : 0" @back-to-top="backToTop"></aoperate>
+          <aoperate ref="operate" :data="operate" @back-to-top="backToTop"></aoperate>
           <button class="close-button" @click="closeButton"><i class="fa fa-close"></i><span>Close</span></button>
       </section>
   </div>
@@ -63,7 +63,14 @@
         scrollRange: 0,
         titlePosition: 0,
         show: false,
-        articleId: ''
+        operate: {
+          mt: '',
+          collected: 0,
+          liked: 0,
+          userid: this.getStorage('userid'),
+          articleid: '',
+          artUserid: ''
+        }
       }
     },
     methods: {
@@ -71,14 +78,23 @@
         const gridInit = require('../common/js/gridAnimate.js')
         gridInit.init()
       },
-      articleDetails(id) {
+      articleDetails(id, user_id) {
         this.$emit('hidden-scroll')
-        this.articleId = id
-        this.$http.get('/get_article_details/'+id).then(res => {
+        this.operate.articleid = id
+        this.operate.artUserid = user_id
+        this.$http.get('/get_article_details', {
+          params: {
+            id: id,
+            userid: this.operate.userid
+          }
+        }).then(res => {
           if( res.status == 200 ) {
             this.content = res.data.data
+            this.operate.collected = res.data.collected
+            this.operate.liked = res.data.liked
             this.$nextTick(() => {
               lazyloadimg.init()
+              this.$refs.comment.get_comments()
             })
             this.codeFromat()
           }
@@ -185,7 +201,6 @@
       //滚动事件
       scrollWrapHandle(e){
         this.scrollRange = e.target.scrollTop
-
         //图标控制
         this.scrollRange > 100 ? this.$refs.operate.atTop() : this.$refs.operate.atBottom()
       },
@@ -221,7 +236,8 @@
         })
       },
       m(n, o){
-        this.top = n
+        this.top = n;
+        this.operate.mt = n;
       }
     }
   }

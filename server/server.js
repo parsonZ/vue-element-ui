@@ -20,7 +20,7 @@ app.use(cookieParser('parsonz'));
 
 app.use(session({
   secret: 'parsonz',
-  cookie: { maxAge:  60*1000*60 },
+  cookie: { maxAge:  60*1000 },
   resave: true,
   rolling: true,
   saveUninitialized: true,
@@ -61,21 +61,27 @@ app.use((req, res, next) => {
   next()
 })
 
-
 /**
   *异步自动化接口处理
 **/
 const interface = async () => {
   await fs.readdir(routeGet, (err, files) => {
     files.map(file => {
-      const callback = require(routeGet + '/' + file)
-      
-      //获取详情
-      if( file.includes('get_article_details') ) {
-        app.get('/' + file.replace('.js', '') + "/:id", callback)
-      } else {
-        app.get('/' + file.replace('.js', ''), callback)
-      }
+      let filedir = path.join('./route/get', file);
+      let callback;
+      fs.stat(filedir, (err, stats) => {
+        if (stats.isDirectory()){
+          fs.readdir(filedir, (err1, files1) => {
+            files1.map(item => {
+              callback = require('./' + path.join(filedir, item))
+              app.get('/'+file+'/'+item.replace('.js', ''), callback)
+            })
+          })
+        } else {
+          callback = require(routeGet + '/' + file)
+          app.get('/' + file.replace('.js', ''), callback)
+        }
+      })
     })
   })
 

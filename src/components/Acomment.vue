@@ -18,6 +18,9 @@
 </template>
 <script>
   export default {
+    props: {
+      data: Object
+    },
     data() {
       return {
         placeholder: '请输入评论',
@@ -33,7 +36,19 @@
         if (this.value == '') {
           this.isfocus = false
         }
-      }
+      },
+      get_comments(){
+        console.log(this.data)
+        this.$http.get('/comments/lists', {
+          params: {
+            targetid: this.data.articleid,
+            userid: this.data.userid,
+            artUserid: this.data.artUserid
+          }
+        }).then(res => {
+
+        })
+      },
     }
   }
 </script>
@@ -43,7 +58,8 @@
     background-color: #fff;
     font-size: 14px;
     max-width: 960px;
-    margin: 0 auto;
+    margin: 3em auto;
+    margin-top: 105%;
 
     .title{
       color: #8a9aa9;
