@@ -36,8 +36,8 @@
                   <p v-else>
                     <aplaceholder></aplaceholder>
                   </p>
+                  <acomment ref="comment" v-if="item.id == operate.articleid" :data="operate"></acomment>
               </article>
-              <acomment ref="comment" :data="operate"></acomment>
           </div>
           <aoperate ref="operate" :data="operate" @back-to-top="backToTop"></aoperate>
           <button class="close-button" @click="closeButton"><i class="fa fa-close"></i><span>Close</span></button>
@@ -94,7 +94,7 @@
             this.operate.liked = res.data.liked
             this.$nextTick(() => {
               lazyloadimg.init()
-              this.$refs.comment.get_comments()
+              this.$refs.comment[0].get_comments()
             })
             this.codeFromat()
           }

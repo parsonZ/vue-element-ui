@@ -38,14 +38,14 @@ module.exports = (req, res) => {
         for(let item1 of item.topComments) {
           let r11 = await util.requestHandle({
             sql: 'select * from user where id = ?',
-            sql_param: [item.from_id]
+            sql_param: [item1.from_id]
           })
           let r12 = await util.requestHandle({
             sql: 'select * from user where id = ?',
-            sql_param: [item.to_id]
+            sql_param: [item1.to_id]
           })
-          item['fromUser'] = r11[0]
-          item['toUser'] = r12[0]
+          item1['fromUser'] = r11[0]
+          item1['toUser'] = r12[0]
         }
       }
       return list;

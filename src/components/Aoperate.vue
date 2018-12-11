@@ -152,6 +152,7 @@
       cursor: pointer;
       transition: .3s;
       margin: .4em 0;
+      color: #fff;
       
       &:hover{
         color: #2196f3;
