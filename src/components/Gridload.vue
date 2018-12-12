@@ -63,6 +63,7 @@
         scrollRange: 0,
         titlePosition: 0,
         show: false,
+        commentShow: false,
         operate: {
           mt: '',
           collected: 0,
@@ -202,7 +203,13 @@
       scrollWrapHandle(e){
         this.scrollRange = e.target.scrollTop
         //图标控制
-        this.scrollRange > 100 ? this.$refs.operate.atTop() : this.$refs.operate.atBottom()
+        this.scrollRange > 100 ? this.$refs.operate.atTop() : this.$refs.operate.atBottom();
+        //评论区出现在屏幕内加载评论
+        //let scrollTop = document.querySelector('#comment-list-box').getBoundingClientRect().top;
+        //if (scrollTop < 100 && !this.commentShow) {
+          
+          //this.commentShow = true 
+        //}
       },
       backToTop(){
         this.$refs.scrollWrap.scrollTo(0,0);

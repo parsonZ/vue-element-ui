@@ -1,8 +1,8 @@
 <template>
   <div id="operate">
-    <div class="setting" :style="{'bottom': data.mt ? '-100%' : 0}">
+    <div class="setting" :style="{'bottom': data.mt ? '-100%' : 0, 'color': show ? '#fff' : '#000'}">
       <i class="fa fa-dot-circle-o fa-2x"
-        @click="show = !show" :style="{'color': show ? '#fff' : '#000'}"></i>
+        @click="show = !show"></i>
 
       <i class="fa fa-arrow-circle-o-up fa-2x" 
         :style="{'bottom': scrolltop ? '.5em' : -100+'px', 'position': 'relative'}"
@@ -152,7 +152,6 @@
       cursor: pointer;
       transition: .3s;
       margin: .4em 0;
-      color: #fff;
       
       &:hover{
         color: #2196f3;
