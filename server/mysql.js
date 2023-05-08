@@ -1,10 +1,10 @@
 const mysql = require("mysql2")
 
 const pool = mysql.createPool({
- host: 'www.parsonz.xyz',
+ host: 'rm-cn-9lb37gjx7001jjco.rwlb.rds.aliyuncs.com',
  user: 'root',
- password: 'pang800820zong',
- database: 'test',
+ password: 'admin@123',
+ database: 'parsonz_test',
  port: 3306
 });
 const connection = (sql, params, callback) => {

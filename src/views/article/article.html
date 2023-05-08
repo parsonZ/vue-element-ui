@@ -18,7 +18,7 @@
                 <div id="slideshow" ref="slideshow" class="dragslider" :class="{'scaleMain': zoom}">
                     <section class="img-dragger img-dragger-large dragdealer">
                         <div class="handle">
-                            <div class="slide" v-for="item in lists" :data-content="'content-'+item.tag_id">
+                            <div class="slide" v-for="item in lists" :data-content="'content-'+item.tag_name">
                                 <div class="img-wrap"><img :src="bgImg"/></div>
                                 <h2>
                                     {{item.tag_name}}
@@ -30,7 +30,7 @@
                                         </li>
                                     </ul>
                                 </h2>
-                                <button class="content-switch" @click="getTagType(item.tag_id)" :class="{hiddenButton: pageScrollTop > pageScrollRange}">
+                                <button class="content-switch" @click="getTagType(item.tag_name)" :class="{hiddenButton: pageScrollTop > pageScrollRange}">
                                     <i class="fa fa-arrow-down" aria-hidden="true"></i>
                                     查看
                                 </button>
@@ -39,7 +39,7 @@
                     </section>
                     <!-- Content section -->
                     <section class="pages" @scroll="pageScrollHandle($event)" :style="{overflow: !hiddenPageScroll ? 'hidden' : 'auto'}">
-                        <div class="content" v-for="item in lists" :data-content="'content-'+item.tag_id">
+                        <div class="content" v-for="item in lists" :data-content="'content-'+item.tag_name">
                             <h2 :class="{translatey100: pageScrollTop > pageScrollRange}">{{item.tag_name}}</h2>
                             <p :class="{translatey100: pageScrollTop > pageScrollRange}">
                                 {{item.tag_description}}

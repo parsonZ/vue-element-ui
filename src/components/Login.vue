@@ -1,22 +1,22 @@
 <template>
     <div id="login" class="animate form">
-      <form autocomplete="on"> 
+      <form autocomplete="on">
           <h1>Log in</h1>
-          <p class="label-input"> 
+          <p class="label-input">
               <label for="username" class="uname"> Username </label>
               <div class="flex">
                 <input id="username" v-model="form.name" autocomplete="off" name="username" required="required" type="text"/>
                 <i class="fa fa-user-o" aria-hidden="true"></i>
               </div>
           </p>
-          <p class="label-input"> 
+          <p class="label-input">
               <label for="password" class="youpasswd"> Password </label>
               <div class="flex">
                 <input id="password" name="password" v-model="form.password" required="required" type="password"/>
                 <i class="fa fa-eye-slash" aria-hidden="true"></i>
               </div>
           </p>
-          <p class="login"> 
+          <p class="login">
               <button type="button" class="button button--nina button--text-thick button--text-upper button--size-s" data-text="Login" @click="onSubmit" v-if="!loading">
                 <span>L</span><span>o</span><span>g</span><span>i</span><span>n</span>
               </button>
@@ -66,7 +66,8 @@
         this.loading = true
         this.$http.post('/login', {
           name: this.form.name,
-          password: this.md5Encrypt(this.form.password)
+          // password: this.md5Encrypt(this.form.password)
+          password: this.form.password
         })
         .then(res => {
           if (res.data.status == 200) {
@@ -101,9 +102,9 @@
       overflow: auto;
   }
   #wrapper{
-      margin: 0px auto;   
+      margin: 0px auto;
       width: 28rem;
-      position: relative; 
+      position: relative;
   }
   form a{
       color: rgb(95, 155, 198);
@@ -121,14 +122,14 @@
       text-align: center;
   }
   /** For the moment only webkit supports the background-clip:text; */
-  
+
   form h1:after{
       content: ' ';
       display: block;
       width: 100%;
       height: 2px;
       margin-top: 10px;
-      background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(154, 161, 162, 0.8) 20%,rgba(46, 49, 49,1) 53%,rgba(154, 161, 162,0.8) 79%,rgba(147,184,189,0) 100%); 
+      background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(154, 161, 162, 0.8) 20%,rgba(46, 49, 49,1) 53%,rgba(154, 161, 162,0.8) 79%,rgba(147,184,189,0) 100%);
   }
 
   form p.login,
@@ -149,15 +150,15 @@
 
   /**** advanced input styling ****/
   /* placeholder */
-  ::-webkit-input-placeholder  { 
-      color: rgb(190, 188, 188); 
+  ::-webkit-input-placeholder  {
+      color: rgb(190, 188, 188);
       font-style: italic;
   }
   input:-moz-placeholder,
-  textarea:-moz-placeholder{ 
+  textarea:-moz-placeholder{
       color: rgb(190, 188, 188);
       font-style: italic;
-  } 
+  }
   input {
     outline: none;
   }
@@ -166,7 +167,7 @@
   form input:not([type="checkbox"]){
       width: 100%;
       padding: 10px 5px 10px 50px;
-      background: #fff; 
+      background: #fff;
       border: 1px solid #fff;
       outline: none;
       -webkit-appearance: none;
@@ -191,11 +192,11 @@
   /*styling both submit buttons */
   form p.button input{
       width: 20%;
-      cursor: pointer;    
+      cursor: pointer;
       background: rgb(97, 97, 97);
       padding: .2em .5em;
       color: #fff;
-      font-size: 1.2em;    
+      font-size: 1.2em;
       border: 1px solid rgb(178, 180, 181);
       outline: none;
   }
@@ -217,7 +218,7 @@
   .keeplogin input,
   .keeplogin label{
       display: inline-block;
-      font-size: 12px;    
+      font-size: 12px;
       font-style: italic;
   }
   .keeplogin input#loginkeeping{
@@ -267,10 +268,10 @@
   }
 
   /** Styling both forms **/
-  #register, 
+  #register,
   #login{
       position: absolute;
-      width: 100%; 
+      width: 100%;
       margin: 30px 0;
       padding: 18px 6% 50px 6%;
       background: rgb(247, 247, 247);
@@ -300,7 +301,7 @@
         font-size: 2rem;
       }
   }
-  #register{  
+  #register{
       z-index: 21;
       opacity: 0;
   }
@@ -334,19 +335,19 @@
       -webkit-animation-duration: 0.5s;
       -webkit-animation-timing-function: ease;
       -webkit-animation-fill-mode: both;
-      
+
       -moz-animation-duration: 0.5s;
       -moz-animation-timing-function: ease;
       -moz-animation-fill-mode: both;
-      
+
       -o-animation-duration: 0.5s;
       -o-animation-timing-function: ease;
       -o-animation-fill-mode: both;
-      
+
       -ms-animation-duration: 0.5s;
       -ms-animation-timing-function: ease;
       -ms-animation-fill-mode: both;
-      
+
       animation-duration: 0.5s;
       animation-timing-function: ease;
       animation-fill-mode: both;

@@ -14,7 +14,7 @@ new Vue({
     hiddenPageScroll: true,
     params: {
       page: 1,
-      counts: 6,
+      counts: 5,
       tag_type: ''
     },
     propsData: {
@@ -47,7 +47,7 @@ new Vue({
       this.zoom = !this.zoom
     },
     initAnimate(){
-      this.slideshow = new DragSlideshow( this.$refs.slideshow, { 
+      this.slideshow = new DragSlideshow( this.$refs.slideshow, {
         onToggle : this.toggleBtnn,
         onToggleContent : this.toggleCtrls,
         onToggleContentComplete : this.toggleCompleteCtrls
@@ -77,9 +77,6 @@ new Vue({
     },
     getTags(){
       this.$http.get('/get_tags', {
-        params: {
-          userid: this.userid
-        }
       }).then(res => {
         return res.data;
       }).then(res => {
@@ -97,7 +94,7 @@ new Vue({
     },
     getTagType (id){
       if (!this.slideshow.isContent) {
-        
+
         //初始化参数
         this.params = {
           page: 1,
@@ -106,7 +103,7 @@ new Vue({
         }
         this.propsData.loadMoreBtn = true
         this.propsData.lists = []
-        
+
         this.getArticlesByTag()
       }
     },
@@ -122,8 +119,8 @@ new Vue({
             return false;
           }
           res.list.map( item => {
-            item['localData'] = new Date(item.create_time).toLocaleDateString()
-            item['localTime'] = new Date(item.create_time).toLocaleTimeString()
+            item['localData'] = new Date(Number(item.create_time)).toLocaleDateString()
+            item['localTime'] = new Date(Number(item.create_time)).toLocaleTimeString()
             return item;
           })
           this.propsData.lists = [...this.propsData.lists, ...res.list]
@@ -133,7 +130,7 @@ new Vue({
             title:'error', message: res.message, type: 'error'
           });
         }
-      })  
+      })
     },
     loadMore(){
       this.params.page ++;

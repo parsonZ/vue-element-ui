@@ -52,12 +52,12 @@ app.use((req, res, next) => {
     } 
     originalUrlFind = false
   })
-  if( originalUrlFind && !req.session.username ){ //登录过期
-    res.send({
-      status: 401,
-      message: '请重新登录'
-    })
-  }
+  // if( originalUrlFind && !req.session.username ){ //登录过期
+  //   res.send({
+  //     status: 401,
+  //     message: '请重新登录'
+  //   })
+  // }
   next()
 })
 

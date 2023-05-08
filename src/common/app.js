@@ -43,18 +43,18 @@ axiosIns.interceptors.request.use((config) => {
 /*响应拦截器*/
 axiosIns.interceptors.response.use(config => {
   //401登录状态过期
-  if(config.data.status == 401) {
-    vue.$notify({
-      title: '提示',
-      message: config.data.message,
-      type: 'error'
-    })
+  // if(config.data.status == 401) {
+  //   vue.$notify({
+  //     title: '提示',
+  //     message: config.data.message,
+  //     type: 'error'
+  //   })
     
-    setTimeout( () => {
-      window.location.href = 'login.html'
-      window.localStorage.removeItem('userid')
-    }, 3000)
-  }
+  //   setTimeout( () => {
+  //     window.location.href = 'login.html'
+  //     window.localStorage.removeItem('userid')
+  //   }, 3000)
+  // }
   vue.$loading.hide()
   return config;
 }, error => {

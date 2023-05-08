@@ -15,6 +15,7 @@ module.exports = (req, res) => {
         message: '用户不存在'
       }
     } else {
+      console.log(data[0].password, req.body.password, 111)
       if (util.valid.equals(data[0].password, req.body.password)) {
         data[0].password = '';
         obj = {

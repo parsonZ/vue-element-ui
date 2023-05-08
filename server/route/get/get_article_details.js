@@ -1,8 +1,8 @@
 const util = require('../../util.js');
 
 module.exports = (req, res) => {
-  
-// 
+
+//
 
   const get_details = () => {
     let sql = 'select a.*, b.content from articles a join articles_details b on a.id = b.id where b.id = ?';
@@ -25,16 +25,20 @@ module.exports = (req, res) => {
 
   const articles_details = async () => {
     let r1 = await get_details();
-    let r2 = await get_collect();
-    let r3 = await get_liked();
-    return { r1, r2, r3 }
+    // let r2 = await get_collect();
+    // let r3 = await get_liked();
+    return {
+      r1,
+      // r2,
+      // r3
+    }
   }
 
   articles_details().then(response => {
     res.send({
       data: response.r1.length ? response.r1[0].content : '这篇文章没有内容....',
-      collected: response.r2.length ? 1 : 0,
-      liked: response.r3.length ? 1 : 0
+      collected: 0,
+      liked: 00
     })
   }).catch( err => {
     return false

@@ -8,7 +8,7 @@
               <div class="loader"></div>
               <span class="category">{{item.avatar_name}}</span>
               <div class="meta meta--preview">
-                  <img class="meta__avatar" :src="item.avatar_img"/> 
+                  <img class="meta__avatar" :src="item.avatar_img"/>
                   <span class="meta__date"><i class="fa fa-calendar-o"></i>{{item.localData}}</span>
                   <span class="meta__reading-time"><i class="fa fa-clock-o"></i>{{item.localTime}}</span>
               </div>
@@ -36,7 +36,7 @@
                   <p v-else>
                     <aplaceholder></aplaceholder>
                   </p>
-                  <acomment ref="comment" v-if="item.id == operate.articleid" :data="operate"></acomment>
+                  <!-- <acomment ref="comment" v-if="item.id == operate.articleid" :data="operate"></acomment> -->
               </article>
           </div>
           <aoperate ref="operate" :data="operate" @back-to-top="backToTop"></aoperate>
@@ -95,7 +95,7 @@
             this.operate.liked = res.data.liked
             this.$nextTick(() => {
               lazyloadimg.init()
-              this.$refs.comment[0].get_comments()
+              // this.$refs.comment[0].get_comments()
             })
             this.codeFromat()
           }
@@ -179,7 +179,7 @@
         })
       },
       //全屏
-      fullScreen(el, isFullScreen){ 
+      fullScreen(el, isFullScreen){
         if(!isFullScreen) {
           classie.add(el, 'open')
           classie.add(el.parentNode.parentNode, this.data.marginTop ? 'full-screen-open' : 'full-screen-open1')
@@ -207,8 +207,8 @@
         //评论区出现在屏幕内加载评论
         //let scrollTop = document.querySelector('#comment-list-box').getBoundingClientRect().top;
         //if (scrollTop < 100 && !this.commentShow) {
-          
-          //this.commentShow = true 
+
+          //this.commentShow = true
         //}
       },
       backToTop(){
