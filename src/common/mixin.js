@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const storage = window.localStorage;
 const axios = require('axios');
-const uploadUrl = 'http://www.parsonz.xyz:9009';
+const uploadUrl = 'http://182.92.87.130:9009';
 
 const mixin = {
   created: function () {

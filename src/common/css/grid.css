@@ -916,7 +916,7 @@
     0% { }
     100% { transform: translateY(0); transform: translateY(0); opacity: 1; }
 }
-
+/* 
 .articles_details blockquote{
   padding: .625rem .9375rem;
   border-left: .5rem #e8edee solid;
@@ -1048,7 +1048,7 @@ h1,h2,h3,h4,h5,h6{
   height: 100%;
   position: absolute;
   max-height: none;
-}
+} */
 .full{
   height: 100%;
   left: -100%;

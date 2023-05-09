@@ -14,13 +14,22 @@ import mixin from './mixin.js';
 //引入store
 import store from 'src/store/index'
 
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+
 import Vue from 'vue';
 import axios from 'axios';
-import { Notification } from 'element-ui';
+import { Notification, Input, Tag, Form, FormItem, Radio } from 'element-ui';
 
 Vue.prototype.$notify = Notification;
 
 Vue.use(loading)
+Vue.use(mavonEditor)
+Vue.use(Input)
+Vue.use(Tag)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Radio)
 
 Vue.mixin(mixin) //混入全局方法
 
@@ -28,7 +37,7 @@ const vue = new Vue();
 
 axios.defaults.withCredentials = true
 const axiosIns = axios.create({
-  baseURL: process.env.NODE_ENV == 'development' ? 'http://localhost:9009' : 'http://www.parsonz.xyz:9009',
+  baseURL: process.env.NODE_ENV == 'development' ? 'http://localhost:9009' : 'http://182.92.87.130:9009',
   timeout: 30000
 });
 
@@ -49,7 +58,7 @@ axiosIns.interceptors.response.use(config => {
   //     message: config.data.message,
   //     type: 'error'
   //   })
-    
+
   //   setTimeout( () => {
   //     window.location.href = 'login.html'
   //     window.localStorage.removeItem('userid')
@@ -86,6 +95,7 @@ requireComponent.keys().forEach(fileName => {
       fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
     )
   )
+
   Vue.component(
     componentName,
     componentConfig.default || componentConfig

@@ -32,11 +32,28 @@
                       <span class="meta__date"><i class="fa fa-calendar-o"></i>{{item.localData}}</span>
                       <span class="meta__reading-time"><i class="fa fa-clock-o"></i>{{item.localTime}}</span>
                   </div>
-                  <p class="articles_details" v-if="item.id == operate.articleid && content.length" ref="articles_details" v-html="content"></p>
+                  <p
+                    class="articles_details"
+                    v-if="item.id == operate.articleid && content.length"
+                    ref="articles_details"
+                  >
+                    <mavon-editor
+                      ref="mavon"
+                      edit-preview="preview"
+                      :toolbars-flag="false"
+                      v-model="content"
+                      :subfield="false"
+                      default-open="preview"
+                      preview-background="#fff"
+                      :box-shadow="false"
+                      :ishljs="true"
+                      style="height: 100%; width: 100%;z-index: 1;"
+                    />
+                  </p>
                   <p v-else>
                     <aplaceholder></aplaceholder>
                   </p>
-                  <!-- <acomment ref="comment" v-if="item.id == operate.articleid" :data="operate"></acomment> -->
+                  <acomment ref="comment" v-if="item.id == operate.articleid" :data="operate"></acomment>
               </article>
           </div>
           <aoperate ref="operate" :data="operate" @back-to-top="backToTop"></aoperate>
