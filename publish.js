@@ -1,6 +1,11 @@
 const { exec } = require('child_process');
 
 const publish = async () => {
+  console.log(`git拉取...等待中...`)
+  await exec('git checkout .')
+  await exec('git checkout master')
+  await exec('git pull origin master')
+  
   console.log(`remove dist...等待中...`)
   await exec('rm -rf dist', (err, stdout, stderr) => {
     if (!err) {
