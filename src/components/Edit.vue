@@ -20,7 +20,7 @@
       preview-background="#fff"
       :box-shadow="false"
       :ishljs="true"
-      style="height: calc(100vh - 100px);width: 100%;border-radius: 0;margin-top: 100px"
+      style="height: calc(100vh - 130px);width: 100%;border-radius: 0;margin-top: 10px"
       @change="change"
     />
   </div>
@@ -43,6 +43,11 @@
         this.value = val
       },
       saveContent(){
+        if (!this.title || !this.tag || !this.value) {
+          return this.$notify({
+            title:'warning', message: '好好填表单', type: 'warning'
+          })
+        }
         this.$http.post('/save_content', {
           content: this.value,
           create_time: new Date().getTime(),
