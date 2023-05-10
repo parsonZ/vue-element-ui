@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="display: flex; align-items: center;white-space: nowrap;padding: 10px 20px;">
-      <span style="font-size: 18px;color: #fff;">标题</span>
+      <span style="font-size: 18px;color: #fff;">文章标题</span>
       &nbsp;&nbsp;&nbsp;
       <el-input v-model="title"></el-input>
       &nbsp;&nbsp;&nbsp;
@@ -34,7 +34,7 @@
     data() {
       return {
         title: '',
-        tag: '',
+        tag: 'javascript',
         value: ''
       }
     },
@@ -48,8 +48,9 @@
             title:'warning', message: '好好填表单', type: 'warning'
           })
         }
+
         this.$http.post('/save_content', {
-          content: this.value,
+          content: encodeURI(this.value),
           create_time: new Date().getTime(),
           update_time: new Date().getTime(),
           user_id: 'admin',

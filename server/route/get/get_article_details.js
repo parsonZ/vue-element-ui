@@ -36,7 +36,7 @@ module.exports = (req, res) => {
 
   articles_details().then(response => {
     res.send({
-      data: response.r1.length ? response.r1[0].content : '这篇文章没有内容....',
+      data: response.r1.length ? decodeURI(response.r1[0].content) : '这篇文章没有内容....',
       collected: 0,
       liked: 00
     })
