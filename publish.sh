@@ -30,6 +30,20 @@ echo "🎉  NPM打包完成"
 rm -rf /usr/share/nginx/html/dist;
 cp -r dist /usr/share/nginx/html
 
+# 重启node服务
+esPort=9009
+pid=$(netstat -nlp|grep :$esPort|awk '{print $7}'|awk -F"/" '{ print $1 }');
+
+#杀掉对应的进程，如果pid不存在，则不执行
+if [  -n  "$pid"  ];  then
+    kill  -9  $pid;
+fi
+echo "关闭node服务..."
+
+cd server/
+node server.js
+echo "node服务启动成功"
+
 # 重启nginx
 systemctl restart nginx
 echo "🎉  发布成功"
