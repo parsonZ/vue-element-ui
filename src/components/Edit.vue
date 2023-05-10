@@ -13,6 +13,26 @@
       <span style="font-size: 18px;color: #fff;">标签</span>
       &nbsp;&nbsp;&nbsp;
       <el-radio v-model="tag" style="color: #fff;" v-for="item in tags" :label="item.tag_name" border>{{item.tag_name}}</el-radio>
+      &nbsp;&nbsp;&nbsp;
+      <el-date-picker
+        v-model="create_time"
+        type="datetime"
+        value-format="yyyy-MM-dd HH:mm:ss"
+        format="yyyy-MM-dd HH:mm:ss"
+        placeholder="创建日期"
+      >
+      </el-date-picker>
+      &nbsp;&nbsp;&nbsp;
+      <el-date-picker
+        v-model="update_time"
+        type="datetime"
+        value-format="yyyy-MM-dd HH:mm:ss"
+        format="yyyy-MM-dd HH:mm:ss"
+        placeholder="更新日期"
+      >
+      </el-date-picker>
+      &nbsp;&nbsp;&nbsp;
+      <a href="article.html">去查看列表</a>
     </div>
     <mavon-editor
       ref="mavon"
@@ -35,10 +55,15 @@
       return {
         title: '',
         tag: 'javascript',
-        value: ''
+        value: '',
+        create_time: null,
+        update_time: null
       }
     },
     methods: {
+      clickViewList() {
+        window.open(`${window.location.host}/article.html`)
+      },
       change(val) {
         this.value = val
       },
@@ -51,8 +76,8 @@
 
         this.$http.post('/save_content', {
           content: encodeURI(this.value),
-          create_time: new Date().getTime(),
-          update_time: new Date().getTime(),
+          create_time: this.create_time ? new Date(this.create_time).getTime() : new Date().getTime(),
+          update_time: this.update_time ? new Date(this.update_time).getTime() : new Date().getTime(),
           user_id: 'admin',
           avatar_name: 'parsonz',
           avatar_img: 'http://182.92.87.130/static/assets/avator.jpg',

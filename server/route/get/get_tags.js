@@ -13,21 +13,11 @@ module.exports = (req, res) => {
     }
     return util.requestHandle({ sql: tags, sql_param: []})
   }
-  // const getLinks = () => {
-  //   let links = `SELECT
-  //     a.tag_id,
-  //     b.link_href,
-  //     a.tag_name,
-  //     c.icon
-  //   FROM
-  //     tag a
-  //     JOIN tag_link b ON a.tag_id = b.tag_id
-  //     JOIN tag_link_type c ON b.tag_link_id = c.id
-  //   ORDER BY
-  //     a.tag_name,
-  //     c.name`;
-  //   return util.requestHandle({ sql: links, sql_param: []})
-  // }
+
+  const getLinks = () => {
+    let links = `SELECT * from tag_link`;
+    return util.requestHandle({ sql: links, sql_param: []})
+  }
 
   const get_tags = async () => {
     let results;
@@ -36,26 +26,26 @@ module.exports = (req, res) => {
     }
 
     let results1 = await getTags( results ? results[0].tags : false)
-    // let results2 = await getLinks()
+    let results2 = await getLinks()
 
     return {
       results1,
-      // results2
+      results2
     };
   }
 
   get_tags().then(response => {
     let r1 = response.results1;
-    // let r2 = response.results2;
-    // r1.map(item => {
-    //   item['links'] = new Array();
-    //   r2.find((value, index, arr) => {
-    //     if(item.tag_id == value.tag_id) {
-    //       item.links.push(value)
-    //     }
-    //   })
-    //   return item
-    // })
+    let r2 = response.results2;
+    r1.map(item => {
+      item['links'] = new Array();
+      r2.find((value, index, arr) => {
+        if(item.tag_name === value.tag_name) {
+          item.links.push(value)
+        }
+      })
+      return item
+    })
     res.send({
       status: 200,
       message: 'success',

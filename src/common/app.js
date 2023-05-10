@@ -19,7 +19,7 @@ import 'mavon-editor/dist/css/index.css'
 
 import Vue from 'vue';
 import axios from 'axios';
-import { Notification, Input, Tag, Form, FormItem, Radio } from 'element-ui';
+import { Notification, Button, Input, Tag, Form, FormItem, Radio, DatePicker, TimePicker } from 'element-ui';
 
 Vue.prototype.$notify = Notification;
 
@@ -30,6 +30,9 @@ Vue.use(Tag)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Radio)
+Vue.use(DatePicker)
+Vue.use(TimePicker)
+Vue.use(Button)
 
 Vue.mixin(mixin) //混入全局方法
 

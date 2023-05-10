@@ -9,7 +9,7 @@
     </head>
     <body class="body">
         <div id="main">
-            <!-- <sidebar @zoom="zoomState"></sidebar> -->
+            <sidebar @zoom="zoomState"></sidebar>
             <!-- <placeholder></placeholder> -->
             <div class="container wrap-container">
                 <header id="header" class="codrops-header" ref="header">
@@ -23,12 +23,11 @@
                                 <h2>
                                     {{item.tag_name}}
                                     <span>{{item.tag_description}}</span>
-                                    <ul v-if="slideshow.isFullscreen">
+                                    <!-- <ul v-if="slideshow.isFullscreen">
                                         <li v-for="link in item.links">
-                                            <svg v-html="link.icon" fill="#007bff"></svg>
-                                            <a :href="link.link_href" target="_blank">{{link.tag_name}}</a>
+                                            <a :href="link.href" target="_blank">{{link.tag_name}}</a>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 </h2>
                                 <button class="content-switch" @click="getTagType(item.tag_name)" :class="{hiddenButton: pageScrollTop > pageScrollRange}">
                                     <i class="fa fa-arrow-down" aria-hidden="true"></i>
