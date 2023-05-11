@@ -40,10 +40,9 @@ if [  -n  "$pid"  ];  then
 fi
 echo "关闭node服务..."
 
+echo "重启nginx和node服务"
+systemctl restart nginx
+
 cd server/
 node server.js
-echo "node服务启动成功"
 
-# 重启nginx
-systemctl restart nginx
-echo "🎉  发布成功"
