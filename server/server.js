@@ -44,12 +44,12 @@ app.use((req, res, next) => {
 **/
 app.use((req, res, next) => {
   let originalUrlFind;
-  
+
   ['/get_tags', '/get_user_info'].find(item => {
     if (req.originalUrl.includes(item)){
       originalUrlFind = true
       return true;
-    } 
+    }
     originalUrlFind = false
   })
   // if( originalUrlFind && !req.session.username ){ //登录过期
