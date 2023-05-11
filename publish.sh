@@ -36,7 +36,7 @@ pid=$(netstat -nlp|grep :$esPort|awk '{print $7}'|awk -F"/" '{ print $1 }');
 
 #杀掉对应的进程，如果pid不存在，则不执行
 if [  -n  "$pid"  ];  then
-    kill  -9  $pid;
+    forever stop $pid;
 fi
 echo "关闭node服务..."
 
@@ -44,5 +44,6 @@ echo "重启nginx和node服务"
 systemctl restart nginx
 
 cd server/
-node server.js
+forever start server.js
+echo "node服务启动成功!"
 
