@@ -3,6 +3,7 @@ cd /root/parsonz/vue-element-ui
 
 # git拉取
 echo "正在同步master代码..."
+git checkout .;
 git checkout master;
 git pull origin master;
 echo "🎉  代码同步完成"
