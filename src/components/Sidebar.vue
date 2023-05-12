@@ -3,11 +3,11 @@
       <button class="menu__handle" @click="onChangeSidebarState"><span>Menu</span></button>
       <div class="menu__inner">
           <ul>
-              <li><a href="javascript:;" @click="redirecterTo('index')" class="active"><i class="fa fa-fw fa-home"></i>首页</a></li>
+              <li><a href="javascript:;" @click="redirecterTo('index')"><i class="fa fa-fw fa-home"></i>首页</a></li>
               <li><a href="javascript:;" @click="redirecterTo('article')"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>标签</a></li>
-              <li><a href="javascript:;" @click="redirecterTo('topping')"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>置顶</a></li>
-              <li><a href="javascript:;" @click="redirecterTo('login')" v-if="userid==null || ''"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>登录</a></li>
-              <li><a href="javascript:;" @click="redirecterTo('user')" v-if="userid"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>我的</a></li>
+              <li><a href="javascript:;" @click="redirecterTo('topping')"><i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>全部</a></li>
+              <!-- <li><a href="javascript:;" @click="redirecterTo('login')" v-if="userid==null || ''"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>登录</a></li> -->
+              <!-- <li><a href="javascript:;" @click="redirecterTo('user')" v-if="userid"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i>我的</a></li> -->
           </ul>
       </div>
       <div class="morph-shape" data-morph-open="M300-10c0,0,295,164,295,410c0,232-295,410-295,410" data-morph-close="M300-10C300-10,5,154,5,400c0,232,295,410,295,410">

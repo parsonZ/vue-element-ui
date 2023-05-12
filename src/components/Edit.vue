@@ -116,7 +116,7 @@
           if (res.status === 200) {
             this.title = res.data.title
             this.tag = res.data.tag_name,
-            this.value = res.data.content,
+            this.value = decodeURI(res.data.content),
             this.create_time = new Date(Number(res.data.create_time)),
             this.update_time = new Date(Number(res.data.update_time))
           }

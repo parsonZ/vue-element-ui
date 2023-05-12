@@ -5,6 +5,7 @@ import './css/normalize.css'
 import './css/component.css'
 import './css/animate.css'
 import './css/plugin.css'
+import 'mavon-editor/dist/css/index.css'
 //引入loading插件
 import loading from 'src/plugins/loading/loading.js'
 
@@ -15,7 +16,7 @@ import mixin from './mixin.js';
 import store from 'src/store/index'
 
 import mavonEditor from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
+
 
 import Vue from 'vue';
 import axios from 'axios';
