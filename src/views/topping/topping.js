@@ -14,7 +14,8 @@ new Vue({
     propsData: {
       lists: [],
       loadMoreBtn: true,
-    }
+    },
+    showTag: true
   },
   mounted(){
     this.init()
@@ -33,16 +34,15 @@ new Vue({
         return res.data
       }).then(res => {
         if(res.status == 200) {
-          if(this.propsData.lists.length >= res.counts){
-            this.propsData.loadMoreBtn = false
-            return false;
-          }
           res.list.map( item => {
-            item['localData'] = new Date(item.create_time).toLocaleDateString()
-            item['localTime'] = new Date(item.create_time).toLocaleTimeString()
+            item['localData'] = new Date(Number(item.create_time)).toLocaleDateString()
+            item['localTime'] = new Date((Number(item.create_time))).toLocaleTimeString()
             return item;
           })
           this.propsData.lists = [...this.propsData.lists, ...res.list]
+          if(res.list.length < this.params.counts){
+            this.propsData.loadMoreBtn = false
+          }
         } else {
           this.$notify({
             title:'error', message: res.message, type: 'error'

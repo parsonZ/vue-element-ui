@@ -4,6 +4,7 @@
         @enter="enter">
         <section class="grid" ref="grid" v-show="show">
           <a class="grid__item" href="#" data-complete="true" @click="articleDetails(item.id, item.user_id)" v-for="item in data.lists">
+              <el-tag v-if="showTag" size="mini" style="width: min-content;position: absolute;top: 20px;right:20px;">{{item.tag_name}}</el-tag>
               <h2 class="title title--preview" style="font-size: 1.5em">{{item.title}}</h2>
               <div class="loader"></div>
               <span class="category">{{item.avatar_name}}</span>
@@ -15,10 +16,10 @@
           </a>
           <footer class="page-meta">
             <span @click="$emit('load-more')" v-if="data.loadMoreBtn">
-              <i class="fa fa-arrow-circle-o-down"></i>
-              Load more
+              <i class="fa fa-arrow-circle-o-down"></i>&nbsp;&nbsp;&nbsp;
+              加载更多
             </span>
-            <span v-else>no results</span>
+            <span v-else>我是有底线的...</span>
           </footer>
         </section>
       </transition>
@@ -71,7 +72,8 @@
 
   export default {
     props: {
-      data: Object
+      data: Object,
+      showTag: Boolean
     },
     data() {
       return {

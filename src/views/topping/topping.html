@@ -10,7 +10,7 @@
     <body>
         <div id="gridMain">
             <div class="container wrap-container" style="background: #fff;" :class="{'scaleMain1': zoom}">
-                <gridload :data="propsData" ref="gridload" @load-more="loadMore"></gridload>
+                <gridload :showtag="showTag" :data="propsData" ref="gridload" @load-more="loadMore"></gridload>
             </div>
             <sidebar @zoom="zoomState"></sidebar>
         </div>

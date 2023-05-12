@@ -3,12 +3,12 @@ const util = require('../../util.js')
 module.exports = (req, res) => {
   let sql, sql1, sql_param, sql1_param;
   if (req.query.tag_type) {
-    sql = 'select * from articles where tag_name in (?) order by create_time limit ?,?;'; //分页
+    sql = 'select * from articles where tag_name in (?) order by create_time desc limit ?,?;'; //分页
     sql1 = 'SELECT count(*) as `counts` FROM `articles` where `tag_name` in (?);'
     sql_param = [req.query.tag_type, (req.query.page-1)*req.query.counts, Number(req.query.counts)];
     sql1_param = [req.query.tag_type];
   } else {
-    sql = 'SELECT * FROM articles order by a.create_time limit ?,?; '; //分页
+    sql = 'SELECT * FROM articles order by create_time desc limit ?,?; '; //分页
     sql1 = 'SELECT count(*) as counts FROM articles;';
     sql_param = [(req.query.page-1)*req.query.counts, Number(req.query.counts)];
     sql1_param = []

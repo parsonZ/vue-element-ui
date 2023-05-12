@@ -287,7 +287,6 @@
   margin: 0;
   font-size: 1.875em;
   font-family: "Playfair Display", serif;
-  text-align: center;
 }
 
 .title--preview {
@@ -297,8 +296,6 @@
   display: flex;
   -webkit-align-items: center;
   align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
   width: 100%;
   font-weight: 700;
 }
@@ -520,8 +517,8 @@
   cursor: pointer;
   text-transform: uppercase;
   display: flex;
-  flex-direction: column;
   font-size: 1.5em;
+  align-items: center;
 }
 .page-meta span i{
   font-size: 1.5em;
@@ -916,7 +913,7 @@
     0% { }
     100% { transform: translateY(0); transform: translateY(0); opacity: 1; }
 }
-/* 
+/*
 .articles_details blockquote{
   padding: .625rem .9375rem;
   border-left: .5rem #e8edee solid;

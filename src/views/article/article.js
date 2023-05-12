@@ -14,7 +14,7 @@ new Vue({
     hiddenPageScroll: true,
     params: {
       page: 1,
-      counts: 5,
+      counts: 6,
       tag_type: ''
     },
     propsData: {
@@ -113,18 +113,15 @@ new Vue({
         params: this.params
       }).then(res => res.data).then( res => {
         if(res.status == 200){
-          if(this.propsData.lists.length >= res.counts){
-            this.hiddenPageScroll = this.propsData.lists.length;
-            this.propsData.loadMoreBtn = false
-            return false;
-          }
           res.list.map( item => {
             item['localData'] = new Date(Number(item.create_time)).toLocaleDateString()
             item['localTime'] = new Date(Number(item.create_time)).toLocaleTimeString()
             return item;
           })
           this.propsData.lists = [...this.propsData.lists, ...res.list]
-          this.hiddenPageScroll = this.propsData.lists.length;
+          if(res.list.length < this.params.counts){
+            this.propsData.loadMoreBtn = false
+          }
         }else{
           this.$notify({
             title:'error', message: res.message, type: 'error'
