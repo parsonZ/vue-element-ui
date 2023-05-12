@@ -4,7 +4,7 @@
         @enter="enter">
         <section class="grid" ref="grid" v-show="show">
           <a class="grid__item" href="#" data-complete="true" @click="articleDetails(item.id, item.user_id)" v-for="item in data.lists">
-              <el-tag v-if="showTag" size="mini" style="width: min-content;position: absolute;top: 20px;right:20px;">{{item.tag_name}}</el-tag>
+              <el-tag v-if="showtag" size="mini" style="width: min-content;position: absolute;top: 20px;right:20px;">{{item.tag_name}}</el-tag>
               <h2 class="title title--preview" style="font-size: 1.5em">{{item.title}}</h2>
               <div class="loader"></div>
               <span class="category">{{item.avatar_name}}</span>
@@ -73,7 +73,7 @@
   export default {
     props: {
       data: Object,
-      showTag: Boolean
+      showtag: Boolean
     },
     data() {
       return {
